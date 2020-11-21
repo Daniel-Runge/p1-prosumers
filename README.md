@@ -29,8 +29,9 @@ Here is a list of important Git commands in the Ubuntu terminal, as well as a sh
 | Command | Description |
 |---|--:|
 | git status | Displays the current working tree status. |
+| git pull | Update your local data to match online repository. Depends on current branch. |
 | git add . | After making a change or adding a file locally, this prepares all changes to be comitted. |
-| git commit -m "" | Write a telling description about your change, and records the changes to be pushed. |
+| git commit -m "\<message>" | Write a telling \<message> about your change, and records the changes to be pushed. |
 | git push | Pushes your comitted changes to the branch you are working in. |
 | git checkout \<branch> | Changes to the specified \<branch>. |
 | git checkout -b \<branch> | Creates a new local branch with \<branch> name. |
@@ -43,5 +44,7 @@ An explanation of an approriate flow for us to get the most out of GitHub.
 ***
 
 **TODO!** Integrate with Jira. How?
+
 **TODO!** Further describe the setup of WSL.
+
 **TODO!** Further describe working with git and its flow.
