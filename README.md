@@ -9,13 +9,13 @@ Then install gcc, make, Git, cURL & Libcurl using the following commands:
 ### Practical Ubuntu commands to know
 | Command | Description |
 |---|--:|
-| mkdir <directory> | Creates a folder called <directory> |
-| touch <filename> | Creates and empty file called <filename>. Also used to update the timestamp of <filename> |
-| cd <directory> | Change directory to <directory>. Sends you home if not directory is chosen. |
+| mkdir \<directory> | Creates a folder called \<directory> |
+| touch \<filename> | Creates and empty file called \<filename>. Also used to update the timestamp of \<filename> |
+| cd \<directory> | Change directory to \<directory>. Sends you home if not directory is chosen. |
 | ls -al | Show you all the files (hidden files too) in the working directory line-by-line. |
 | code . | Opens **Visual Studio Code** editor inside the folder you are in. |
 | explorer.exe . | Opens the current directory in Windows explorer at the linux folder. |
-| ./<filename> | Runs the file <filename>. |
+| ./\<filename> | Runs the file \<filename>. |
 
 ***
 
@@ -32,9 +32,9 @@ Here is a list of important Git commands in the Ubuntu terminal, as well as a sh
 | git add . | After making a change or adding a file locally, this prepares all changes to be comitted. |
 | git commit -m "" | Write a telling description about your change, and records the changes to be pushed. |
 | git push | Pushes your comitted changes to the branch you are working in. |
-| git checkout <branch> | Changes to the specified <branch>. |
-| git checkout -b <branch> | Creates a new local branch with <branch> name. |
-| git push --set-upstream origin <branch> | Creates your local branch in the online repo, and pushes to it. |
+| git checkout \<branch> | Changes to the specified \<branch>. |
+| git checkout -b \<branch> | Creates a new local branch with \<branch> name. |
+| git push --set-upstream origin \<branch> | Creates your local branch in the online repo, and pushes to it. |
 | git branch | Displays the branch you are working in, as well as other available branches in the project. |
 
 ### Git flow
