@@ -22,6 +22,7 @@ int main(void)
     headers = curl_slist_append(headers, "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
+    /*  tells curl that you want to write the data you get into your file */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
     result = curl_easy_perform(curl);
 
