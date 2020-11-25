@@ -28,6 +28,7 @@ Here is a list of important Git commands in the Ubuntu terminal, as well as a sh
 
 | Command | Description |
 |---|--:|
+| git clone \<repo> | Clones \<repo> onto your local machine. \<repo> is a SSH link from GitHub. |
 | git status | Displays the current working tree status. |
 | git pull | Update your local data to match online repository. Depends on current branch. |
 | git add . | After making a change or adding a file locally, this prepares all changes to be comitted. |

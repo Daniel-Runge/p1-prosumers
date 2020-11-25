@@ -42,7 +42,7 @@ int main(void)
     CURL *curl;
     CURLcode res;
     FILE *fp;
-    char filename[] = {"cattest"};
+    char filename[] = {"cattest.json"};
 
     curl_global_init(CURL_GLOBAL_ALL);
 
@@ -53,7 +53,7 @@ int main(void)
         init_string(&s);
 
         curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_easy_setopt(curl, CURLOPT_URL, "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1");
+        curl_easy_setopt(curl, CURLOPT_URL, "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1");
 
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
