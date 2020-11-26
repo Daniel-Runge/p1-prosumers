@@ -32,7 +32,7 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 
 
 int analyze_data(data_total total, data_consumtion consumtion);
-void green_power(data_total *value);
+int green_power(data_total *value);
 
 /**
  * @brief Function to analyze data that comes from the API.
@@ -115,7 +115,7 @@ int analyze_data(data_total total, data_consumtion consumtion)
  * @param value The intensity struct as a pointer with the green value returen in the struct.
  */
 
-void green_power(data_total *value)
+int green_power(data_total *value)
 {
     if (value->carbon_intensity <= 100)
     {
