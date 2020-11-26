@@ -1,1 +1,53 @@
-{"zone":"DK-DK1","powerConsumptionBreakdown":{"battery discharge":0,"biomass":271,"coal":303,"gas":75,"hydro":1032,"hydro discharge":48,"nuclear":13,"oil":8,"solar":2,"wind":1427,"geothermal":0,"unknown":5},"powerProductionBreakdown":{"nuclear":null,"geothermal":null,"biomass":335,"coal":420,"wind":1850,"solar":3,"hydro":1,"gas":94,"oil":9,"unknown":3,"hydro discharge":null,"battery discharge":null},"powerImportBreakdown":{"DE":0,"DK-DK2":169,"NL":0,"NO-NO2":1632,"SE":0},"powerExportBreakdown":{"DE":1250,"DK-DK2":0,"NL":0,"NO-NO2":0,"SE":81},"datetime":"2020-11-25T09:34:01.275Z","fossilFreePercentage":86,"renewablePercentage":86,"powerConsumptionTotal":3185,"powerProductionTotal":2715,"powerImportTotal":1801,"powerExportTotal":1331,"updatedAt":"2020-11-25T09:34:02.338Z"}
+{
+    "zone": "DK-DK1",
+    "powerConsumptionBreakdown": {
+        "battery discharge": 0,
+        "biomass": 271,
+        "coal": 303,
+        "gas": 75,
+        "hydro": 1032,
+        "hydro discharge": 48,
+        "nuclear": 13,
+        "oil": 8,
+        "solar": 2,
+        "wind": 1427,
+        "geothermal": 0,
+        "unknown": 5
+    },
+    "powerProductionBreakdown": {
+        "nuclear": null,
+        "geothermal": null,
+        "biomass": 335,
+        "coal": 420,
+        "wind": 1850,
+        "solar": 3,
+        "hydro": 1,
+        "gas": 94,
+        "oil": 9,
+        "unknown": 3,
+        "hydro discharge": null,
+        "battery discharge": null
+    },
+    "powerImportBreakdown": {
+        "DE": 0,
+        "DK-DK2": 169,
+        "NL": 0,
+        "NO-NO2": 1632,
+        "SE": 0
+    },
+    "powerExportBreakdown": {
+        "DE": 1250,
+        "DK-DK2": 0,
+        "NL": 0,
+        "NO-NO2": 0,
+        "SE": 81
+    },
+    "datetime": "2020-11-25T09:34:01.275Z",
+    "fossilFreePercentage": 86,
+    "renewablePercentage": 86,
+    "powerConsumptionTotal": 3185,
+    "powerProductionTotal": 2715,
+    "powerImportTotal": 1801,
+    "powerExportTotal": 1331,
+    "updatedAt": "2020-11-25T09:34:02.338Z"
+}
