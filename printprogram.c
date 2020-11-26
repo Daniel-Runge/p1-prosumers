@@ -6,16 +6,11 @@
      */
 void welcomeprint();
 void printdata(data_total total, data_consumtion consumtion, int parameter);
-/**
- * @brief Use struct for printing data, use output from analyze to print the evaluation.
 
- use array of strings or switch to store the potential analysis results.
- * 
- * @return int 
- */
 const char *co2[] = {
     "Right now the energy in denmark is green\n",
-    "The energy in Denmark is not green right now\n"};
+    "The energy in Denmark is not green right now\n",
+    "How are we still alive with this intensity"};
 
 /**
  * @brief It is not finished
@@ -38,7 +33,7 @@ void printdata(data_total total, data_consumtion consumtion, int parameter)
 {
 
     printf("Right now the procent of renewable energy in Denmark is %f\n",total.renewable);
-    printf("The carbon intensity in Denmark is %f (kilde eller noget)\n", total.carbon_intensity);
+    printf("The carbon intensity in Denmark is %f g/kWh\n", total.carbon_intensity);
 
     printf("So the conclusion must be \n%s\n",co2[parameter]);
 
