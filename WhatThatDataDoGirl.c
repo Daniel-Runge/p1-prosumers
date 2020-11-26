@@ -22,7 +22,11 @@ struct APIData
 };
 
 
-
+/**
+ * @brief Copypaste work so far
+ * Will be adjusted so it can scan data into our struct
+ * @return type is int because it's the main function right now
+ */
 int main(void) 
 {
    FILE *fp;
