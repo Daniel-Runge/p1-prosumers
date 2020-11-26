@@ -2,7 +2,10 @@
 #include <stdlib.h>
 int main(void)
 {
-    /*a welcome message in the making*/
+    /**
+     * @brief a welcome message in the making, this is just an outcast
+     * 
+     */
     printf("Hello love, welcome to our energy data program. This program can show you how Denmark " 
     "produce their electrical energy right now. In Denmark we mainly use windpower to produce " 
     "electricity, as windpower is not 100 procent consistent, the electrical power grid in Denmark "
