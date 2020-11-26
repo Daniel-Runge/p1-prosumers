@@ -50,6 +50,7 @@ void get_api (char* filemode, char* url, char* filename)
     CURL *curl;
     FILE *fp;
     struct curl_slist *headers = NULL;
+    CURLcode result;
     
     /* creates a file and a pointer to that file  */
     fp=fopen(filename, filemode);
@@ -65,6 +66,7 @@ void get_api (char* filemode, char* url, char* filename)
 
     /*  tells curl that you want to write the data you get into your file */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+    result = curl_easy_perform(curl);
 
     /* closes everything and cleans up */
     fclose(fp);
