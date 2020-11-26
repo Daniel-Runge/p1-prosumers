@@ -18,7 +18,7 @@ int main (void)
     int j = 0;
 
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
-     "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2", 
+     "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2"} ;
     
