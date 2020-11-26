@@ -57,15 +57,18 @@ int main ()
     printf("Biomass:  %6.2lf %%\n", biomass_procentage);
     printf("Sum:      %6d %%\n", sum = wind_procentage + hydro_procentage + biomass_procentage);
 
-    /*Hvor meget gram CO2 De forskellige former for energi bruger op at lave en kWh (Kilo Watt Hour)*/
+    /*How much CO2 in grams the different types of energy make in kWh (Kilo Watt Hour)*/
     /*1 MW = 1000 kWh*/
     /*Wind 11 gCO2/kWh*/
     /*Hydro 24 gCO2/kWh*/
     /*Solar 45 gCO2/kWh*/
     /*Biomass 230 gCO2/kWh*/
     /*Coal 820 gCO2/kWh*/
+
+
     
-    
+
+
 
 
     return 0;
