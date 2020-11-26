@@ -5,7 +5,7 @@
      * 
      */
 void welcomeprint();
-void printdata(data_total total, data_consumtion consumtion, int parameter);
+void printdata(data_total total, data_consumption consumtion, int parameter);
 
 const char *co2[] = {
     "Right now the energy in denmark is green\n",
@@ -29,7 +29,7 @@ void welcomeprint()
  * @brief this is where the dat will be printed
  * 
  */
-void printdata(data_total total, data_consumtion consumtion, int parameter)
+void printdata(data_total total, data_consumption consumtion, int parameter)
 {
 
     printf("Right now the procent of renewable energy in Denmark is %f\n",total.renewable);

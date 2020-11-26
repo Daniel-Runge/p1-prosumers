@@ -3,26 +3,7 @@
 #include <stdlib.h>
 #include "energyAppFunctions.h"
 
-typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
-{
-    double battery_discharge;
-    double biomass;
-    double coal;
-    double gas;
-    double hydro;
-    double hydro_discharge;
-    double nuclear;
-    double oil;
-    double solar;
-    double wind;
-    double geothermal;
-    double unknown;
-} data_consumtion;
-
-
-
-
-int analyze_data(data_total total, data_consumtion consumtion);
+int analyze_data(data_total total, data_consumption consumption);
 int green_power(data_total *value);
 
 /**
@@ -35,7 +16,7 @@ int green_power(data_total *value);
 
 /* int main()
 {
-    data_consumtion consumtion;
+    data_consumption consumtion;
     data_total total;
 
 
@@ -71,7 +52,7 @@ int green_power(data_total *value);
  * @return int Analyzed data returned to print.
  */
 
-int analyze_data(data_total total, data_consumtion consumtion)
+int analyze_data(data_total total, data_consumption consumtion)
 {
     double wind_procentage, hydro_procentage, biomass_procentage, solar_procentage, hydro_dischare_procentage;
     double renewable_sum;
