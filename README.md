@@ -5,12 +5,17 @@ Outlined below is the setup of tools used to collaborate on the project.
 ## WSL 2 setup
 First enable and install WSL following the guide [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 Then install gcc, make, Git, cURL & Libcurl using the following commands:
+> sudo apt update && sudo apt upgrade
+> sudo apt install build-essential
+> sudo apt-get install manpages-dev
+> sudo apt install curl
+> sudo apt install libcurl4-openssl-dev
 
 ### Practical Ubuntu commands to know
 | Command | Description |
 |---|--:|
-| mkdir \<directory> | Creates a folder called \<directory> |
-| touch \<filename> | Creates and empty file called \<filename>. Also used to update the timestamp of \<filename> |
+| mkdir \<directory> | Creates a folder called \<directory>. |
+| touch \<filename> | Creates and empty file called \<filename>. Also used to update the timestamp of \<filename>. |
 | cd \<directory> | Change directory to \<directory>. Sends you home if not directory is chosen. |
 | ls -al | Show you all the files (hidden files too) in the working directory line-by-line. |
 | code . | Opens **Visual Studio Code** editor inside the folder you are in. |
