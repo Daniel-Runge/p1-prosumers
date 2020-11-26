@@ -15,8 +15,8 @@ typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
     int solar;
     int wind;
     int geothermal;
-    int unknown;   
-}data_consumtion;
+    int unknown;
+} data_consumtion;
 
 typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 {
@@ -26,7 +26,17 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
     int productionTotal;
     int ImportTotal;
     int ExportTotal;
-}data_total;
+} data_total;
+
+typedef struct
+{
+    int carbon;
+    int green;
+}intensity;
+
+
+int analyze_data(data_total total, data_consumtion consumtion);
+void green_power(intensity *value);
 
 /**
  * @brief Function to analyze data that comes from the API.
@@ -40,9 +50,11 @@ int main()
 {
     data_consumtion consumtion;
     data_total total;
-    double wind_procentage, hydro_procentage, biomass_procentage; 
-    int sum;
-    
+    intensity value;
+
+    /*Dummy data*/
+
+    value.carbon = 200;
 
     /*Data that was taken from an API Request |NOT UP TO DATE|*/
     total.fossile = 91;
@@ -54,9 +66,20 @@ int main()
     consumtion.hydro = 848;
     consumtion.wind = 1900;
 
+    analyze_data(total, consumtion);
 
-    wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal; /*Precentage of total prower from wind*/
-    hydro_procentage =  (consumtion.hydro * 100.) / total.consumtionTotal; /*Precentage of total prower from Hydro*/
+    green_power(&value);
+
+    return 0;
+}
+
+int analyze_data(data_total total, data_consumtion consumtion)
+{
+    double wind_procentage, hydro_procentage, biomass_procentage;
+    int sum;
+
+    wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal;       /*Precentage of total prower from wind*/
+    hydro_procentage = (consumtion.hydro * 100.) / total.consumtionTotal;     /*Precentage of total prower from Hydro*/
     biomass_procentage = (consumtion.biomass * 100.) / total.consumtionTotal; /*Precentage of total prower from Biomass*/
 
     printf("Wind:     %6.2lf %%\n", wind_procentage);
@@ -72,9 +95,22 @@ int main()
     /*Biomass 230 gCO2/kWh*/
     /*Coal 820 gCO2/kWh*/
 
-
-
-    return 0;
+    return 1;
 }
 
-/*int analyze_data(data_total total, data_consumtion consumtion)*/
+void green_power(intensity *value)
+{
+    if (value->carbon <= 100)
+    {
+        value->green = 0;
+    }
+    else if (value->carbon <= 200)
+    {
+        value->green = 1;
+    }
+    else if (value->carbon <= 300)
+    {
+        value->green = 2;
+    }
+}
+
