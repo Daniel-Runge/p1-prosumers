@@ -4,28 +4,28 @@
 
 typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
 {
-    double battery_discharge;
-    double biomass;
-    double coal;
-    double gas;
-    double hydro;
-    double hydro_discharge;
-    double nuclear;
-    double oil;
-    double solar;
-    double wind;
-    double geothermal;
-    double unknown;   
+    int battery_discharge;
+    int biomass;
+    int coal;
+    int gas;
+    int hydro;
+    int hydro_discharge;
+    int nuclear;
+    int oil;
+    int solar;
+    int wind;
+    int geothermal;
+    int unknown;   
 }data_consumtion;
 
 typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 {
-    double fossile;
-    double renewable;
-    double consumtionTotal;
-    double productionTotal;
-    double ImportTotal;
-    double ExportTotal;
+    int fossile;
+    int renewable;
+    int consumtionTotal;
+    int productionTotal;
+    int ImportTotal;
+    int ExportTotal;
 }data_total;
 
 /**
@@ -36,7 +36,7 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
  * @return int To to use for the final print statement.
  */
 
-int analyze_data(data_total total, data_consumtion consumtion)
+int main()
 {
     data_consumtion consumtion;
     data_total total;
@@ -55,9 +55,9 @@ int analyze_data(data_total total, data_consumtion consumtion)
     consumtion.wind = 1900;
 
 
-    wind_procentage = consumtion.wind / total.consumtionTotal * 100; /*Precentage of total prower from wind*/
-    hydro_procentage =  consumtion.hydro / total.consumtionTotal * 100; /*Precentage of total prower from Hydro*/
-    biomass_procentage = consumtion.biomass / total.consumtionTotal * 100; /*Precentage of total prower from Biomass*/
+    wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal; /*Precentage of total prower from wind*/
+    hydro_procentage =  (consumtion.hydro * 100.) / total.consumtionTotal; /*Precentage of total prower from Hydro*/
+    biomass_procentage = (consumtion.biomass * 100.) / total.consumtionTotal; /*Precentage of total prower from Biomass*/
 
     printf("Wind:     %6.2lf %%\n", wind_procentage);
     printf("Hydro:    %6.2lf %%\n", hydro_procentage);
@@ -73,11 +73,8 @@ int analyze_data(data_total total, data_consumtion consumtion)
     /*Coal 820 gCO2/kWh*/
 
 
-    
-
-
-
 
     return 0;
 }
 
+/*int analyze_data(data_total total, data_consumtion consumtion)*/
