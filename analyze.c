@@ -57,35 +57,54 @@ int main()
     value.carbon = 200;
 
     /*Data that was taken from an API Request |NOT UP TO DATE|*/
-    total.fossile = 91;
-    total.renewable = 91;
-    total.consumtionTotal = 3237;
+    total.fossile = 73;
+    total.renewable = 71;
+    total.consumtionTotal = 2807;
 
-    consumtion.biomass = 207;
-    consumtion.solar = 0;
-    consumtion.hydro = 848;
-    consumtion.wind = 1900;
-
-    analyze_data(total, consumtion);
+    consumtion.biomass = 197;
+    consumtion.coal = 485;
+    consumtion.gas = 179;
+    consumtion.hydro = 951;
+    consumtion.hydro_discharge = 60;
+    consumtion.nuclear = 68;
+    consumtion.oil = 10;
+    consumtion.solar = 74;
+    consumtion.wind = 763;
+    consumtion.geothermal = 0;
+    consumtion.unknown = 20;
+    
 
     green_power(&value);
 
     return 0;
 }
 
+/**
+ * @brief A function for futher use of analyzing data in the future.
+ * 
+ * @param total API DATA
+ * @param consumtion API DATA
+ * @return int Analyzed data returned to print.
+ */
+
 int analyze_data(data_total total, data_consumtion consumtion)
 {
-    double wind_procentage, hydro_procentage, biomass_procentage;
-    int sum;
+    double wind_procentage, hydro_procentage, biomass_procentage, solar_procentage, hydro_dischare_procentage;
+    double renewable_sum;
 
+    solar_procentage = (consumtion.solar * 100.) / total.consumtionTotal;
     wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal;       /*Precentage of total prower from wind*/
     hydro_procentage = (consumtion.hydro * 100.) / total.consumtionTotal;     /*Precentage of total prower from Hydro*/
     biomass_procentage = (consumtion.biomass * 100.) / total.consumtionTotal; /*Precentage of total prower from Biomass*/
 
-    printf("Wind:     %6.2lf %%\n", wind_procentage);
-    printf("Hydro:    %6.2lf %%\n", hydro_procentage);
-    printf("Biomass:  %6.2lf %%\n", biomass_procentage);
-    printf("Sum:      %6d %%\n", sum = wind_procentage + hydro_procentage + biomass_procentage);
+
+    printf("Solar:            %6.2lf %%\n", solar_procentage);
+    printf("Wind:             %6.2lf %%\n", wind_procentage);
+    printf("Hydro:            %6.2lf %%\n", hydro_procentage);
+    printf("Biomass:          %6.2lf %%\n", biomass_procentage);
+    printf("Sum af renewable: %6.2f %%\n", renewable_sum = wind_procentage + hydro_procentage + biomass_procentage + solar_procentage);
+
+
 
     /*How much CO2 in grams the different types of energy make in kWh (Kilo Watt Hour)*/
     /*1 MW = 1000 kWh*/
@@ -95,8 +114,16 @@ int analyze_data(data_total total, data_consumtion consumtion)
     /*Biomass 230 gCO2/kWh*/
     /*Coal 820 gCO2/kWh*/
 
+
+
     return 1;
 }
+
+/**
+ * @brief Function to get the index for the print statement is the power green?
+ * 
+ * @param value The intensity struct as a pointer with the green value returen in the struct.
+ */
 
 void green_power(intensity *value)
 {
