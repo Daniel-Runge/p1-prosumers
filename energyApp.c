@@ -9,10 +9,14 @@
 int main(void)
 {
     data_total total;
+    data_consumtion consum;
     /* curl_global_init(CURL_GLOBAL_ALL); */
 
-    filemaker();
-    readFile(total);
+    fileMaker();
+    readFile(&total);
+    green_power(&total);
+    welcomeprint();
+    printdata(total, consum, green_power(&total));
     /*curl_global_cleanup();*/
     return 0;
 }

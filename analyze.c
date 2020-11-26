@@ -33,16 +33,14 @@ int green_power(data_total *value);
  * @return int To to use for the final print statement.
  */
 
-int main()
+/* int main()
 {
     data_consumtion consumtion;
     data_total total;
 
-    /*Dummy data*/
 
     total.carbon_intensity = 200;
 
-    /*Data that was taken from an API Request |NOT UP TO DATE|*/
     total.fossile = 73;
     total.renewable = 71;
     total.consumtionTotal = 2807;
@@ -62,7 +60,8 @@ int main()
     green_power(&total);
 
     return 0;
-}
+} 
+*/
 
 /**
  * @brief A function for futher use of analyzing data in the future.
