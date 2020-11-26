@@ -1,4 +1,4 @@
-CC = clang
+CC = gcc
 CFLAGS1 = -g
 CFLAGS2 = -g -c -Wall
 LIBS = `curl-config --libs`
