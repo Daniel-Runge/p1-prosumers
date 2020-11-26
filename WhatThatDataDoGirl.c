@@ -6,6 +6,23 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/* Struct for all the numbers given */
+struct APIData
+{
+    int CarbonIntensity;
+    int Renewable;
+    int FossileFree;
+    int SolarCon;
+    int WindCon;
+    int HydroCon;
+    int BiomassCon;
+    int Nuclear;
+    int Import;
+    int Export;
+};
+
+
+
 int main(void) 
 {
    FILE *fp;
