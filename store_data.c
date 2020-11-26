@@ -6,36 +6,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <json-c/json.h>
-
-typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
-{
-    double battery_discharge;
-    double biomass;
-    double coal;
-    double gas;
-    double hydro;
-    double hydro_discharge;
-    double nuclear;
-    double oil;
-    double solar;
-    double wind;
-    double geothermal;
-    double unknown;
-} data_consumtion;
-
-typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
-{
-    double fossile;
-    double renewable;
-    double consumtionTotal;
-    double productionTotal;
-    double ImportTotal;
-    double ExportTotal;
-    double carbon_intensity;
-} data_total;
+#include "energyAppFunctions.h"
 
 double EnergyParser(char *Filename, char *KeyWord);
-void readFile(data_total POWAH);
+void readFile(data_total *POWAH);
 
 /**
  * @brief Function takes the created files by the API and runs thorugh them checking
@@ -47,7 +21,7 @@ void readFile(data_total POWAH);
  * @return type is void.
  */
 
-void readFile(data_total POWAH)
+void readFile(data_total *POWAH)
 {
     char *KeyWord[] = {"battery discharge", "biomass", "coal", "gas", "hydro", 
     "hydro discharge", "nuclear", "oil", "solar", "wind", "geothermal", "unknown", 
@@ -57,8 +31,8 @@ void readFile(data_total POWAH)
     char *Filename[] = {"renewable_dk1.json", "renewable_dk2.json", 
     "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
 
-    POWAH.renewable = EnergyParser(Filename[0], KeyWord[13]);
-    POWAH.carbon_intensity = EnergyParser(Filename[2], KeyWord[18]);
+    POWAH->renewable = EnergyParser(Filename[0], KeyWord[13]);
+    POWAH->carbon_intensity = EnergyParser(Filename[2], KeyWord[18]);
 }
 
 /**

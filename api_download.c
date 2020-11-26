@@ -17,6 +17,7 @@ int fileMaker(void)
 {
     /*loops a function using different parameters from 2 arrays one is the urls and the other is wheather the file should be written or appended*/
     int j = 0;
+    int i;
 
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
      "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
@@ -31,10 +32,11 @@ int fileMaker(void)
     char* filename[] = {"renewable_dk1.json", "renewable_dk2.json", "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
 
 
-    for (int i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
     {
         get_api(filemode[j],url[i], filename[i]);
     }
+    return 0;
 
 }
 
@@ -47,7 +49,7 @@ void get_api (char* filemode, char* url, char* filename)
 
     CURL *curl;
     FILE *fp;
-    int result;
+    struct curl_slist *headers = NULL;
     
     /* creates a file and a pointer to that file  */
     fp=fopen(filename, filemode);
@@ -58,13 +60,11 @@ void get_api (char* filemode, char* url, char* filename)
     curl_easy_setopt(curl, CURLOPT_URL, url);
 
     /* creates a header file and puts the authentification token into it for the curl request  */
-    struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers, "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     /*  tells curl that you want to write the data you get into your file */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-    result = curl_easy_perform(curl);
 
     /* closes everything and cleans up */
     fclose(fp);

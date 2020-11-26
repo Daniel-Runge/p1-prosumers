@@ -5,7 +5,7 @@
      * 
      */
 void welcomeprint();
-void printdata();
+void printdata(data_total total, data_consumtion consumtion, int parameter);
 /**
  * @brief Use struct for printing data, use output from analyze to print the evaluation.
 
@@ -16,12 +16,7 @@ void printdata();
 const char *co2[] = {
     "Right now the energy in denmark is green\n",
     "The energy in Denmark is not green right now\n"};
-int main(void)
-{
-    welcomeprint();
-    printdata();
-    return (0);
-}
+
 /**
  * @brief It is not finished
  * 
