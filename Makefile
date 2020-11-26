@@ -1,14 +1,13 @@
 CC = gcc
-CFLAGS1 = -g
-CFLAGS2 = -g -c -Wall
+CFLAGS = -g -ansi -pedantic -Wformat -Wall
 LIBS = `curl-config --libs`
 DEPS = energyAppFunctions.h
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS2)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-energyApp: energyApp.o
-	$(CC) $(CFLAGS1) -o $@ $< $(LIBS)
+energyApp: energyApp.o api_download.o
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
 clean:
 	rm -f *.o energyApp
