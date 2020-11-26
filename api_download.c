@@ -5,6 +5,7 @@
 
 
 void get_api (char* filemode, char* url, char* filename);
+int filemaker(void);
 
 /**
  * @brief the program accesses the electricity map api and downloads data from dk and inputs it into a file
@@ -12,7 +13,7 @@ void get_api (char* filemode, char* url, char* filename);
  */
 
 
-int main (void)
+int fileMaker(void)
 {
     /*loops a function using different parameters from 2 arrays one is the urls and the other is wheather the file should be written or appended*/
     int j = 0;

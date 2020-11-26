@@ -45,7 +45,6 @@ int EnergyParser(char *Filename, char *KeyWord);
  */
 int main(void)
 {
-    int i, j;
     data_total POWAH;
     char *KeyWord[] = {"battery discharge", "biomass", "coal", "gas", "hydro", 
     "hydro discharge", "nuclear", "oil", "solar", "wind", "geothermal", "unknown", 

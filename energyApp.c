@@ -8,8 +8,11 @@
 
 int main(void)
 {
+    data_total total;
     /* curl_global_init(CURL_GLOBAL_ALL); */
 
+    filemaker();
+    readFile(total);
     /*curl_global_cleanup();*/
     return 0;
 }
