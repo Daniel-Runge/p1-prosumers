@@ -4,7 +4,7 @@
 #include <curl/curl.h>
 
 
-void get_api (char* filemode, char* url);
+void get_api (char* filemode, char* url, char* filename);
 
 /**
  * @brief the program accesses the electricity map api and downloads data from dk and inputs it into a file
@@ -27,7 +27,7 @@ int main (void)
     
     char* filemode[] ={"w","a"};
     
-    char* filename[] = {"renewable_dk1", "renewable_dk2", "carbon_intensity_dk1", "carbon_intensity_dk1"};
+    char* filename[] = {"renewable_dk1.json", "renewable_dk2.json", "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
 
 
     for (int i = 0; i < 4; i++)
