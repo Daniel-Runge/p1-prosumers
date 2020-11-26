@@ -22,12 +22,17 @@ int main (void)
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2"} ;
     
+
+
+    
     char* filemode[] ={"w","a"};
     
+    char* filename[] = {"renewable_dk1", "renewable_dk2", "carbon_intensity_dk1", "carbon_intensity_dk1"};
+
+
     for (int i = 0; i < 4; i++)
     {
-        get_api(filemode[j],url[i]);
-        j=1;
+        get_api(filemode[j],url[i], filename[i]);
     }
 
 }
@@ -36,7 +41,7 @@ int main (void)
  * @brief Get the file from a url  to the electricity map api
  * 
  */
-void get_api (char* filemode, char* url)
+void get_api (char* filemode, char* url, char* filename)
 {
 
     CURL *curl;
@@ -44,7 +49,7 @@ void get_api (char* filemode, char* url)
     int result;
     
     /* creates a file and a pointer to that file  */
-    fp=fopen("testing.json", filemode);
+    fp=fopen(filename, filemode);
 
     /* this is setting up the request type "GET" and the adress curl should access  */
     curl = curl_easy_init();
