@@ -42,7 +42,7 @@ int main(void)
     CURL *curl;
     CURLcode res;
     FILE *fp;
-    char filename[] = {"cattest"};
+    char filename[] = {"cattest.json"};
 
     curl_global_init(CURL_GLOBAL_ALL);
 
