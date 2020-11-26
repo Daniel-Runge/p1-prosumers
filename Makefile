@@ -6,8 +6,8 @@ DEPS = energyAppFunctions.h
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-energyApp: energyApp.o api_download.o
-	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+energyApp: api_download.o energyApp.o
+	$(CC) -o $@ $< $(CFLAGS) $(LIBS)
 
 clean:
 	rm -f *.o energyApp

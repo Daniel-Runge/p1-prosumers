@@ -12,10 +12,9 @@ int main(void)
     CURLcode res;
     FILE *fp;
 
-    curl_global_init(CURL_GLOBAL_ALL);
+    /* curl_global_init(CURL_GLOBAL_ALL); */
     get_co2();
     get_renevable();
 
-    curl_global_cleanup();
-    return 0;
+    /*curl_global_cleanup();*/
 }
