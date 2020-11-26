@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "energyAppFunctions.h"
 
 typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
 {
@@ -18,17 +19,7 @@ typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
     double unknown;
 } data_consumtion;
 
-typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
-{
-    double fossile;
-    double renewable;
-    double consumtionTotal;
-    double productionTotal;
-    double ImportTotal;
-    double ExportTotal;
-    double carbon_intensity;
-    double green;
-} data_total;
+
 
 
 int analyze_data(data_total total, data_consumtion consumtion);
@@ -46,7 +37,6 @@ int main()
 {
     data_consumtion consumtion;
     data_total total;
-    
 
     /*Dummy data*/
 
