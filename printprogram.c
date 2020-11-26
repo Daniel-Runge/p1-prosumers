@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "energyAppFunctions.h"
 /**
      * @brief a welcome message in the making, this is just an outcast
      * 
@@ -38,16 +39,15 @@ void welcomeprint()
  * @brief this is where the dat will be printed
  * 
  */
-void printdata()
+void printdata(data_total total, data_consumtion consumtion, int parameter)
 {
-    int wind =193, hydro =34, biomass =34, sum, procent = 48, intensitet = 86;
-    sum = wind + hydro + biomass;
 
-    printf("Right now the procent of renewable energy in Denmark is %d\n",procent);
-    printf("The carbon intensity in Denmark is %d (kilde eller noget)\n", intensitet);
+    printf("Right now the procent of renewable energy in Denmark is %f\n",total.renewable);
+    printf("The carbon intensity in Denmark is %f (kilde eller noget)\n", total.carbon_intensity);
 
-    printf("So the conclusion must be \n%s\n",co2[0]);
+    printf("So the conclusion must be \n%s\n",co2[parameter]);
+
     printf("The total amount of energy in Denmark is produced by\n");
-    printf("|Wind     Hydro     Biomass     Sum|\n");
-    printf("|%4d   %4d   %7d   %10d|\n", wind, hydro, biomass, sum);
+    printf("|Wind     Hydro     Biomass|\n");
+    printf("|%4f   %4f   %7f|\n", consumtion.wind, consumtion.hydro, consumtion.biomass);
 }
