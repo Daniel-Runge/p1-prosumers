@@ -12,32 +12,25 @@ int filemaker(void);
  * 
  */
 
-
 int fileMaker(void)
 {
-    /*loops a function using different parameters from 2 arrays one is the urls and the other is wheather the file should be written or appended*/
-    int j = 0;
     int i;
+    int j = 0;
 
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
      "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1", 
-     "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2"} ;
-    
-
-
+     "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2"};
     
     char* filemode[] ={"w","a"};
     
     char* filename[] = {"renewable_dk1.json", "renewable_dk2.json", "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
-
 
     for (i = 0; i < 4; i++)
     {
         get_api(filemode[j],url[i], filename[i]);
     }
     return 0;
-
 }
 
 /**
@@ -66,11 +59,11 @@ void get_api (char* filemode, char* url, char* filename)
 
     /*  tells curl that you want to write the data you get into your file */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+    /* curl_easy_perform runs the curl that you set using easy_setopt */
     result = curl_easy_perform(curl);
 
     /* closes everything and cleans up */
     fclose(fp);
     curl_easy_cleanup(curl);
-
 }
 
