@@ -16,7 +16,7 @@ typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
     double wind;
     double geothermal;
     double unknown;
-} data_consumtion;
+} data_consumption;
 
 typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 {
@@ -35,4 +35,4 @@ void readFile(data_total *POWAH);
 int green_power(data_total *value);
 
 void welcomeprint();
-void printdata(data_total total, data_consumtion consumtion, int parameter);
+void printdata(data_total total, data_consumption consumption, int parameter);

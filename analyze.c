@@ -17,7 +17,7 @@ int wind_power(data_total total, data_consumtion consumtion);
 
 int main()
 {
-    data_consumtion consumtion;
+    data_consumption consumtion;
     data_total total;
 
     /*Dummy data*/
@@ -60,7 +60,7 @@ int main()
  * @return int Analyzed data returned to print.
  */
 
-int analyze_data(data_total total, data_consumtion consumtion)
+int analyze_data(data_total total, data_consumption consumtion)
 {
     double wind_procentage, hydro_procentage, biomass_procentage, solar_procentage, hydro_dischare_procentage;
     double renewable_sum;
