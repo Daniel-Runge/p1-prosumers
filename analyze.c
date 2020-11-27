@@ -3,72 +3,69 @@
 #include <stdlib.h>
 #include "energyAppFunctions.h"
 
-int analyze_data(data_total total, data_consumtion consumtion);
+int analyze_data(data_total total, data_consumption consumption);
 int green_power(data_total *value);
-int wind_power(data_total total, data_consumtion consumtion);
+int wind_power(data_total total, data_consumption consumption);
 
 /**
  * @brief Function to analyze data that comes from the API.
  * 
  * @param total The data from the APIs Total section.
- * @param consumtion The data from the APIs consumtion section.
+ * @param consumption The data from the APIs consumption section.
  * @return int To to use for the final print statement.
  */
 
-int main()
+/* int main()
 {
-    data_consumption consumtion;
+    data_consumption consumption;
     data_total total;
 
-    /*Dummy data*/
 
     total.carbon_intensity = 200;
 
-    /*Data that was taken from an API Request |NOT UP TO DATE|*/
     total.fossile = 73;
     total.renewable = 71;
-    total.consumtionTotal = 2807;
+    total.consumptionTotal = 2807;
 
-    consumtion.biomass = 197;
-    consumtion.coal = 485;
-    consumtion.gas = 179;
-    consumtion.hydro = 951;
-    consumtion.hydro_discharge = 60;
-    consumtion.nuclear = 68;
-    consumtion.oil = 10;
-    consumtion.solar = 74;
-    consumtion.wind = 763;
-    consumtion.geothermal = 0;
-    consumtion.unknown = 20;
+    consumption.biomass = 197;
+    consumption.coal = 485;
+    consumption.gas = 179;
+    consumption.hydro = 951;
+    consumption.hydro_discharge = 60;
+    consumption.nuclear = 68;
+    consumption.oil = 10;
+    consumption.solar = 74;
+    consumption.wind = 763;
+    consumption.geothermal = 0;
+    consumption.unknown = 20;
 
-    /*green_power(&total);*/
 
-    analyze_data(total, consumtion);
+    analyze_data(total, consumption);
 
-    wind_power(total, consumtion);
+    wind_power(total, consumption);
 
-    printf("%d\n", wind_power(total, consumtion));
+    printf("%d\n", wind_power(total, consumption));
 
     return 0;
-}
+} */
 
 /**
  * @brief A function for futher use of analyzing data in the future.
  * 
  * @param total API DATA
- * @param consumtion API DATA
+ * @param consumption API DATA
  * @return int Analyzed data returned to print.
  */
 
-int analyze_data(data_total total, data_consumption consumtion)
+int analyze_data(data_total total, data_consumption consumption)
 {
     double wind_procentage, hydro_procentage, biomass_procentage, solar_procentage, hydro_dischare_procentage;
     double renewable_sum;
 
-    solar_procentage = (consumtion.solar * 100.) / total.consumtionTotal;
-    wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal;       /*Precentage of total prower from wind*/
-    hydro_procentage = (consumtion.hydro * 100.) / total.consumtionTotal;     /*Precentage of total prower from Hydro*/
-    biomass_procentage = (consumtion.biomass * 100.) / total.consumtionTotal; /*Precentage of total prower from Biomass*/
+    solar_procentage = (consumption.solar * 100.) / total.consumptionTotal;
+    wind_procentage = (consumption.wind * 100.) / total.consumptionTotal;       /*Precentage of total prower from wind*/
+    hydro_procentage = (consumption.hydro * 100.) / total.consumptionTotal;     /*Precentage of total prower from Hydro*/
+    biomass_procentage = (consumption.biomass * 100.) / total.consumptionTotal; /*Precentage of total prower from Biomass*/
 
     printf("Solar:            %6.2lf %%\n", solar_procentage);
     printf("Wind:             %6.2lf %%\n", wind_procentage);
@@ -121,14 +118,14 @@ int green_power(data_total *value)
  * @brief A function to show if the wind is strong or not.
  * 
  * @param total Data from the total section of the API.
- * @param consumtion Data from the consumtion section of the API.
+ * @param consumption Data from the consumption section of the API.
  * @return int Return 1 if wind power is 10% or under 2 if its over 50% and 0 if its anything else.
  */
 
-int wind_power(data_total total, data_consumtion consumtion)
+int wind_power(data_total total, data_consumption consumption)
 {
     int wind_procentage;
-    wind_procentage = (consumtion.wind * 100.) / total.consumtionTotal;
+    wind_procentage = (consumption.wind * 100.) / total.consumptionTotal;
 
     if (wind_procentage <= 10)
     {
@@ -148,14 +145,14 @@ int wind_power(data_total total, data_consumtion consumtion)
  * @brief |WORK IN PROGRESS|
  * 
  * @param total 
- * @param consumtion 
+ * @param consumption 
  * @return int 
  */
 
-int coal_power(data_total total, data_consumtion consumtion) 
+int coal_power(data_total total, data_consumption consumption) 
 {
     int coal_procentage;
-    coal_procentage = (consumtion.coal * 100.) / total.consumtionTotal;
+    coal_procentage = (consumption.coal * 100.) / total.consumptionTotal;
 
     if (coal_procentage >= 20)
     {

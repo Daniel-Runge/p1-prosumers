@@ -22,7 +22,7 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 {
     double fossile;
     double renewable;
-    double consumtionTotal;
+    double consumptionTotal;
     double productionTotal;
     double ImportTotal;
     double ExportTotal;
