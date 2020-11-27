@@ -2,13 +2,14 @@
 #include "energyAppFunctions.h"
 /**
      * @brief a welcome message in the making, this is just an outcast
-     * data_consumption consumtion,
+     * 
+     * , int wind
      */
 void welcomeprint();
-void printdata(data_total total,  int parameter, int wind);
+void printdata(data_total total, data_consumption consumtion, int parameter);
 
 const char *co2[] = {
-    "Right now the energy in denmark is green\n",
+    "Green!!\n",
     "The energy in Denmark is partialy green right now\n",
     "There are owls in the swamp\n",
     "The ice is smelting at the pøules\n"};
@@ -31,17 +32,18 @@ void welcomeprint()
 }
 /**
  * @brief this is where the dat will be printed
- * data_consumption consumtion,
+ * 
+ * data_total total, int parameter, int wind
+ * 
  */
-void printdata(data_total total, int parameter, int wind)
+void printdata(data_total total, data_consumption consumtion, int parameter)
 {
+    char *empty[] = {"|"};
+    printf("%% renewable energy | Carbon intensity (g/kWh) | Conclusion |\n");
 
-    printf("Right now the procent of renewable energy in Denmark is %f\n", total.renewable);
-    printf("The carbon intensity in Denmark is %f g/kWh\n", total.carbon_intensity);
+    printf("%11.2f%9s %14.2f%12s %10s \n", total.renewable,empty[0], total.carbon_intensity, empty[0], co2[parameter]);
 
-    printf("So the conclusion must be \n%s\n", co2[parameter]);
 
-    printf("the wind energy in Denmark is now. \n%s\n", windy[wind]);
     /*printf("The total amount of energy in Denmark is produced by\n");
     printf("|Wind     Hydro     Biomass|\n");
     printf("|%4f   %4f   %7f|\n", consumtion.wind, consumtion.hydro, consumtion.biomass);*/
