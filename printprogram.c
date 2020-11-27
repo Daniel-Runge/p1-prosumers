@@ -2,10 +2,10 @@
 #include "energyAppFunctions.h"
 /**
      * @brief a welcome message in the making, this is just an outcast
-     * 
+     * data_consumption consumtion,
      */
 void welcomeprint();
-void printdata(data_total total, /*data_consumption consumtion*/, int parameter, int wind);
+void printdata(data_total total,  int parameter, int wind);
 
 const char *co2[] = {
     "Right now the energy in denmark is green\n",
@@ -31,16 +31,17 @@ void welcomeprint()
 }
 /**
  * @brief this is where the dat will be printed
- * 
+ * data_consumption consumtion,
  */
-void printdata(data_total total, /* data_consumption consumtion*/, int parameter, int wind)
+void printdata(data_total total, int parameter, int wind)
 {
 
     printf("Right now the procent of renewable energy in Denmark is %f\n", total.renewable);
     printf("The carbon intensity in Denmark is %f g/kWh\n", total.carbon_intensity);
 
     printf("So the conclusion must be \n%s\n", co2[parameter]);
-    printf("%s\n", windy[wind]);
+
+    printf("the wind energy in Denmark is now. \n%s\n", windy[wind]);
     /*printf("The total amount of energy in Denmark is produced by\n");
     printf("|Wind     Hydro     Biomass|\n");
     printf("|%4f   %4f   %7f|\n", consumtion.wind, consumtion.hydro, consumtion.biomass);*/
