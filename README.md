@@ -2,6 +2,11 @@
 Our project for first semester deals with energy awareness, and turning consumers into prosumers.
 Outlined below is the setup of tools used to collaborate on the project.
 
+## 
+
+# Preparation tutorial for developers
+On a system with the below installed dependencies, simply type make in the WSL terminal/bash window to create the file energyApp, or type make exe to generate a windows executable (not currently working).
+
 ## WSL 2 setup
 First enable and install WSL following the guide [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 Then install gcc, make, Git, cURL & Libcurl using the following commands:
@@ -9,7 +14,13 @@ Then install gcc, make, Git, cURL & Libcurl using the following commands:
 > sudo apt install build-essential  
 > sudo apt-get install manpages-dev  
 > sudo apt install curl  
-> sudo apt install libcurl4-openssl-dev
+> sudo apt install libcurl4-openssl-dev  
+> sudo apt install libjson-c-dev  
+> sudo apt-get install mingw-w64
+
+Optional installations that may be worth installing:
+> sudo apt-get install doxygen  
+> sudo apt install cmake
 
 ### Practical Ubuntu commands to know
 | Command | Description |
