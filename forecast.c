@@ -78,3 +78,30 @@ int analyse(struct WindData *number)
         return 4;
     }
 }
+
+
+
+double EnergyParser(char *Filename, char *KeyWord)
+{
+    FILE *fp;
+    char FileBuffer[1800];
+    struct json_object *Full_json;
+    struct json_object *Consumption;
+    struct json_object *FoundNumber;
+    fp = fopen(Filename, "r");
+    if (fp == NULL)
+    {
+        printf("Could not read JSON file\n");
+    }
+    fread(FileBuffer, 1800, 1, fp);
+    fclose(fp);
+
+    Full_json = json_tokener_parse(FileBuffer);
+    json_object_object_get_ex(Full_json, KeyWord, &FoundNumber);
+    if (json_object_get_int(FoundNumber) == 0)
+    {
+        json_object_object_get_ex(Full_json, "powerConsumptionBreakdown", &Consumption);
+        json_object_object_get_ex(Consumption, KeyWord, &FoundNumber);
+    }
+    return (json_object_get_int(FoundNumber));
+}
