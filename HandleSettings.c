@@ -89,15 +89,3 @@ void UpdateSettingsFile(settings settings)
 
     fclose(settingsFile);
 }
-
-int main(void)
-{
-    settings settings;
-    printf("Location: %d\n", settings.numberOfHours);
-    settings = CreateSettingsStruct();
-    UpdateSettingsFile(settings);
-
-    printf("Location: %d\n", settings.numberOfHours);
-
-    return CheckSettings();
-}
