@@ -3,30 +3,42 @@
 #include <string.h>
 #include <curl/curl.h>
 
+<<<<<<< HEAD
 void weathermap_api();
+=======
+void get_api (char* filemode, char* url, char* filename, char* auth);
+
+>>>>>>> 9c7a4d515ed3884ab03ee3d846fd23d81f473ae6
 
 /**
  * @brief Get the file from a url  to the electricity map api
  * 
  */
-void weathermap_api(char *filemode, char *url, char *filename)
+int main(void)
+{
+    get_api("w", "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686", "OpenWeatherMap.json", "91f093992825e6f84a7a6f7033480686");
+    return(0);
+}
+
+
+void get_api (char* filemode, char* url, char* filename, char* auth)
 {
 
     CURL *curl;
     FILE *fp;
     struct curl_slist *headers = NULL;
     CURLcode result;
-
+    
     /* creates a file and a pointer to that file  */
-    fp = fopen("OpenWeatherMap.json", "w");
+    fp=fopen(filename, filemode);
 
     /* this is setting up the request type "GET" and the adress curl should access  */
     curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-    curl_easy_setopt(curl, CURLOPT_URL, "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686");
+    curl_easy_setopt(curl, CURLOPT_URL, url);
 
     /* creates a header file and puts the authentification token into it for the curl request  */
-    headers = curl_slist_append(headers, "auth-token: 91f093992825e6f84a7a6f7033480686");
+    headers = curl_slist_append(headers, auth);
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     /*  tells curl that you want to write the data you get into your file */
