@@ -3,12 +3,15 @@
 #include <string.h>
 #include <curl/curl.h>
 
-<<<<<<< HEAD
-void weathermap_api();
-=======
+struct WindData
+{
+    int UnixTime;
+    int WindSpeed;
+};
+
+
 void get_api (char* filemode, char* url, char* filename, char* auth);
 
->>>>>>> 9c7a4d515ed3884ab03ee3d846fd23d81f473ae6
 
 /**
  * @brief Get the file from a url  to the electricity map api
