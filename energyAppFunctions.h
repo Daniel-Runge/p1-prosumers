@@ -1,6 +1,3 @@
-void get_api (char* filemode, char* url, char* filename);
-int fileMaker(void);
-
 
 typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
 {
@@ -29,10 +26,37 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
     double carbon_intensity;
 } data_total;
 
-double EnergyParser(char *Filename, char *KeyWord);
-void readFile(data_total *POWAH);
+/**
+ * @brief prototypes from the energyApp.c file
+ */
+void EnergiApp(void);
+/**
+ * @brief prototypes from the command.c file
+ */
+char Command (void);
+void UpdateSettings(void);
+char Input (void);
+int clean_stdin();
 
+/**
+ * @brief prototypes from the api_download.c file
+ */
+int fileMaker(void);
+void get_api (char* filemode, char* url, char* filename);
+
+/**
+ * @brief prototypes from the store_data.c file
+ */
+void readFile(data_total *POWAH);
+double EnergyParser(char *Filename, char *KeyWord);
+
+/**
+ * @brief prototypes from the analyze.c file
+ */
 int green_power(data_total *value);
 
+/**
+ * @brief prototypes from the printprogram.c file
+ */
 void welcomeprint();
 void printdata(data_total total, data_consumption consumption, int parameter);

@@ -4,14 +4,7 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
-
-char Command (void);
-void EnergiApp(void);
-void UpdateSettings(void);
-char Input (void);
-
-int clean_stdin(); 
-
+ 
 
 int main(void)
 {
@@ -21,24 +14,26 @@ int main(void)
     {
         EnergiApp();
     }
-
     else
     {
         UpdateSettings();
         EnergiApp();
     }
 
-    
     do{
         Cmd = Command();
     }
     while(Cmd != 'e');
     
-    return 0;
-    
+    return 0;   
 }    
     
-    
+/**
+ * @brief this fuction just writes some help and is a switch that chooses which switch based on output from the input func.
+ * it also returns a char that is uses by the main func to know when to exit.
+ * 
+ * @return char 
+ */
 char Command ()    
 {
     printf("chose a command, write '-h' for help\n");
@@ -75,6 +70,11 @@ char Command ()
     }
 }
 
+/**
+ * @brief this is the primary function which is just a gathering of other functions and making of structs.
+ * its where all the non structure stuff happens.
+ * 
+ */
 void EnergiApp(void)
 {
     data_total total;
@@ -90,6 +90,11 @@ void EnergiApp(void)
 
 }
 void UpdateSettings (void){}
+
+/**
+ * @brief this function takes the input checks if its correct and then returns it.
+ * @return char 
+ */
 char Input (void){
     char boss='b', c;
     while (((scanf("-%c%c", &boss, &c) != 2 || c != '\n') 
@@ -100,7 +105,10 @@ char Input (void){
     return boss;
     
 }
-
+/**
+ * @brief this function just checks if the stdin is clean to make sure its not printing from old input. and also cleans it.
+ * @return int 
+ */
 int clean_stdin()
 {
     while (getchar() != '\n');
