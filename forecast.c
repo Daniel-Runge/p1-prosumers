@@ -5,8 +5,6 @@
 
 void weathermap_api();
 
-
-
 /**
  * @brief Get the file from a url  to the electricity map api
  * 
@@ -39,4 +37,29 @@ void weathermap_api(char *filemode, char *url, char *filename)
     /* closes everything and cleans up */
     fclose(fp);
     curl_easy_cleanup(curl);
+}
+
+int analyse(struct WindData *number)
+{
+
+    if (number->WindSpeed <= 2)
+    {
+        return 0;
+    }
+    else if (number->WindSpeed <= 3)
+    {
+        return 1;
+    }
+    else if (number->WindSpeed <= 4)
+    {
+        return 2;
+    }
+    else if (number->WindSpeed <= 5)
+    {
+        return 3;
+    }
+    else
+    {
+        return 4;
+    }
 }
