@@ -4,7 +4,7 @@
 #include <curl/curl.h>
 
 
-void get_api (char* filemode, char* url, char* filename);
+void get_api (char* filemode, char* url, char* filename, char* auth);
 int filemaker(void);
 
 /**
@@ -28,7 +28,7 @@ int fileMaker(void)
 
     for (i = 0; i < 4; i++)
     {
-        get_api(filemode[j],url[i], filename[i]);
+        get_api(filemode[j],url[i], filename[i], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
     return 0;
 }
@@ -37,7 +37,7 @@ int fileMaker(void)
  * @brief Get the file from a url  to the electricity map api
  * 
  */
-void get_api (char* filemode, char* url, char* filename)
+void get_api (char* filemode, char* url, char* filename, char* auth)
 {
 
     CURL *curl;
@@ -54,7 +54,7 @@ void get_api (char* filemode, char* url, char* filename)
     curl_easy_setopt(curl, CURLOPT_URL, url);
 
     /* creates a header file and puts the authentification token into it for the curl request  */
-    headers = curl_slist_append(headers, "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+    headers = curl_slist_append(headers, auth);
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     /*  tells curl that you want to write the data you get into your file */
