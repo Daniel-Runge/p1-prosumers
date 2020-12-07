@@ -84,4 +84,4 @@ void UpdateSettingsStruct();
 int ValidateCharInput(char candidate, char option1, char option2);
 char CharInput (void);
 int IntInput(void);
-int clean_stdin();
+void CleanStdin();

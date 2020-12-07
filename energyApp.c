@@ -38,7 +38,7 @@ char Command ()
 {
     printf("chose a command, write '-h' for help\n");
     char choice;
-    choice = Input();
+    choice = CharInput();
 
     switch (choice){
         case 'h':
@@ -47,7 +47,7 @@ char Command ()
             break;
         case 's':
             printf("lets open settings then\n");
-            UpdateSettings();
+            /* Add function to update settings. */
             return 's';
             break;
         case 'g':

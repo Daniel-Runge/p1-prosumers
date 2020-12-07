@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <ctype.h>
+#include "energyAppFunctions.h"
+
 /**
  * @brief Validates the @param candidate if it is equal the two options.
  * 
@@ -9,42 +12,59 @@
  */
 int ValidateCharInput(char candidate, char option1, char option2)
 {
-    if(candidate == option1 || candidate == option2){
+    if (candidate == option1 || candidate == option2)
+    {
         return 1;
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }
 
 /**
  * @brief this function scans for an alpha char input and calls clean.
- * source: 
+ *  
  * @return the scanned chararacter.
  */
-char CharInput (void){
-    char choice='b', c;
-    while (((scanf("-%c%c", &choice, &c) != 2 || c != '\n') 
-             && clean_stdin()) || !isalpha(choice)){
-                 printf("wrong!\n");
-             }
-
+char CharInput(void)
+{
+    char choice = 'b';
+    while ((scanf("-%c", &choice) != 1) || !isalpha(choice))
+    {
+        CleanStdin();
+        printf("wrong!\n");
+    }
+    CleanStdin();
     return choice;
 }
 
-int IntInput(void){
+/**
+ * @brief This function scands for an integer input and calls clean.
+ * 
+ * @return the scanned int.
+ */
+int IntInput(void)
+{
     int choice = 0;
-    while(scanf("-%d") != 1 && clean_stdin()|| !isdigit(choice)){
+    while (scanf("-%d", &choice) != 1)
+    {
+        CleanStdin();
+        printf("%d", choice);
         printf("Wrong!\n");
     }
+    CleanStdin();
+
+    return choice;
 }
 
 /**
  * @brief this function cleans the input buffer.
  * @return int 
  */
-int clean_stdin()
+void CleanStdin()
 {
     char buffer;
-    while ((buffer = getchar()) !='\n' && buffer != EOF);
-    return 1;
+    while ((buffer = getchar()) != '\n' && buffer != EOF)
+        ;
 }
