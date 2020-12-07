@@ -12,7 +12,7 @@ int filemaker(void);
  * 
  */
 
-int fileMaker(void)
+int fileMaker(char Location)
 {
     int i;
     int j = 0;
@@ -24,13 +24,18 @@ int fileMaker(void)
     
     char* filemode[] ={"w","a"};
     
-    char* filename[] = {"renewable_dk1.json", "renewable_dk2.json", "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
+    char* filename[] = {"renewable.json", "renewable_dk2.json", "carbon_intensity.json", "carbon_intensity_dk2.json"};
 
-    for (i = 0; i < 4; i++)
-    {
-        get_api(filemode[j],url[i], filename[i], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+
+    if(Location == 'e'){
+        get_api(filemode[1],url[2],filename[1] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[4],filename[3] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
-    return 0;
+    if(Location == 'w'){
+        get_api(filemode[1],url[1],filename[1] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[3],filename[3] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+    }
+
 }
 
 /**

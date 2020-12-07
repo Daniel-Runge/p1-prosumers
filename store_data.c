@@ -19,11 +19,11 @@ void readFile(data_total *data)
     "fossilFreePercentage", "renewablePercentage", "powerConsumptionTotal", 
     "powerProductionTotal", "powerImportTotal", "powerExportTotal", "carbonIntensity"};
 
-    char *Filename[] = {"renewable_dk1.json", "renewable_dk2.json", 
-    "carbon_intensity_dk1.json", "carbon_intensity_dk2.json"};
+    char *Filename[] = {"renewable.json", "renewable_dk2.json", 
+    "carbon_intensity_dk1.json", "carbon_intensity.json"};
 
     data->renewable = EnergyParser(Filename[0], KeyWord[13]);
-    data->carbon_intensity = EnergyParser(Filename[2], KeyWord[18]);
+    data->carbon_intensity = EnergyParser(Filename[4], KeyWord[18]);
 }
 
 /**
