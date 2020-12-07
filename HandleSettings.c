@@ -3,8 +3,8 @@
 #include "energyAppFunctions.h"
 
 #define SETTINGS_FILE "settings.txt"
-#define ERROR_FILE "Could not open the file %s"
-#define ERROR_SCAN_RETRY "Invalid input! Try again"
+#define ERROR_FILE "Could not open the file %s\n"
+#define ERROR_SCAN_RETRY "Invalid input! Try again\n"
 
 /**
  * @brief Returns 1 if the settings file exists. 0 if it does not exist.
@@ -24,45 +24,41 @@ int CheckSettings()
 settings CreateSettingsStruct()
 {
     settings settings;
-    char buffer[10];
     char charBuffer;
+    int intBuffer;
 
-    printf("Create user settings.\n"
+    printf("No settings detected, creating user settings:\n"
     "Are you in w(est) or e(ast)?\n");
-
-
-
-
-
-
-    printf("Create user settings.\n"
-    "Are you in DK1 or DK2?\n");
-    scanf("%s", buffer);
-    while(strcmp(buffer, "DK1") && strcmp(buffer, "DK2")){
+    charBuffer = CharInput();
+    while(!ValidateCharInput(charBuffer, 'w', 'e')){
         printf(ERROR_SCAN_RETRY);
-        scanf("%s", buffer);
+        charBuffer = CharInput();
     }
-    printf("%s\n", buffer);
-    strcpy(settings.location, buffer);
-    printf("%s\n", settings.location);
+    settings.location = charBuffer;
+
     printf("Do you wish to see a forecast? (y/n)\n");
-    scanf(" %c", &charBuffer);
-    printf("%c", charBuffer);
-    while(charBuffer != 'y' && charBuffer != 'n'){
+    charBuffer = CharInput();
+    while(!ValidateCharInput(charBuffer, 'y', 'n')){
         printf(ERROR_SCAN_RETRY);
-        scanf(" %c", &charBuffer);
+        charBuffer = CharInput();
     }
     settings.forecast = charBuffer == 'y' ? 1 : 0;
+
     settings.numberOfHours = 0;
-    while(settings.forecast && (settings.numberOfHours >= 48 || settings.numberOfHours <= 0)){
+    if(settings.forecast){
         printf("How many hours do you wish to compare? (1-48)\n");
-        scanf("%d", &settings.numberOfHours);
+        intBuffer = IntInput();
+        while(intBuffer > 48 || intBuffer < 1){
+            printf(ERROR_SCAN_RETRY);
+            intBuffer = IntInput();
+        }
     }
+
     printf("Do you wish us to evaluate if the energy is green right now? (y/n)\n");
-    scanf(" %c", &charBuffer);
-    while(charBuffer != 'y' && charBuffer != 'n'){
+    charBuffer = CharInput();
+    while(!ValidateCharInput(charBuffer, 'y', 'n')){
         printf(ERROR_SCAN_RETRY);
-        scanf(" %c", &charBuffer);
+        charBuffer = CharInput();
     }
     settings.green = charBuffer == 'y' ? 1 : 0;
 

@@ -89,29 +89,3 @@ void EnergiApp(void)
     /*curl_global_cleanup();*/
 
 }
-
-
-/**
- * @brief this function scans for an alpha char input and calls clean.
- * source: 
- * @return char 
- */
-char CharInput (void){
-    char choice='b', c;
-    while (((scanf("-%c%c", &choice, &c) != 2 || c != '\n') 
-             && clean_stdin()) || !isalpha(choice)){
-                 printf("wrong!");
-             }
-
-    return choice;
-    
-}
-/**
- * @brief this function cleans the input buffer.
- * @return int 
- */
-int clean_stdin()
-{
-    while (getchar() != '\n');
-    return 1;
-}
