@@ -81,7 +81,7 @@ void EnergiApp(void)
     data_consumption consumption;
     /* curl_global_init(CURL_GLOBAL_ALL); */
 
-    fileMaker();
+    fileMaker('w'); /* Update parameter with parameter from settings. */
     readFile(&total);
     green_power(&total);
     welcomeprint();
