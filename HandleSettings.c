@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include "energyAppFunctions.h"
 
 #define SETTINGS_FILE "settings.txt"
@@ -7,9 +6,9 @@
 #define ERROR_SCAN_RETRY "Invalid input! Try again\n"
 
 /**
- * @brief Returns 1 if the settings file exists. 0 if it does not exist.
+ * @brief Function to determine existence of settings.txt file.
  * 
- * @return int 
+ * @return 1 if the settings file exists. 0 if it does not exist.
  */
 int CheckSettings()
 {
@@ -21,6 +20,11 @@ int CheckSettings()
     return 1;
 }
 
+/**
+ * @brief Create a Settings Struct object
+ * 
+ * @return settings 
+ */
 settings CreateSettingsStruct()
 {
     settings settings;
@@ -66,6 +70,11 @@ settings CreateSettingsStruct()
     return settings;
 }
 
+/**
+ * @brief Update the settings file based on the settings struct.
+ * 
+ * @param settings 
+ */
 void UpdateSettingsFile(settings settings)
 {
     FILE *settingsFile = fopen(SETTINGS_FILE, "w");
@@ -74,7 +83,7 @@ void UpdateSettingsFile(settings settings)
     {
         printf(ERROR_FILE, SETTINGS_FILE);
     }
-    fputs(settings.location, settingsFile);
+    fprintf(settingsFile, "%c", settings.location);
     fprintf(settingsFile, "\n%d", settings.forecast);
     fprintf(settingsFile, "\n%d", settings.numberOfHours);
     fprintf(settingsFile, "\n%d", settings.green);

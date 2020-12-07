@@ -16,4 +16,4 @@ exe: api_download.o store_data.o analyze.o printprogram.o energyApp.o
 	x86_64-w64-mingw32-gcc -o energyApp.exe $^ $(CFLAGS) $(LIBS)
 
 clean:
-	rm -f *.o energyApp
+	rm -f *.o energyApp settings.txt
