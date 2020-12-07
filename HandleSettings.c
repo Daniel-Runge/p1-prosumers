@@ -53,6 +53,7 @@ settings CreateSettingsStruct()
             intBuffer = IntInput();
         }
     }
+    settings.numberOfHours = intBuffer;
 
     printf("Do you wish us to evaluate if the energy is green right now? (y/n)\n");
     charBuffer = CharInput();
