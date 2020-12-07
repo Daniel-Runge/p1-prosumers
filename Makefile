@@ -3,10 +3,13 @@ CFLAGS = -g -pedantic -Wformat -Wall
 LIBS = `curl-config --libs` -ljson-c
 DEPS = energyAppFunctions.h
 
+OBJ = api_download.o store_data.o analyze.o printprogram.o \
+HandleSettings.o HandleInput.o energyApp.o
+
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-energyApp: api_download.o store_data.o analyze.o printprogram.o energyApp.o HandleSettings.o HandleInput.o
+energyApp: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 exe: api_download.o store_data.o analyze.o printprogram.o energyApp.o
