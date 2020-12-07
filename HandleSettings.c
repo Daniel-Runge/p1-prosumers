@@ -2,23 +2,9 @@
 #include <string.h>
 #include "energyAppFunctions.h"
 
-#define PLACEHOLDER 100
 #define SETTINGS_FILE "settings.txt"
 #define ERROR_FILE "Could not open the file %s"
 #define ERROR_SCAN_RETRY "Invalid input! Try again"
-
-typedef struct
-{
-    char location[PLACEHOLDER];
-    int forecast;
-    int numberOfHours;
-    int green;
-} settings;
-
-int CheckSettings();
-settings CreateSettingsStruct();
-void UpdateSettingsFile(settings settings);
-void UpdateSettingsStruct();
 
 /**
  * @brief Returns 1 if the settings file exists. 0 if it does not exist.
@@ -40,6 +26,15 @@ settings CreateSettingsStruct()
     settings settings;
     char buffer[10];
     char charBuffer;
+
+    printf("Create user settings.\n"
+    "Are you in w(est) or e(ast)?\n");
+
+
+
+
+
+
     printf("Create user settings.\n"
     "Are you in DK1 or DK2?\n");
     scanf("%s", buffer);

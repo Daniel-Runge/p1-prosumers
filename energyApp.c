@@ -4,19 +4,19 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
- 
-
 int main(void)
 {
     char Cmd;
+    settings settings;
     
-    if(1)
+    if(CheckSettings())
     {
         EnergiApp();
     }
     else
     {
-        UpdateSettings();
+        settings = CreateSettingsStruct();
+        UpdateSettingsFile(settings);
         EnergiApp();
     }
 
@@ -37,10 +37,10 @@ int main(void)
 char Command ()    
 {
     printf("chose a command, write '-h' for help\n");
-    char boss;
-    boss = Input();
+    char choice;
+    choice = Input();
 
-    switch (boss){
+    switch (choice){
         case 'h':
             printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
             return 'h';
@@ -89,24 +89,25 @@ void EnergiApp(void)
     /*curl_global_cleanup();*/
 
 }
-void UpdateSettings (void){}
+
 
 /**
- * @brief this function takes the input checks if its correct and then returns it.
+ * @brief this function scans for an alpha char input and calls clean.
+ * source: 
  * @return char 
  */
-char Input (void){
-    char boss='b', c;
-    while (((scanf("-%c%c", &boss, &c) != 2 || c != '\n') 
-             && clean_stdin()) || !isalpha(boss)){
+char CharInput (void){
+    char choice='b', c;
+    while (((scanf("-%c%c", &choice, &c) != 2 || c != '\n') 
+             && clean_stdin()) || !isalpha(choice)){
                  printf("wrong!");
              }
 
-    return boss;
+    return choice;
     
 }
 /**
- * @brief this function just checks if the stdin is clean to make sure its not printing from old input. and also cleans it.
+ * @brief this function cleans the input buffer.
  * @return int 
  */
 int clean_stdin()
