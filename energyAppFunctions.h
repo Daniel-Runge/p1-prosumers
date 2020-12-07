@@ -81,7 +81,7 @@ void UpdateSettingsStruct();
 /**
  * @brief Prototypes from HandleInput.c
  */
-int ValidateInput(char candidate, char option1, char option2);
+int ValidateCharInput(char candidate, char option1, char option2);
 char CharInput (void);
 int IntInput(void);
 int clean_stdin();
