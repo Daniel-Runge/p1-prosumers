@@ -50,8 +50,8 @@ char Command (void);
 /**
  * @brief prototypes from the api_download.c file
  */
-int fileMaker(void);
-void get_api (char* filemode, char* url, char* filename);
+void fileMaker(char Location);
+void get_api (char* filemode, char* url, char* filename, char* auth);
 
 /**
  * @brief prototypes from the store_data.c file

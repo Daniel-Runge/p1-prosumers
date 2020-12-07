@@ -12,11 +12,8 @@ int filemaker(void);
  * 
  */
 
-int fileMaker(char Location)
+void fileMaker(char Location)
 {
-    int i;
-    int j = 0;
-
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
      "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1", 
@@ -28,12 +25,12 @@ int fileMaker(char Location)
 
 
     if(Location == 'e'){
-        get_api(filemode[1],url[2],filename[1] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
-        get_api(filemode[1],url[4],filename[3] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[2],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[4],filename[3], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
     if(Location == 'w'){
-        get_api(filemode[1],url[1],filename[1] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
-        get_api(filemode[1],url[3],filename[3] "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[1],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        get_api(filemode[1],url[3],filename[3], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
 
 }
