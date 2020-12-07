@@ -4,19 +4,19 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
- 
-
 int main(void)
 {
     char Cmd;
+    settings settings;
     
-    if(1)
+    if(CheckSettings())
     {
         EnergiApp();
     }
     else
     {
-        UpdateSettings();
+        settings = CreateSettingsStruct();
+        UpdateSettingsFile(settings);
         EnergiApp();
     }
 
@@ -37,10 +37,10 @@ int main(void)
 char Command ()    
 {
     printf("chose a command, write '-h' for help\n");
-    char boss;
-    boss = Input();
+    char choice;
+    choice = Input();
 
-    switch (boss){
+    switch (choice){
         case 'h':
             printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
             return 'h';
@@ -88,29 +88,4 @@ void EnergiApp(void)
     printdata(total, consumption, green_power(&total));
     /*curl_global_cleanup();*/
 
-}
-void UpdateSettings (void){}
-
-/**
- * @brief this function takes the input checks if its correct and then returns it.
- * @return char 
- */
-char Input (void){
-    char boss='b', c;
-    while (((scanf("-%c%c", &boss, &c) != 2 || c != '\n') 
-             && clean_stdin()) || !isalpha(boss)){
-                 printf("wrong!");
-             }
-
-    return boss;
-    
-}
-/**
- * @brief this function just checks if the stdin is clean to make sure its not printing from old input. and also cleans it.
- * @return int 
- */
-int clean_stdin()
-{
-    while (getchar() != '\n');
-    return 1;
 }

@@ -27,6 +27,18 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 } data_total;
 
 /**
+ * @brief Settings struct to determine the handling of data.
+ * 
+ */
+typedef struct
+{
+    char location;
+    int forecast;
+    int numberOfHours;
+    int green;
+} settings;
+
+/**
  * @brief prototypes from the energyApp.c file
  */
 void EnergiApp(void);
@@ -34,9 +46,6 @@ void EnergiApp(void);
  * @brief prototypes from the command.c file
  */
 char Command (void);
-void UpdateSettings(void);
-char Input (void);
-int clean_stdin();
 
 /**
  * @brief prototypes from the api_download.c file
@@ -60,3 +69,19 @@ int green_power(data_total *value);
  */
 void welcomeprint();
 void printdata(data_total total, data_consumption consumption, int parameter);
+
+/**
+ * @brief Prototypes from HandleSettings.c 
+ */
+int CheckSettings();
+settings CreateSettingsStruct();
+void UpdateSettingsFile(settings settings);
+void UpdateSettingsStruct();
+
+/**
+ * @brief Prototypes from HandleInput.c
+ */
+int ValidateInput(char candidate, char option1, char option2);
+char CharInput (void);
+int IntInput(void);
+int clean_stdin();
