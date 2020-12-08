@@ -15,8 +15,7 @@ int main(void)
     }
     else
     {
-        settings = CreateSettingsStruct();
-        UpdateSettingsFile(settings);
+        settings = CreateSettings();
         EnergiApp();
     }
 
