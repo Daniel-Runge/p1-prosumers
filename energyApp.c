@@ -20,7 +20,7 @@ int main(void)
     }
 
     do{
-        Cmd = Command();
+        Cmd = Command(settings);
     }
     while(Cmd != 'e');
     
@@ -33,7 +33,7 @@ int main(void)
  * 
  * @return char 
  */
-char Command ()    
+char Command (settings settings)
 {
     printf("chose a command, write '-h' for help\n");
     char choice;
@@ -46,7 +46,7 @@ char Command ()
             break;
         case 's':
             printf("lets open settings then\n");
-            /* Add function to update settings. */
+            UpdateSettingsMenu(settings);
             return 's';
             break;
         case 'g':
