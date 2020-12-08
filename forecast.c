@@ -14,7 +14,7 @@ struct WindData
 typedef struct WindData WindData;
 WindData WindPower[50];
 
-void Plot(WindData WindPower[]);
+void Plot(WindData WindPower[], int MaxHours);
 void WeatherParser(char *Filename);
 void get_api(char *filemode, char *url, char *filename, char *auth);
 
@@ -22,7 +22,7 @@ int main(void)
 {
     get_api("w", "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=current,minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686", "OpenWeatherMap.json", "91f093992825e6f84a7a6f7033480686");
     WeatherParser("OpenWeatherMap.json");
-    Plot(WindPower);
+    Plot(WindPower, 25);
     return (0);
 }
 
@@ -70,35 +70,44 @@ void WeatherParser(char *Filename)
         WindPower[i].WindSpeed = json_object_get_double(Wind);
     }
 }
-
-void Plot(WindData WindPower[])
+/**
+ * @brief Plots a graph of windspeed up to 48 hours in the future.
+ * 
+ * @param WindPower is used to get windspeeds at each hour.
+ * @param MaxHours is used to change how far ahead into the future the graph should plot.
+ */
+void Plot(WindData WindPower[], int MaxHours)
 {
-    int Big = 0, i, j, MaxHours = 25;
+    int UpperMS = 0, i, j;
+    /* Finds the highest windspeed in the set we need to check */
     for (i = 0; i < MaxHours; i++)
     {
-        if ((WindPower[i].WindSpeed + 0.5) > Big)
+        if ((WindPower[i].WindSpeed + 0.5) > UpperMS)
         {
-            Big = (WindPower[i].WindSpeed + 0.5);
+            UpperMS = (WindPower[i].WindSpeed + 0.5);
         }
     }
-    if (Big >= 15)
+    /* Rounds up to the nearest 5 */
+    if (UpperMS >= 15)
     {
-        Big = 20;
+        UpperMS = 20;
     }
-    else if (Big >= 10)
+    else if (UpperMS >= 10)
     {
-        Big = 15;
+        UpperMS = 15;
     }
-    else if (Big >= 5)
+    else if (UpperMS >= 5)
     {
-        Big = 10;
+        UpperMS = 10;
     }
-    else if (Big >= 0)
+    else if (UpperMS >= 0)
     {
-        Big = 5;
+        UpperMS = 5;
     }
-    for (i = Big; i >= 0; i--)
+    /* This for-loop starts at the top of the graph and goes down - Controls Y-axis */
+    for (i = UpperMS; i >= 0; i--)
     {
+        /* Draws the Y-axis and writes numbers periodically on the axis */
         if (i == 20 || i == 15 || i == 10 || i == 5 || i == 0)
         {
             printf("%2d m/s|", i);
