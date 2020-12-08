@@ -79,18 +79,17 @@ void EnergiApp(void)
 {
     data_total total;
     data_consumption consumption;
-    WindData windData;
+    WindData windData[50];
     TimeInfo timeInfo;
     settings settings;
     /* curl_global_init(CURL_GLOBAL_ALL); */
 
     fileMaker('w'); /* Update parameter with parameter from settings. */
     readFile(&total);
+    WeatherParser("OpenWeatherMap.json", windData);
     green_power(&total);
     welcomeprint();
     printdata(total, consumption, green_power(&total));
     /*curl_global_cleanup();*/
-
-    WeatherParser("")
     TimeForWind(&windData, settings.numberOfHours, &timeInfo);
 }

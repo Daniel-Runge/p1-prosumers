@@ -23,7 +23,7 @@ int main(void)
  * 
  * @param Filename is the name of the file which we need to open and parse.
  */
-void WeatherParser(char *Filename)
+void WeatherParser(char *Filename, WindData WindPower[])
 {
     FILE *fp;
     char FileBuffer[15000];
