@@ -17,11 +17,12 @@ void fileMaker(char Location)
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
      "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
      "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK1", 
-     "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2"};
+     "https://api.electricitymap.org/v3/carbon-intensity/latest?zone=DK-DK2", 
+     "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=current,minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686"};
     
     char* filemode[] ={"w","a"};
     
-    char* filename[] = {"renewable.json", "renewable_dk2.json", "carbon_intensity.json", "carbon_intensity_dk2.json"};
+    char* filename[] = {"renewable.json", "renewable_dk2.json", "carbon_intensity.json", "carbon_intensity_dk2.json", "OpenWeatherMap.json"};
 
 
     if(Location == 'e'){
@@ -33,6 +34,7 @@ void fileMaker(char Location)
         get_api(filemode[1],url[3],filename[3], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
 
+    get_api("w", "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=current,minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686", "OpenWeatherMap.json", "91f093992825e6f84a7a6f7033480686");
 }
 
 /**

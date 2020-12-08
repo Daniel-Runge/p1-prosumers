@@ -113,5 +113,5 @@ int CompareWindSpeed(const void *a, const void *b);
  * @brief Prototypes from Forecast.c
  */
 void Plot(WindData WindPower[], int MaxHours);
-void WeatherParser(char *Filename);
+void WeatherParser(char *Filename, WindData WindPower[]);
 void get_api(char *filemode, char *url, char *filename, char *auth);
