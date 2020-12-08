@@ -1,39 +1,56 @@
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
 typedef struct
 {
-    int Time;
-    double WindSpeed;
-} Speed;
-
-typedef struct
-{
-    int UnixTime;
+    time_t UnixTime;
     double WindSpeed;
 } WindData;
 
 int analyse_wind(WindData WindPower[50]);
-void print_wind(Speed Speeds[50], WindData WindPower[50], int hours);
-int compare(const void *a, const void *b);
+void print_wind(WindData WindPower[50], int hoursAhead);
+int CompareWindSpeed(const void *a, const void *b);
+void ConvertUnixDate(time_t unix_number);
 
-/*int main()
+/**
+ * @brief the main function is filled with dummy data and it tests the functions
+ * 
+ * @return int 
+ */
+int main()
 {
-    int hours = 3;
-    Speed Speeds[50];
-    WindData WindPower[50];
-    WindPower[0].WindSpeed = 4.5;
-    WindPower[1].WindSpeed = 5.5;
-    WindPower[2].WindSpeed = 2.5;
-    WindPower[0].UnixTime = 143289432;
-    WindPower[1].UnixTime = 834270324;
-    WindPower[2].UnixTime = 154328932;
 
-    print_wind(Speeds, WindPower, hours);
+    int hoursAhead = 6;
+    WindData WindPower[50];
+    int i;
+    for (i = 0; i < 48; i++)
+    {
+        WindPower[i].WindSpeed = 4 + i;
+        WindPower[i].UnixTime = i + 1607344339;
+    }
+
+    print_wind(WindPower, hoursAhead);
+
     return 0;
 }
-*/
+/**
+ * @brief The function converts UnixTime into a string
+ * The function is taken from https://www.epochconverter.com/programming/c
+ * @param unix_number which needs to be of type time_t 
+ */
+void ConvertUnixDate(time_t unix_number)
+{
+    struct tm ts;
+    char buf[80];
+
+    // Format time, "ddd yyyy-mm-dd hh:mm:ss zzz"
+    ts = *localtime(&unix_number);
+    strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+    printf("%s", buf);
+}
+
 int analyse_wind(WindData WindPower[50])
 {
     if (WindPower->WindSpeed <= 4)
@@ -63,47 +80,55 @@ int analyse_wind(WindData WindPower[50])
  * 
  * 
  */
-void print_wind(Speed Speeds[50], WindData WindPower[50], int hours)
+void print_wind(WindData WindPower[50], int hoursAhead)
 {
-    const char *about_wind[] = {
-        "As the wind mills do not produce energy right now\n",
-        "The wind mills produce small amounts of energy right now\n",
-        "The wind blows moderately, which means it might be a good time to use energy\n",
-        "The wind is blowing - you can consume energy\n",
-        "Now there are big amounts of energy that are produced. Now it is the best time to consume energy\n"};
 
-    int i;
+    const char *about_wind[] = {
+        "The energy is not comming from windmills right now, so know is not a good time\n",
+        "Windmills are producing a small amount of energy right now, but not green\n",
+        "The wind blows moderately, There could be a better time then now\n",
+        "There is coming enough energy from windmills to call it green energy. Around this time would be a good time to use energy\n",
+        "The wind is very high Around this time, so the windmills are producing a large amount of energy right now. Around this time it is the best time to consume energy\n"};
     printf("The wind speed will be shown as a scale from 0 to 4, where 4 shows that it is the best time to use energy\n");
 
-    qsort(WindPower, hours, sizeof(WindData), compare);
-
-    /*perhaps for loop which prints for the next hours*/
-    for (i = 0; i < hours; i++)
+    qsort(WindPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
+    int i;
+    for (i = 0; i < hoursAhead; i++)
     {
+
         if (analyse_wind(&WindPower[i]) == 4)
         {
-            printf("The Time: %d %s", WindPower->UnixTime, about_wind[4]);
+            ConvertUnixDate(WindPower[i].UnixTime);
+
+            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[4], WindPower[i].WindSpeed);
         }
         else if (analyse_wind(&WindPower[i]) == 3)
         {
-            printf("The Time: %d %s", WindPower->UnixTime, about_wind[3]);
+            ConvertUnixDate(WindPower[i].UnixTime);
+
+            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[3], WindPower[i].WindSpeed);
         }
         else if (analyse_wind(&WindPower[i]) == 2)
         {
-            printf("The Time: %d %s", WindPower->UnixTime, about_wind[2]);
+            ConvertUnixDate(WindPower[i].UnixTime);
+
+            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[2], WindPower[i].WindSpeed);
         }
         else if (analyse_wind(&WindPower[i]) == 1)
         {
-            printf("The Time: %d %s", WindPower->UnixTime, about_wind[1]);
+            ConvertUnixDate(WindPower[i].UnixTime);
+
+            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[1], WindPower[i].WindSpeed);
         }
         else
         {
-            printf("%s", about_wind[0]);
+            ConvertUnixDate(WindPower[i].UnixTime);
+            printf("The Time: %ld %s and %lf", WindPower[i].UnixTime, about_wind[0], WindPower[i].WindSpeed);
         }
     }
 }
 
-int compare(const void *a, const void *b)
+int CompareWindSpeed(const void *a, const void *b)
 {
 
     WindData *WindDataA = (WindData *)a;
