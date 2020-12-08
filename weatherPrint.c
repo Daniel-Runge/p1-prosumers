@@ -3,16 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
+#define SEC_PER_MIN 60
+#define SEC_PER_HOUR (60 * 60)
+#define SEC_PER_DAY (60 * 60 * 24)
+#define SEC_PER_WEEK (60 * 60 * 24 * 7)
+
 typedef struct
 {
     time_t UnixTime;
     double WindSpeed;
 } WindData;
 
-int analyse_wind(WindData WindPower[50]);
-void print_wind(WindData WindPower[50], int hoursAhead);
-int CompareWindSpeed(const void *a, const void *b);
+typedef struct
+{
+    long int sec;
+    long int min;
+    long int hour;
+    long int day;
+} TimeInfo;
+
+void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime);
 void ConvertUnixDate(time_t unix_number);
+void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
+int CompareWindSpeed(const void *a, const void *b);
 
 /**
  * @brief the main function is filled with dummy data and it tests the functions
@@ -21,18 +34,14 @@ void ConvertUnixDate(time_t unix_number);
  */
 int main()
 {
-
     int hoursAhead = 6;
     WindData WindPower[50];
-    int i;
-    for (i = 0; i < 48; i++)
-    {
-        WindPower[i].WindSpeed = 4 + i;
-        WindPower[i].UnixTime = i + 1607344339;
-    }
-
-    print_wind(WindPower, hoursAhead);
-
+    TimeInfo InfoTime;
+    TimeForWind(WindPower, hoursAhead, &InfoTime);
+    printf("%ld\n", InfoTime.day);
+    printf("%ld\n", InfoTime.hour);
+    printf("%ld\n", InfoTime.min);
+    printf("%ld\n", InfoTime.sec);
     return 0;
 }
 /**
@@ -47,90 +56,63 @@ void ConvertUnixDate(time_t unix_number)
 
     // Format time, "ddd yyyy-mm-dd hh:mm:ss zzz"
     ts = *localtime(&unix_number);
-    strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+    strftime(buf, sizeof(buf), "%H", &ts);
     printf("%s", buf);
 }
 
-int analyse_wind(WindData WindPower[50])
+/**
+ * @brief the function converts the seconds 
+ * 
+ * @param sekunder calculated in TimeForWind
+ * @param InfoTime the struct that contains info calculated from the function  
+ */
+
+void SecondsConverter(long int sekunder, TimeInfo *InfoTime)
 {
-    if (WindPower->WindSpeed <= 4)
-    {
-        return 0;
-    }
-    else if (WindPower->WindSpeed <= 6)
-    {
-        return 1;
-    }
-    else if (WindPower->WindSpeed <= 8)
-    {
-        return 2;
-    }
-    else if (WindPower->WindSpeed <= 10)
-    {
-        return 3;
-    }
-    else
-    {
-        return 4;
-    }
+    long int minutter, timer, dage;
+
+    dage = (sekunder % SEC_PER_WEEK) / SEC_PER_DAY;
+    timer = (sekunder % SEC_PER_DAY) / SEC_PER_HOUR;
+    minutter = (sekunder % SEC_PER_HOUR) / SEC_PER_MIN;
+    sekunder = sekunder % SEC_PER_MIN;
+
+    InfoTime->sec = sekunder;
+    InfoTime->min = minutter;
+    InfoTime->hour = timer;
+    InfoTime->day = dage;
 }
 
 /**
- * @brief this function prints the result from the function analyse_wind and tells whether it is a good time to consume the energy
- * 
- * 
+ * @brief the function calculates the difference between the actual time and the prognosed time
+ *       
+ * @param WindPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
+ * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void print_wind(WindData WindPower[50], int hoursAhead)
+void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime)
 {
+    long int TimeDifference;
+    struct tm *local;
+    time_t t = time(NULL);
 
-    const char *about_wind[] = {
-        "The energy is not comming from windmills right now, so know is not a good time\n",
-        "Windmills are producing a small amount of energy right now, but not green\n",
-        "The wind blows moderately, There could be a better time then now\n",
-        "There is coming enough energy from windmills to call it green energy. Around this time would be a good time to use energy\n",
-        "The wind is very high Around this time, so the windmills are producing a large amount of energy right now. Around this time it is the best time to consume energy\n"};
-    printf("The wind speed will be shown as a scale from 0 to 4, where 4 shows that it is the best time to use energy\n");
+    /* Get the localtime */
+    local = localtime(&t);
 
+    /*qsort sorts WindPower.WindSpeed in decreasing order*/
     qsort(WindPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
-    int i;
-    for (i = 0; i < hoursAhead; i++)
-    {
 
-        if (analyse_wind(&WindPower[i]) == 4)
-        {
-            ConvertUnixDate(WindPower[i].UnixTime);
+    TimeDifference = WindPower[0].UnixTime - t;
 
-            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[4], WindPower[i].WindSpeed);
-        }
-        else if (analyse_wind(&WindPower[i]) == 3)
-        {
-            ConvertUnixDate(WindPower[i].UnixTime);
-
-            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[3], WindPower[i].WindSpeed);
-        }
-        else if (analyse_wind(&WindPower[i]) == 2)
-        {
-            ConvertUnixDate(WindPower[i].UnixTime);
-
-            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[2], WindPower[i].WindSpeed);
-        }
-        else if (analyse_wind(&WindPower[i]) == 1)
-        {
-            ConvertUnixDate(WindPower[i].UnixTime);
-
-            printf("The Time: %ld %s and %lf\n", WindPower[i].UnixTime, about_wind[1], WindPower[i].WindSpeed);
-        }
-        else
-        {
-            ConvertUnixDate(WindPower[i].UnixTime);
-            printf("The Time: %ld %s and %lf", WindPower[i].UnixTime, about_wind[0], WindPower[i].WindSpeed);
-        }
-    }
+    SecondsConverter(TimeDifference, InfoTime);
 }
 
+/**
+ * @brief compares the element WindSpeed from the structure WindData
+ * @param a first element in the structure
+ * @param b second element in the structure
+ * @return positive int if the function is true
+ */
 int CompareWindSpeed(const void *a, const void *b)
 {
-
     WindData *WindDataA = (WindData *)a;
 
     WindData *WindDataB = (WindData *)b;
