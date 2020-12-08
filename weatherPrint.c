@@ -28,23 +28,6 @@ void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
 
 /**
- * @brief the main function is filled with dummy data and it tests the functions
- * 
- * @return int 
- */
-int main()
-{
-    int hoursAhead = 6;
-    WindData WindPower[50];
-    TimeInfo InfoTime;
-    TimeForWind(WindPower, hoursAhead, &InfoTime);
-    printf("%ld\n", InfoTime.day);
-    printf("%ld\n", InfoTime.hour);
-    printf("%ld\n", InfoTime.min);
-    printf("%ld\n", InfoTime.sec);
-    return 0;
-}
-/**
  * @brief The function converts UnixTime into a string
  * The function is taken from https://www.epochconverter.com/programming/c
  * @param unix_number which needs to be of type time_t 
