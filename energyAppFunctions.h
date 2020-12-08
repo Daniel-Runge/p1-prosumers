@@ -35,7 +35,7 @@ typedef struct
     char location;
     int forecast;
     int numberOfHours;
-    int green;
+    int CO2Intensity;
 } settings;
 
 /**
@@ -45,7 +45,7 @@ void EnergiApp(void);
 /**
  * @brief prototypes from the command.c file
  */
-char Command (void);
+char Command (settings settings);
 
 /**
  * @brief prototypes from the api_download.c file
@@ -74,14 +74,15 @@ void printdata(data_total total, data_consumption consumption, int parameter);
  * @brief Prototypes from HandleSettings.c 
  */
 int CheckSettings();
-settings CreateSettingsStruct();
+settings CreateSettings();
 void UpdateSettingsFile(settings settings);
-void UpdateSettingsStruct();
+void UpdateSettingsMenu(settings settings);
+void UpdateSetting(settings *settings, char command);
 
 /**
  * @brief Prototypes from HandleInput.c
  */
-int ValidateCharInput(char candidate, char option1, char option2);
+int ValidateCharInput(char candidate, int num, ...);
 char CharInput (void);
 int IntInput(void);
 void CleanStdin();
