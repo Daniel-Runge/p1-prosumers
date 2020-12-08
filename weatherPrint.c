@@ -3,29 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
+#include "energyAppFunctions.h"
+
 #define SEC_PER_MIN 60
 #define SEC_PER_HOUR (60 * 60)
 #define SEC_PER_DAY (60 * 60 * 24)
 #define SEC_PER_WEEK (60 * 60 * 24 * 7)
-
-typedef struct
-{
-    time_t UnixTime;
-    double WindSpeed;
-} WindData;
-
-typedef struct
-{
-    long int sec;
-    long int min;
-    long int hour;
-    long int day;
-} TimeInfo;
-
-void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime);
-void ConvertUnixDate(time_t unix_number);
-void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
-int CompareWindSpeed(const void *a, const void *b);
 
 /**
  * @brief The function converts UnixTime into a string
@@ -74,11 +57,7 @@ void SecondsConverter(long int sekunder, TimeInfo *InfoTime)
 void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime)
 {
     long int TimeDifference;
-    struct tm *local;
     time_t t = time(NULL);
-
-    /* Get the localtime */
-    local = localtime(&t);
 
     /*qsort sorts WindPower.WindSpeed in decreasing order*/
     qsort(WindPower, hoursAhead, sizeof(WindData), CompareWindSpeed);

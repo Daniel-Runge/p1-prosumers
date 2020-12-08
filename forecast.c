@@ -3,20 +3,9 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <json-c/json.h>
+#include "energyAppFunctions.h"
 
-/* Struct for our found data */
-struct WindData
-{
-    int UnixTime;
-    double WindSpeed;
-};
-/* We get an array of size 48 from the API, this is size 50 for safety's sake */
-typedef struct WindData WindData;
-WindData WindPower[50];
 
-void Plot(WindData WindPower[], int MaxHours);
-void WeatherParser(char *Filename);
-void get_api(char *filemode, char *url, char *filename, char *auth);
 
 /*
 int main(void)
@@ -72,6 +61,7 @@ void WeatherParser(char *Filename)
         WindPower[i].WindSpeed = json_object_get_double(Wind);
     }
 }
+
 /**
  * @brief Plots a graph of windspeed up to 48 hours in the future.
  * 
