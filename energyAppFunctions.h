@@ -38,6 +38,20 @@ typedef struct
     int CO2Intensity;
 } settings;
 
+typedef struct
+{
+    time_t UnixTime;
+    double WindSpeed;
+} WindData;
+
+typedef struct
+{
+    long int sec;
+    long int min;
+    long int hour;
+    long int day;
+} TimeInfo;
+
 /**
  * @brief prototypes from the energyApp.c file
  */
@@ -86,3 +100,18 @@ int ValidateCharInput(char candidate, int num, ...);
 char CharInput (void);
 int IntInput(void);
 void CleanStdin();
+
+/**
+ * @brief Prototypes from WeatherPrint.c
+ */
+void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime);
+void ConvertUnixDate(time_t unix_number);
+void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
+int CompareWindSpeed(const void *a, const void *b);
+
+/**
+ * @brief Prototypes from Forecast.c
+ */
+void Plot(WindData WindPower[], int MaxHours);
+void WeatherParser(char *Filename);
+void get_api(char *filemode, char *url, char *filename, char *auth);
