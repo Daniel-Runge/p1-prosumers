@@ -19,11 +19,10 @@ void readFile(data_total *data)
     "fossilFreePercentage", "renewablePercentage", "powerConsumptionTotal", 
     "powerProductionTotal", "powerImportTotal", "powerExportTotal", "carbonIntensity"};
 
-    char *Filename[] = {"renewable.json", "renewable_dk2.json", 
-    "carbon_intensity_dk1.json", "carbon_intensity.json"};
+    char *Filename[] = {"renewable.json", "carbonIntensity.json"};
 
     data->renewable = EnergyParser(Filename[0], KeyWord[13]);
-    data->carbon_intensity = EnergyParser(Filename[4], KeyWord[18]);
+    data->carbon_intensity = EnergyParser(Filename[0], KeyWord[18]);
 }
 
 /**
@@ -43,7 +42,7 @@ double EnergyParser(char *Filename, char *KeyWord)
     fp = fopen(Filename, "r");
     if (fp == NULL)
     {
-        printf("Could not read JSON file\n");
+        printf("Could not read GUSTAV file\n");
     }
     fread(FileBuffer, 1800, 1, fp);
     fclose(fp);

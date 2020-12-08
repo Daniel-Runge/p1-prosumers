@@ -5,18 +5,6 @@
 #include <json-c/json.h>
 #include "energyAppFunctions.h"
 
-
-
-/*
-int main(void)
-{
-    get_api("w", "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=current,minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686", "OpenWeatherMap.json", "91f093992825e6f84a7a6f7033480686");
-    WeatherParser("OpenWeatherMap.json");
-    Plot(WindPower, 25);
-    return (0);
-}
-*/
-
 /**
  * @brief Takes a json file and parses it for our wanted data(Time and windspeed). 
  * The data is then put into the WindPower struct.
@@ -37,7 +25,7 @@ void WeatherParser(char *Filename, WindData WindPower[])
     fp = fopen(Filename, "r");
     if (fp == NULL)
     {
-        printf("Could not read JSON file\n");
+        printf("Could not read weather JSON file\n");
     }
     fread(FileBuffer, 15000, 1, fp);
     fclose(fp);

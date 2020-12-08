@@ -1,3 +1,4 @@
+#include <time.h>
 
 typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
 {
@@ -82,7 +83,7 @@ int green_power(data_total *value);
  * @brief prototypes from the printprogram.c file
  */
 void welcomeprint();
-void printdata(data_total total, data_consumption consumption, int parameter);
+void printdata(data_total total, data_consumption consumption, settings settings);
 
 /**
  * @brief Prototypes from HandleSettings.c 

@@ -1,11 +1,10 @@
-#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
 #define SEC_PER_MIN 60
-#define SEC_PER_HOUR (60 / 60)
-#define SEC_PER_DAY (60 / 60 / 24)
+#define SEC_PER_HOUR (60 * 60)
+#define SEC_PER_DAY (60 * 60 * 24)
 typedef struct
 {
     time_t UnixTime;
@@ -72,12 +71,8 @@ void SecondsConverter(long int sekunder, TimeInfo *InfoTime)
 void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime)
 {
     long int TimeDifference;
-    struct tm *local;
     time_t t = time(NULL);
-    /* Get the localtime */
-    local = localtime(&t);
 
-    /*qsort sorts WindPower.WindSpeed in decreasing order*/
     qsort(WindPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
     TimeDifference = WindPower[0].UnixTime - t;
