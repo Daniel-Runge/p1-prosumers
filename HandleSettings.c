@@ -78,6 +78,31 @@ Settings CreateSettings()
 
     return settings;
 }
+/**
+ * @brief Create the settings from file into struct.
+ * 
+ * @param settings 
+ */
+void CreateSettingsStruct(Settings settings)
+{
+    
+    
+    FILE *settingsFile;
+    settingsFile = fopen(SETTINGS_FILE, "r");
+    if (settingsFile == NULL)
+    {
+        printf(ERROR_FILE, SETTINGS_FILE);
+    }
+    
+    f = fopen(SETTINGS_FILE, "r");
+    fscanf(settingsFile," %c",settings.location);
+    fscanf(settingsFile," %d",settings.forecast);
+    fscanf(settingsFile," %d",settings.numberOfHours);
+    fscanf(settingsFile," %d",settings.CO2Intensity);
+    fclose(settingsFile);
+}
+
+
 
 /**
  * @brief Update the settings file based on the settings struct.
