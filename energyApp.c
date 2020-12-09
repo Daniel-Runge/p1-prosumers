@@ -4,92 +4,71 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
+/**
+ * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
+ */
 int main(void)
 {
-    char Cmd;
-    settings settings;
-    
-    
-    if(CheckSettings())
-    {
-        EnergiApp();
-    }
-    else
-    {
-        settings = CreateSettings();
-        EnergiApp();
+    WindData windData[50];
+    int hours = 6;
+    TimeInfo timeInfo;
+    int i;
+    int j = 1;
+
+    for(i = 0; i < 50; i++){
+        windData[i].UnixTime = 1607441791 + i * 3671;
+        windData[i].WindSpeed = 11 * i * j;
+        j = j*-1;
     }
 
-    do{
-        Cmd = Command(settings);
-    }
-    while(Cmd != 'e');
-    
-    return 0;   
-}    
-    
+    TimeForWind(windData, hours, &timeInfo);
+    printf("%ld\n", timeInfo.day);
+    printf("%ld\n", timeInfo.hour);
+    printf("%ld\n", timeInfo.min);
+    printf("%ld\n", timeInfo.sec);
+
+
+    return 0;
+}
+
 /**
- * @brief this fuction just writes some help and is a switch that chooses which switch based on output from the input func.
- * it also returns a char that is uses by the main func to know when to exit.
+ * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.
  * 
+ * @param settings 
  * @return char 
  */
-char Command (settings settings)
+char Command(settings settings)
 {
     printf("chose a command, write '-h' for help\n");
     char choice;
     choice = CharInput();
 
-    switch (choice){
-        case 'h':
-            printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
-            return 'h';
-            break;
-        case 's':
-            printf("lets open settings then\n");
-            UpdateSettingsMenu(settings);
-            return 's';
-            break;
-        case 'g':
-            printf("not yet implemented");
-            return 'g';
-            break;
-        case 'r':
-            printf("here we go again\n");
-            EnergiApp();
-            return 'r';
-            break;
-        case 'e':
-            printf("thanks for using\n");
-            return 'e';
-            break;
-        default:
-            printf("not a valid input\n");
-            return 'z';
-            break;
+    switch (choice)
+    {
+    case 'h':
+        printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
+        return 'h';
+        break;
+    case 's':
+        printf("lets open settings then\n");
+        UpdateSettingsMenu(settings);
+        return 's';
+        break;
+    case 'g':
+        printf("not yet implemented");
+        return 'g';
+        break;
+    case 'r':
+        printf("here we go again\n");
+        return 'r';
+        break;
+    case 'e':
+        printf("thanks for using\n");
+        return 'e';
+        break;
+    default:
+        printf("not a valid input\n");
+        return 'z';
+        break;
     }
-}
-
-/**
- * @brief this is the primary function which is just a gathering of other functions and making of structs.
- * its where all the non structure stuff happens.
- * 
- */
-void EnergiApp(void)
-{
-    data_total total;
-    data_consumption consumption;
-    WindData windData[50];
-    TimeInfo timeInfo;
-    settings settings;
-    /* curl_global_init(CURL_GLOBAL_ALL); */
-
-    fileMaker('w'); /* Update parameter with parameter from settings. */
-    readFile(&total);
-    WeatherParser("OpenWeatherMap.json", windData);
-    green_power(&total);
-    welcomeprint();
-    printdata(total, consumption, green_power(&total));
-    /*curl_global_cleanup();*/
-    TimeForWind(&windData, settings.numberOfHours, &timeInfo);
 }
