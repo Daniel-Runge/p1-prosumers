@@ -22,7 +22,7 @@ void readFile(data_total *data)
     char *Filename[] = {"renewable.json", "carbonIntensity.json"};
 
     data->renewable = EnergyParser(Filename[0], KeyWord[13]);
-    data->carbon_intensity = EnergyParser(Filename[0], KeyWord[18]);
+    data->carbon_intensity = EnergyParser(Filename[1], KeyWord[18]);
 }
 
 /**
@@ -42,7 +42,7 @@ double EnergyParser(char *Filename, char *KeyWord)
     fp = fopen(Filename, "r");
     if (fp == NULL)
     {
-        printf("Could not read GUSTAV file\n");
+        printf("Could not read file\n");
     }
     fread(FileBuffer, 1800, 1, fp);
     fclose(fp);

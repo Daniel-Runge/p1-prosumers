@@ -4,32 +4,67 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
+void runprogram(settings settings);
+
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
 int main(void)
 {
-    WindData windData[50];
-    int hours = 6;
-    TimeInfo timeInfo;
-    int i;
-    int j = 1;
-
-    for(i = 0; i < 50; i++){
-        windData[i].UnixTime = 1607441791 + i * 3671;
-        windData[i].WindSpeed = 11 * i * j;
-        j = j*-1;
-    }
-
-    TimeForWind(windData, hours, &timeInfo);
-    printf("%ld\n", timeInfo.day);
-    printf("%ld\n", timeInfo.hour);
-    printf("%ld\n", timeInfo.min);
-    printf("%ld\n", timeInfo.sec);
-
-
+    EnergiApp();
     return 0;
 }
+void EnergiApp(void)
+{
+    data_consumption consumtion;
+
+    data_total total;
+
+    settings settings;
+
+    WindData Windpower[50];
+
+    TimeInfo InfoTime;
+    welcomeprint();
+    do
+    {
+        if (CheckSettings())
+        {
+            runprogram(settings);
+        }
+        else
+        {
+            CreateSettings(settings);
+            runprogram(settings);
+        }
+    }
+    while (Command(settings)!='e');  
+}
+
+void runprogram(settings settings)
+{
+    data_consumption consumtion;
+    data_total total;
+    readFile(&total);
+    printdata(total, consumtion, settings);
+
+    
+    
+
+
+
+
+    
+
+
+
+
+
+
+}
+
+
+
 
 /**
  * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.
