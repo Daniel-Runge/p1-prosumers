@@ -56,3 +56,41 @@ double EnergyParser(char *Filename, char *KeyWord)
     }
     return (json_object_get_int(FoundNumber));
 }
+
+/**
+ * @brief Takes a json file and parses it for our wanted data(Time and windspeed). 
+ * The data is then put into the WindPower struct.
+ * 
+ * @param Filename is the name of the file which we need to open and parse.
+ */
+void WeatherParser(char *Filename, WindData WindPower[])
+{
+    FILE *fp;
+    char FileBuffer[15000];
+    int i, NumOfHours;
+    struct json_object *Full_json;
+    struct json_object *AllHours;
+    struct json_object *SingleHour;
+    struct json_object *Time;
+    struct json_object *Wind;
+    fp = fopen(Filename, "r");
+    if (fp == NULL)
+    {
+        printf("Could not read weather JSON file\n");
+    }
+    fread(FileBuffer, 15000, 1, fp);
+    fclose(fp);
+
+    Full_json = json_tokener_parse(FileBuffer);
+    json_object_object_get_ex(Full_json, "hourly", &AllHours);
+    NumOfHours = json_object_array_length(AllHours);
+    printf("%d\n", NumOfHours);
+    for (i = 0; i < NumOfHours; i++)
+    {
+        SingleHour = json_object_array_get_idx(AllHours, i);
+        json_object_object_get_ex(SingleHour, "dt", &Time);
+        json_object_object_get_ex(SingleHour, "wind_speed", &Wind);
+        WindPower[i].UnixTime = json_object_get_int(Time);
+        WindPower[i].WindSpeed = json_object_get_double(Wind);
+    }
+}

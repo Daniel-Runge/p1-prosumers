@@ -34,11 +34,11 @@ void fileMaker(char Location)
         get_api(filemode[0],url[2],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
 
-    get_api("w", "https://api.openweathermap.org/data/2.5/onecall?lat=56&lon=9.3&exclude=current,minutely,daily,alerts&appid=91f093992825e6f84a7a6f7033480686", "OpenWeatherMap.json", "91f093992825e6f84a7a6f7033480686");
+    get_api(filemode[0], url[4], filename[2], "91f093992825e6f84a7a6f7033480686");
 }
 
 /**
- * @brief Get the file from a url  to the electricity map api
+ * @brief Get the file from a url to the electricity map api
  * 
  */
 void get_api (char* filemode, char* url, char* filename, char* auth)
