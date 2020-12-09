@@ -100,7 +100,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, DataConsumption consumption, Settings settings);
+void PrintData(DataStats total, DataConsumption consumption, Settings settings, TimeSplit infotime);
 void PlotForecast(WindData windPower[], int maxHours);
 
 /**
