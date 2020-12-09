@@ -21,6 +21,7 @@ void EnergyApp(void)
     settings.location = 'w';
     settings.numberOfHours = 8;
 
+
     WelcomePrint();
     if (!CheckSettings())
     {
