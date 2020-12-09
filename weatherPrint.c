@@ -2,27 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
+#include "energyAppFunctions.h"
+
 #define SEC_PER_MIN 60
 #define SEC_PER_HOUR (60 * 60)
 #define SEC_PER_DAY (60 * 60 * 24)
-typedef struct
-{
-    time_t unixTime;
-    double windSpeed;
-} WindData;
-
-typedef struct
-{
-    long int sec;
-    long int min;
-    long int hour;
-    long int day;
-} TimeSplit;
-
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime);
-void ConvertUnixDate(time_t unixNumber);
-void SecondsConverter(long int sekunder, TimeSplit *TimeSplit);
-int ComparewindSpeed(const void *a, const void *b);
 
 /**
  * @brief The function converts UnixTime into a string
@@ -41,7 +25,7 @@ void ConvertUnixDate(time_t unixNumber)
 }
 
 /**
- * @brief the function converts the seconds 
+ * @brief function which converts seconds into days, hours, minutes and seconds
  * 
  * @param sekunder calculated in TimeForWind
  * @param InfoTime the struct that contains info calculated from the function  
