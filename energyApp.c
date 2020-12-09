@@ -16,18 +16,10 @@ int main(void)
 }
 void EnergiApp(void)
 {
-    data_consumption consumtion;
-
-    data_total total;
-
     settings settings;
 
-    WindData Windpower[50];
-
     welcomeprint();
-    do
-    {
-        if (CheckSettings())
+    if (CheckSettings())
         {
             runprogram(settings);
         }
@@ -36,7 +28,7 @@ void EnergiApp(void)
             CreateSettings(settings);
             runprogram(settings);
         }
-    } while (Command(settings) != 'e');
+    while (Command(settings) != 'e');{}
 }
 
 void runprogram(settings settings)
@@ -72,7 +64,7 @@ char Command(settings settings)
     switch (choice)
     {
     case 'h':
-        printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
+        printf("-h to open help\n -s to change settings\n -g to do graphs\n -r to run the\b -e to exit the program\n");
         return 'h';
         break;
     case 's':
@@ -86,6 +78,7 @@ char Command(settings settings)
         break;
     case 'r':
         printf("here we go again\n");
+        runprogram(settings);
         return 'r';
         break;
     case 'e':
