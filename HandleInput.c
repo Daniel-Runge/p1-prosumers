@@ -1,28 +1,19 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <stdarg.h>
 #include "energyAppFunctions.h"
 
 /**
- * @brief Validates the @param candidate if it is equal the @param num of options.
+ * @brief Validates the @param candidate if it is equal to either of the parameters
  * 
- * @param candidate the input to be tested for.
- * @param num the number of elements to test against.
- * @param ... all the characters to test against.
+ * @param candidate the input to be tested for
+ * @param option1 the first input to be tested against
+ * @param option2 the second input to be tested against
  * @return int 
  */
-int ValidateCharInput(char candidate, int num, ...){
-    va_list valist;
-    int i;
-    va_start(valist, num);
-
-    for(i = 0; i < num; i++){
-        if (candidate == va_arg(valist, char)){
-            return 1;
-        }
+int ValidateCharInput(char candidate, char option1, char option2){
+    if((candidate == option1) || (candidate == option2)){
+        return 1;
     }
-
-    va_end(valist);
     return 0;
 }
 

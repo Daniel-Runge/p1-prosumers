@@ -1,6 +1,10 @@
 #include <time.h>
 
-typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
+/**
+ * @brief Struct to contain CONSUMPTION data from Electricity Map API
+ * 
+ */
+typedef struct 
 {
     double battery_discharge;
     double biomass;
@@ -16,7 +20,11 @@ typedef struct /*Data we get from the API in MW |POWER CONSUMTION STRUCT|*/
     double unknown;
 } data_consumption;
 
-typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
+/**
+ * @brief Struct to contain CARBON INTENSITY data from Electricity Map API
+ * 
+ */
+typedef struct 
 {
     double fossile;
     double renewable;
@@ -28,7 +36,7 @@ typedef struct /*Data we get from the API in MW |TOTAL SECTION|*/
 } data_total;
 
 /**
- * @brief Settings struct to determine the handling of data.
+ * @brief Struct to contain the user settings determining how the program handles output
  * 
  */
 typedef struct
@@ -39,12 +47,20 @@ typedef struct
     int CO2Intensity;
 } settings;
 
+/**
+ * @brief Data to contain WIND and TIME data pairs from openweathermap
+ * 
+ */
 typedef struct
 {
     time_t UnixTime;
     double WindSpeed;
 } WindData;
 
+/**
+ * @brief Struct to contain a certain point in time.
+ * 
+ */
 typedef struct
 {
     long int sec;
@@ -54,39 +70,41 @@ typedef struct
 } TimeInfo;
 
 /**
- * @brief prototypes from the energyApp.c file
+ * prototypes from the energyApp.c file
  */
 void EnergiApp(void);
 /**
- * @brief prototypes from the command.c file
+ * prototypes from the command.c file
  */
 char Command (settings settings);
 
 /**
- * @brief prototypes from the api_download.c file
+ * prototypes from the api_download.c file
  */
 void fileMaker(char Location);
 void get_api (char* filemode, char* url, char* filename, char* auth);
 
 /**
- * @brief prototypes from the store_data.c file
+ * prototypes from the store_data.c file
  */
 void readFile(data_total *POWAH);
 double EnergyParser(char *Filename, char *KeyWord);
+void WeatherParser(char *Filename, WindData WindPower[]);
 
 /**
- * @brief prototypes from the analyze.c file
+ * prototypes from the analyze.c file
  */
 int green_power(data_total *value);
 
 /**
- * @brief prototypes from the printprogram.c file
+ * prototypes from the printprogram.c file
  */
 void welcomeprint();
 void printdata(data_total total, data_consumption consumption, settings settings);
+void Plot(WindData WindPower[], int MaxHours);
 
 /**
- * @brief Prototypes from HandleSettings.c 
+ * Prototypes from HandleSettings.c 
  */
 int CheckSettings();
 settings CreateSettings();
@@ -95,24 +113,17 @@ void UpdateSettingsMenu(settings settings);
 void UpdateSetting(settings *settings, char command);
 
 /**
- * @brief Prototypes from HandleInput.c
+ * Prototypes from HandleInput.c
  */
-int ValidateCharInput(char candidate, int num, ...);
+int ValidateCharInput(char candidate, char option1, char option2);
 char CharInput (void);
 int IntInput(void);
 void CleanStdin();
 
 /**
- * @brief Prototypes from WeatherPrint.c
+ * Prototypes from WeatherPrint.c
  */
 void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime);
 void ConvertUnixDate(time_t unix_number);
 void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
-
-/**
- * @brief Prototypes from Forecast.c
- */
-void Plot(WindData WindPower[], int MaxHours);
-void WeatherParser(char *Filename, WindData WindPower[]);
-void get_api(char *filemode, char *url, char *filename, char *auth);
