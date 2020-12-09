@@ -21,24 +21,24 @@ void EnergyApp(void)
     settings.location = 'w';
     settings.numberOfHours = 8;
 
-    welcomeprint();
+    WelcomePrint();
     if (!CheckSettings())
     {
         CreateSettings(settings);
     }
-    runprogram(settings);
+    RunProgram(settings);
     while (Command(settings) != 'e')
     {
     }
 }
 
-void runprogram(Settings settings)
+void RunProgram(Settings settings)
 {
     DataConsumption consumtion;
     DataStats total;
     WindData windpower[50];
     TimeSplit InfoTime;
-    readFile(&total);
+    PrepareParsing(&total);
     PrintData(total, consumtion, settings);
 
     if (settings.forecast)
