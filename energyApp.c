@@ -4,32 +4,50 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
+void runprogram(settings settings);
+
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
 int main(void)
 {
-    WindData windData[50];
-    int hours = 6;
-    TimeInfo timeInfo;
-    int i;
-    int j = 1;
-
-    for(i = 0; i < 50; i++){
-        windData[i].UnixTime = 1607441791 + i * 3671;
-        windData[i].WindSpeed = 11 * i * j;
-        j = j*-1;
-    }
-
-    TimeForWind(windData, hours, &timeInfo);
-    printf("%ld\n", timeInfo.day);
-    printf("%ld\n", timeInfo.hour);
-    printf("%ld\n", timeInfo.min);
-    printf("%ld\n", timeInfo.sec);
-
-
+    EnergiApp();
     return 0;
 }
+void EnergiApp(void)
+{
+    settings settings;
+
+    welcomeprint();
+    if (CheckSettings())
+        {
+            runprogram(settings);
+        }
+        else
+        {
+            CreateSettings(settings);
+            runprogram(settings);
+        }
+    while (Command(settings) != 'e');{}
+}
+
+void runprogram(settings settings)
+{
+    data_consumption consumtion;
+    data_total total;
+    WindData Windpower[50];
+    TimeInfo InfoTime;
+    readFile(&total);
+    printdata(total, consumtion, settings);
+
+    if (settings.forecast == 1)
+    {
+        printf("hello\n");
+        WeatherParser("OpenWeatherMap.json", Windpower);
+        TimeForWind(Windpower, settings.numberOfHours, &InfoTime);
+    }
+}
+
 
 /**
  * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.
@@ -46,7 +64,7 @@ char Command(settings settings)
     switch (choice)
     {
     case 'h':
-        printf("-h to open help \n-s to change settings \n -g to do graphs\n -r to run the \b -e to exit the program\n");
+        printf("-h to open help\n -s to change settings\n -g to do graphs\n -r to run the\b -e to exit the program\n");
         return 'h';
         break;
     case 's':
@@ -60,6 +78,7 @@ char Command(settings settings)
         break;
     case 'r':
         printf("here we go again\n");
+        runprogram(settings);
         return 'r';
         break;
     case 'e':

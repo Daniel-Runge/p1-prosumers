@@ -68,6 +68,7 @@ void get_api (char* filemode, char* url, char* filename, char* auth)
     /* curl_easy_perform runs the curl that you set using easy_setopt */
     result = curl_easy_perform(curl);
     printf("4");
+    printf("\n%d\n",result);
 
     /* closes everything and cleans up */
     fclose(fp);
