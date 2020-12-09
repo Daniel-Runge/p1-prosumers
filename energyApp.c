@@ -24,7 +24,6 @@ void EnergiApp(void)
 
     WindData Windpower[50];
 
-    TimeInfo InfoTime;
     welcomeprint();
     do
     {
@@ -37,33 +36,25 @@ void EnergiApp(void)
             CreateSettings(settings);
             runprogram(settings);
         }
-    }
-    while (Command(settings)!='e');  
+    } while (Command(settings) != 'e');
 }
 
 void runprogram(settings settings)
 {
     data_consumption consumtion;
     data_total total;
+    WindData Windpower[50];
+    TimeInfo InfoTime;
     readFile(&total);
     printdata(total, consumtion, settings);
 
-    
-    
-
-
-
-
-    
-
-
-
-
-
-
+    if (settings.forecast == 1)
+    {
+        printf("hello\n");
+        WeatherParser("OpenWeatherMap.json", Windpower);
+        TimeForWind(Windpower, settings.numberOfHours, &InfoTime);
+    }
 }
-
-
 
 
 /**
