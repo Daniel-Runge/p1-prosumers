@@ -73,7 +73,6 @@ void WeatherParser(char *Filename, WindData WindPower[])
     struct json_object *SingleHour;
     struct json_object *Time;
     struct json_object *Wind;
-    /*Opens file, reads data and puts data in 'FileBuffer'*/
     fp = fopen(Filename, "r");
     if (fp == NULL)
     {
@@ -82,16 +81,10 @@ void WeatherParser(char *Filename, WindData WindPower[])
     fread(FileBuffer, 15000, 1, fp);
     fclose(fp);
 
-    /*Takes FileBuffer and puts it in Full_json struct, so it now is a json_object*/
     Full_json = json_tokener_parse(FileBuffer);
-    /*Looks for 'hourly' from json file and puts 'hourly' array into the 'AllHours' json_object*/
     json_object_object_get_ex(Full_json, "hourly", &AllHours);
-    /*Gives us the amount of hours we have forecasts for*/
     NumOfHours = json_object_array_length(AllHours);
     printf("%d\n", NumOfHours);
-    /*for-loop puts data from every hour in correct place in the WindPower struct
-    unixTime = Time
-    WindSpeed = Wind*/
     for (i = 0; i < NumOfHours; i++)
     {
         SingleHour = json_object_array_get_idx(AllHours, i);

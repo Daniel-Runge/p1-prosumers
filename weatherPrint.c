@@ -104,7 +104,7 @@ int CompareWindSpeed(const void *a, const void *b)
 void Plot(WindData WindPower[], int MaxHours)
 {
     int UpperMS = 0, i, j;
-    /* Finds the highest windspeed in the set we need to check */
+    /* +0.5 is used to round up any numbers that need to be rounded up */
     for (i = 0; i < MaxHours; i++)
     {
         if ((WindPower[i].WindSpeed + 0.5) > UpperMS)
@@ -132,7 +132,6 @@ void Plot(WindData WindPower[], int MaxHours)
     /* This for-loop starts at the top of the graph and goes down - Controls Y-axis */
     for (i = UpperMS; i >= 0; i--)
     {
-        /* Draws the Y-axis and writes numbers periodically on the axis */
         if (i == 20 || i == 15 || i == 10 || i == 5 || i == 0)
         {
             printf("%2d m/s|", i);
