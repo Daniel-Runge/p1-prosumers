@@ -3,26 +3,26 @@
 #include <json-c/json.h>
 #include "energyAppFunctions.h"
 
-double EnergyParser(char *Filename, char *KeyWord);
-void readFile(data_total *data);
+double EnergyParser(char *filename, char *keyword);
+void readFile(DataStats *data);
 
 /**
  * @brief Function takes the created files by api_download.c and runs thorugh them looking
  * for the data we need using certain words.
- * The KeyWord array is for future development.
+ * The keyword array is for future development.
  */
 
-void readFile(data_total *data)
+void PrepareParsing(DataStats *data)
 {
-    char *KeyWord[] = {"battery discharge", "biomass", "coal", "gas", "hydro", 
+    char *keyword[] = {"battery discharge", "biomass", "coal", "gas", "hydro", 
     "hydro discharge", "nuclear", "oil", "solar", "wind", "geothermal", "unknown", 
     "fossilFreePercentage", "renewablePercentage", "powerConsumptionTotal", 
     "powerProductionTotal", "powerImportTotal", "powerExportTotal", "carbonIntensity"};
 
-    char *Filename[] = {"renewable.json", "carbonIntensity.json"};
+    char *filename[] = {"renewable.json", "carbonIntensity.json"};
 
-    data->renewable = EnergyParser(Filename[0], KeyWord[13]);
-    data->carbon_intensity = EnergyParser(Filename[1], KeyWord[18]);
+    data->renewable = EnergyParser(filename[0], keyword[13]);
+    data->carbonIntensity = EnergyParser(filename[1], keyword[18]);
 }
 
 /**
@@ -32,65 +32,64 @@ void readFile(data_total *data)
  * @return is made with the json-c library to parse the file and return the corresponding data.
  * 
  */
-double EnergyParser(char *Filename, char *KeyWord)
+double EnergyParser(char *filename, char *keyword)
 {
     FILE *fp;
-    char FileBuffer[1800];
-    struct json_object *Full_json;
-    struct json_object *Consumption;
-    struct json_object *FoundNumber;
-    fp = fopen(Filename, "r");
+    char fileBuffer[1800];
+    struct json_object *fullJson;
+    struct json_object *consumption;
+    struct json_object *foundNumber;
+    fp = fopen(filename, "r");
     if (fp == NULL)
     {
         printf("Could not read file\n");
     }
-    fread(FileBuffer, 1800, 1, fp);
+    fread(fileBuffer, 1800, 1, fp);
     fclose(fp);
 
-    Full_json = json_tokener_parse(FileBuffer);
-    json_object_object_get_ex(Full_json, KeyWord, &FoundNumber);
-    if (json_object_get_int(FoundNumber) == 0)
+    fullJson = json_tokener_parse(fileBuffer);
+    json_object_object_get_ex(fullJson, keyword, &foundNumber);
+    if (json_object_get_int(foundNumber) == 0)
     {
-        json_object_object_get_ex(Full_json, "powerConsumptionBreakdown", &Consumption);
-        json_object_object_get_ex(Consumption, KeyWord, &FoundNumber);
+        json_object_object_get_ex(fullJson, "powerConsumptionBreakdown", &consumption);
+        json_object_object_get_ex(consumption, keyword, &foundNumber);
     }
-    return (json_object_get_int(FoundNumber));
+    return (json_object_get_int(foundNumber));
 }
 
 /**
  * @brief Takes a json file and parses it for our wanted data(Time and windspeed). 
  * The data is then put into the WindPower struct.
  * 
- * @param Filename is the name of the file which we need to open and parse.
+ * @param filename is the name of the file which we need to open and parse.
  */
-void WeatherParser(char *Filename, WindData WindPower[])
+void WeatherParser(char *filename, WindData windPower[])
 {
     FILE *fp;
-    char FileBuffer[15000];
-    int i, NumOfHours;
-    struct json_object *Full_json;
-    struct json_object *AllHours;
-    struct json_object *SingleHour;
-    struct json_object *Time;
-    struct json_object *Wind;
-    fp = fopen(Filename, "r");
+    char fileBuffer[15000];
+    int i, numOfHours;
+    struct json_object *fullJson;
+    struct json_object *allHours;
+    struct json_object *singleHour;
+    struct json_object *time;
+    struct json_object *wind;
+    fp = fopen(filename, "r");
     if (fp == NULL)
     {
         printf("Could not read weather JSON file\n");
     }
-    fread(FileBuffer, 15000, 1, fp);
+    fread(fileBuffer, 15000, 1, fp);
     fclose(fp);
 
-    Full_json = json_tokener_parse(FileBuffer);
-    json_object_object_get_ex(Full_json, "hourly", &AllHours);
-    NumOfHours = json_object_array_length(AllHours);
-    printf("%d\n", NumOfHours);
-    for (i = 0; i < NumOfHours; i++)
+    fullJson = json_tokener_parse(fileBuffer);
+    json_object_object_get_ex(fullJson, "hourly", &allHours);
+    numOfHours = json_object_array_length(allHours);
+    for (i = 0; i < numOfHours; i++)
     {
-        SingleHour = json_object_array_get_idx(AllHours, i);
-        json_object_object_get_ex(SingleHour, "dt", &Time);
-        json_object_object_get_ex(SingleHour, "wind_speed", &Wind);
-        WindPower[i].UnixTime = json_object_get_int(Time);
-        WindPower[i].WindSpeed = json_object_get_double(Wind);
+        singleHour = json_object_array_get_idx(allHours, i);
+        json_object_object_get_ex(singleHour, "dt", &time);
+        json_object_object_get_ex(singleHour, "wind_speed", &wind);
+        windPower[i].unixTime = json_object_get_int(time);
+        windPower[i].windSpeed = json_object_get_double(wind);
     }
 }

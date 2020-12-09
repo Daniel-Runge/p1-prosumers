@@ -22,15 +22,15 @@ int ValidateCharInput(char candidate, char option1, char option2){
  *  
  * @return the scanned chararacter.
  */
-char CharInput(void)
+char GetUserCharInput(void)
 {
     char choice = 'b';
     while ((scanf("-%c", &choice) != 1) || !isalpha(choice))
     {
-        CleanStdin();
+        CleanStandardInput();
         printf("wrong!\n");
     }
-    CleanStdin();
+    CleanStandardInput();
     return choice;
 }
 
@@ -39,16 +39,16 @@ char CharInput(void)
  * 
  * @return the scanned int.
  */
-int IntInput(void)
+int GetUserIntInput(void)
 {
     int choice = 0;
     while (scanf("-%d", &choice) != 1)
     {
-        CleanStdin();
+        CleanStandardInput();
         printf("%d", choice);
         printf("Wrong!\n");
     }
-    CleanStdin();
+    CleanStandardInput();
 
     return choice;
 }
@@ -57,7 +57,7 @@ int IntInput(void)
  * @brief this function cleans the input buffer.
  * @return int 
  */
-void CleanStdin()
+void CleanStandardInput()
 {
     char buffer;
     while ((buffer = getchar()) != '\n' && buffer != EOF)
