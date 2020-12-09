@@ -16,19 +16,21 @@ int main(void)
 }
 void EnergyApp(void)
 {
-    Settings settings;
+    settings settings;
+    settings.forecast=1;
+    settings.location='w';
+    settings.numberOfHours=8;
 
-    WelcomePrint();
-    if (CheckSettings())
-        {
-            RunProgram(settings);
-        }
-        else
-        {
-            CreateSettings(settings);
-            RunProgram(settings);
-        }
-    while (Command(settings) != 'e');{}
+    welcomeprint();
+    if (!CheckSettings())
+    {
+        CreateSettings(settings);
+    }
+    runprogram(settings);
+    while (Command(settings) != 'e')
+    {
+    }
+main
 }
 
 void runprogram(Settings settings)
@@ -40,14 +42,13 @@ void runprogram(Settings settings)
     readFile(&total);
     PrintData(total, consumtion, settings);
 
-    if (settings.forecast == 1)
+    if (settings.forecast)
     {
         printf("hello\n");
         WeatherParser("OpenWeatherMap.json", windpower);
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }
 }
-
 
 /**
  * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.

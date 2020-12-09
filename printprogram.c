@@ -27,10 +27,16 @@ const char *windResponse[] = {
  */
 void WelcomePrint()
 {
+        printf("           ____        ____  ______    __        _____     _____      ___  ___      ______  \n");
+    printf("           \\   \\  __  /   / |   ___|  |  |      /  ___|   /     \\    /   \\/   \\    |   ___| \n");
+    printf("            \\   \\/  \\/   /  |  |__    |  |     |  /      |  / \\  |  /          \\   |  |__ \n");
+    printf("             \\          /   |  |___   |  |___  |  \\___   |  \\ /  | /   /\\__/\\   \\  |  |___ \n");
+    printf("              \\___/\\___/    |______|  |______|  \\_____|   \\_____/ /___/      \\___\\ |______| \n");
+    
     /*this needs to change*/
-    printf("Hello and welcome to energy data program. This program is able show you "
-           "if the electricity consumed in denmark is green or not. It can also show when"
-           " it will probably be green in the next 48 hours based on wind preditions.\n\n");
+    printf("              Hello and welcome to energy data program. This program is able show you\n"
+           "           if the electricity consumed in denmark is green or not. It can also show when\n"
+           "              it will probably be green in the next 48 hours based on wind preditions.\n\n");
 }
 /**
  * @brief this is where the data will be printed, based on settings
