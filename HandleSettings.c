@@ -27,28 +27,28 @@ int CheckSettings()
  * 
  * @return settings 
  */
-settings CreateSettings()
+Settings CreateSettings()
 {
-    settings settings;
+    Settings settings;
     char charBuffer;
     int intBuffer;
 
     printf("No settings detected, creating user settings:\n"
            "Are you in w(est) or e(ast)?\n");
-    charBuffer = CharInput();
+    charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'w', 'e'))
     {
         printf(ERROR_SCAN_RETRY);
-        charBuffer = CharInput();
+        charBuffer = GetUserCharInput();
     }
     settings.location = charBuffer;
 
     printf("Do you wish to see a forecast? (y/n)\n");
-    charBuffer = CharInput();
+    charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {
         printf(ERROR_SCAN_RETRY);
-        charBuffer = CharInput();
+        charBuffer = GetUserCharInput();
     }
     settings.forecast = charBuffer == 'y' ? 1 : 0;
 
@@ -56,21 +56,21 @@ settings CreateSettings()
     if (settings.forecast)
     {
         printf("How many hours do you wish to compare? (1-48)\n");
-        intBuffer = IntInput();
+        intBuffer = GetUserIntInput();
         while (intBuffer > 48 || intBuffer < 1)
         {
             printf(ERROR_SCAN_RETRY);
-            intBuffer = IntInput();
+            intBuffer = GetUserIntInput();
         }
     }
     settings.numberOfHours = intBuffer;
 
     printf("Do you wish to see the specific CO2 intensity? (y/n)\n");
-    charBuffer = CharInput();
+    charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {
         printf(ERROR_SCAN_RETRY);
-        charBuffer = CharInput();
+        charBuffer = GetUserCharInput();
     }
     settings.CO2Intensity = charBuffer == 'y' ? 1 : 0;
 
@@ -84,7 +84,7 @@ settings CreateSettings()
  * 
  * @param settings 
  */
-void UpdateSettingsFile(settings settings)
+void UpdateSettingsFile(Settings settings)
 {
     FILE *settingsFile = fopen(SETTINGS_FILE, "w");
 
@@ -100,9 +100,9 @@ void UpdateSettingsFile(settings settings)
     fclose(settingsFile);
 }
 
-void UpdateSettingsMenu(settings settings)
+void UpdateSettingsMenu(Settings settings)
 {
-    char choice = 'b';
+    char choice;
     printf(SETTINGS_WELCOME_MESSAGE,
            settings.location, settings.CO2Intensity, settings.forecast);
     if (settings.forecast)
@@ -118,7 +118,7 @@ void UpdateSettingsMenu(settings settings)
            "-e to exit settings menu.\n");
 
     do{
-        choice = CharInput();
+        choice = GetUserCharInput();
         UpdateSetting(&settings, choice);
     }while(choice != 'e');
 }
@@ -129,7 +129,7 @@ void UpdateSettingsMenu(settings settings)
  * @param settings 
  * @param command 
  */
-void UpdateSetting(settings *settings, char command)
+void UpdateSetting(Settings *settings, char command)
 {
     switch (command)
     {
@@ -145,7 +145,7 @@ void UpdateSetting(settings *settings, char command)
     case 'h':
         if (settings->forecast)
         {
-            settings->numberOfHours = IntInput();
+            settings->numberOfHours = GetUserIntInput();
             while ((settings->numberOfHours < 1) || (settings->numberOfHours > 48))
                 ;
         }

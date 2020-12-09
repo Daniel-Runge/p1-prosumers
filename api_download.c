@@ -4,15 +4,15 @@
 #include <curl/curl.h>
 
 
-void get_api (char* filemode, char* url, char* filename, char* auth);
-int filemaker(void);
+void ContactApi (char* filemode, char* url, char* filename, char* auth);
+void GetApiFiles(char location);
 
 /**
  * @brief the program accesses the electricity map api and downloads data from dk and inputs it into a file
  * 
  */
 
-void fileMaker(char Location)
+void GetApiFiles(char location)
 {
     char* url[] = { "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK1",
      "https://api.electricitymap.org/v3/power-breakdown/latest?zone=DK-DK2", 
@@ -25,23 +25,23 @@ void fileMaker(char Location)
     char* filename[] = {"renewable.json", "carbonIntensity.json", "OpenWeatherMap.json"};
 
 
-    if(Location == 'e'){
-        get_api(filemode[0],url[1],filename[0], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
-        get_api(filemode[0],url[3],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+    if(location == 'e'){
+        ContactApi(filemode[0],url[1],filename[0], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        ContactApi(filemode[0],url[3],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
-    if(Location == 'w'){
-        get_api(filemode[0],url[0],filename[0], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
-        get_api(filemode[0],url[2],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+    if(location == 'w'){
+        ContactApi(filemode[0],url[0],filename[0], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
+        ContactApi(filemode[0],url[2],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
     }
 
-    get_api(filemode[0], url[4], filename[2], "91f093992825e6f84a7a6f7033480686");
+    ContactApi(filemode[0], url[4], filename[2], "91f093992825e6f84a7a6f7033480686");
 }
 
 /**
  * @brief Get the file from a url to the electricity map api
  * 
  */
-void get_api (char* filemode, char* url, char* filename, char* auth)
+void ContactApi (char* filemode, char* url, char* filename, char* auth)
 {
 
     CURL *curl;
