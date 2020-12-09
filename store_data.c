@@ -12,7 +12,7 @@ void readFile(DataStats *data);
  * The keyword array is for future development.
  */
 
-void readFile(DataStats *data)
+void PrepareParsing(DataStats *data)
 {
     char *keyword[] = {"battery discharge", "biomass", "coal", "gas", "hydro", 
     "hydro discharge", "nuclear", "oil", "solar", "wind", "geothermal", "unknown", 
