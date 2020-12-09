@@ -11,15 +11,15 @@
 /**
  * @brief The function converts UnixTime into a string
  * The function is taken from https://www.epochconverter.com/programming/c
- * @param unix_number which needs to be of type time_t 
+ * @param unixNumber which needs to be of type time_t 
  */
-void ConvertUnixDate(time_t unix_number)
+void ConvertUnixDate(time_t unixNumber)
 {
     struct tm ts;
     char buf[80];
 
-    // Format time, "ddd yyyy-mm-dd hh:mm:ss zzz"
-    ts = *localtime(&unix_number);
+    // Format time, "day yyyy-mm-dd hh:mm:ss tmz"
+    ts = *localtime(&unixNumber);
     strftime(buf, sizeof(buf), "%H", &ts);
     printf("%s", buf);
 }
@@ -31,7 +31,7 @@ void ConvertUnixDate(time_t unix_number)
  * @param InfoTime the struct that contains info calculated from the function  
  */
 
-void SecondsConverter(long int sekunder, TimeInfo *InfoTime)
+void SecondsConverter(long int sekunder, TimeSplit *InfoTime)
 {
     long int minutter, timer, dage;
 
@@ -49,72 +49,72 @@ void SecondsConverter(long int sekunder, TimeInfo *InfoTime)
 /**
  * @brief the function calculates the difference between the actual time and the prognosed time
  *       
- * @param WindPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
+ * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
  * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime)
+void TimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime)
 {
-    long int TimeDifference;
+    long int timeDifference;
     time_t t = time(NULL);
 
-    qsort(WindPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
+    qsort(windPower, hoursAhead, sizeof(WindData), ComparewindSpeed);
 
-    TimeDifference = WindPower[0].UnixTime - t;
+    timeDifference = windPower[0].unixTime - t;
 
-    SecondsConverter(TimeDifference, InfoTime);
+    SecondsConverter(timeDifference, InfoTime);
 }
 
 /**
- * @brief compares the element WindSpeed from the structure WindData
+ * @brief compares the element windSpeed from the structure WindData
  * @param a first element in the structure
  * @param b second element in the structure
  * @return positive int if the function is true
  */
-int CompareWindSpeed(const void *a, const void *b)
+int ComparewindSpeed(const void *a, const void *b)
 {
-    WindData *WindDataA = (WindData *)a;
+    WindData *windDataA = (WindData *)a;
 
-    WindData *WindDataB = (WindData *)b;
+    WindData *windDataB = (WindData *)b;
 
-    return (WindDataB->WindSpeed - WindDataA->WindSpeed);
+    return (windDataB->windSpeed - windDataA->windSpeed);
 }
 
 /**
  * @brief Plots a graph of windspeed up to 48 hours in the future.
  * 
- * @param WindPower is used to get windspeeds at each hour.
- * @param MaxHours is used to change how far ahead into the future the graph should plot.
+ * @param windPower is used to get windspeeds at each hour.
+ * @param maxHours is used to change how far ahead into the future the graph should plot.
  */
-void Plot(WindData WindPower[], int MaxHours)
+void PlotForecast(WindData windPower[], int maxHours)
 {
-    int UpperMS = 0, i, j;
+    int upperWS = 0, i, j;
     /* +0.5 is used to round up any numbers that need to be rounded up */
-    for (i = 0; i < MaxHours; i++)
+    for (i = 0; i < maxHours; i++)
     {
-        if ((WindPower[i].WindSpeed + 0.5) > UpperMS)
+        if ((windPower[i].windSpeed + 0.5) > upperWS)
         {
-            UpperMS = (WindPower[i].WindSpeed + 0.5);
+            upperWS = (windPower[i].windSpeed + 0.5);
         }
     }
     /* Rounds up to the nearest 5 */
-    if (UpperMS >= 15)
+    if (upperWS >= 15)
     {
-        UpperMS = 20;
+        upperWS = 20;
     }
-    else if (UpperMS >= 10)
+    else if (upperWS >= 10)
     {
-        UpperMS = 15;
+        upperWS = 15;
     }
-    else if (UpperMS >= 5)
+    else if (upperWS >= 5)
     {
-        UpperMS = 10;
+        upperWS = 10;
     }
-    else if (UpperMS >= 0)
+    else if (upperWS >= 0)
     {
-        UpperMS = 5;
+        upperWS = 5;
     }
     /* This for-loop starts at the top of the graph and goes down - Controls Y-axis */
-    for (i = UpperMS; i >= 0; i--)
+    for (i = upperWS; i >= 0; i--)
     {
         if (i == 20 || i == 15 || i == 10 || i == 5 || i == 0)
         {
@@ -124,10 +124,10 @@ void Plot(WindData WindPower[], int MaxHours)
         {
             printf("      |");
         }
-        for (j = 0; j < MaxHours; j++)
+        for (j = 0; j < maxHours; j++)
         {
             printf("  ");
-            if ((WindPower[j].WindSpeed + 0.5) >= i - 1 && (WindPower[j].WindSpeed + 0.5) < i)
+            if ((windPower[j].windSpeed + 0.5) >= i - 1 && (windPower[j].windSpeed + 0.5) < i)
             {
                 printf("#");
             }
@@ -139,13 +139,13 @@ void Plot(WindData WindPower[], int MaxHours)
         printf("\n");
     }
     printf("      ");
-    for (i = 0; i <= MaxHours * 3; i++)
+    for (i = 0; i <= maxHours * 3; i++)
     {
         printf("-");
     }
     printf("\n");
     printf("      ");
-    for (i = 0; i < MaxHours; i++)
+    for (i = 0; i < maxHours; i++)
     {
         if (i % 2 == 0)
         {
@@ -158,6 +158,6 @@ void Plot(WindData WindPower[], int MaxHours)
     }
     printf("\n");
     printf("      ");
-    printf("%*s", (MaxHours * 3 / 2) + 6, "Hours Ahead");
+    printf("%*s", (maxHours * 3 / 2) + 6, "Hours Ahead");
     printf("\n");
 }

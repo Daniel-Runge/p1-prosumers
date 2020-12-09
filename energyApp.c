@@ -4,22 +4,22 @@
 #include <curl/curl.h>
 #include "energyAppFunctions.h"
 
-void runprogram(settings settings);
+void RunProgram(Settings settings);
 
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
 int main(void)
 {
-    EnergiApp();
+    EnergyApp();
     return 0;
 }
-void EnergiApp(void)
+void EnergyApp(void)
 {
-    settings settings;
-    settings.forecast=1;
-    settings.location='w';
-    settings.numberOfHours=8;
+    Settings settings;
+    settings.forecast = 1;
+    settings.location = 'w';
+    settings.numberOfHours = 8;
 
     welcomeprint();
     if (!CheckSettings())
@@ -32,20 +32,20 @@ void EnergiApp(void)
     }
 }
 
-void runprogram(settings settings)
+void runprogram(Settings settings)
 {
-    data_consumption consumtion;
-    data_total total;
-    WindData Windpower[50];
-    TimeInfo InfoTime;
+    DataConsumption consumtion;
+    DataStats total;
+    WindData windpower[50];
+    TimeSplit InfoTime;
     readFile(&total);
-    printdata(total, consumtion, settings);
+    PrintData(total, consumtion, settings);
 
     if (settings.forecast)
     {
         printf("hello\n");
-        WeatherParser("OpenWeatherMap.json", Windpower);
-        TimeForWind(Windpower, settings.numberOfHours, &InfoTime);
+        WeatherParser("OpenWeatherMap.json", windpower);
+        GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }
 }
 
@@ -55,11 +55,11 @@ void runprogram(settings settings)
  * @param settings 
  * @return char 
  */
-char Command(settings settings)
+char Command(Settings settings)
 {
     printf("chose a command, write '-h' for help\n");
     char choice;
-    choice = CharInput();
+    choice = GetUserCharInput();
 
     switch (choice)
     {
@@ -78,7 +78,7 @@ char Command(settings settings)
         break;
     case 'r':
         printf("here we go again\n");
-        runprogram(settings);
+        RunProgram(settings);
         return 'r';
         break;
     case 'e':

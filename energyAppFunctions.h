@@ -18,7 +18,7 @@ typedef struct
     double wind;
     double geothermal;
     double unknown;
-} data_consumption;
+} DataConsumption;
 
 /**
  * @brief Struct to contain CARBON INTENSITY data from Electricity Map API
@@ -30,10 +30,10 @@ typedef struct
     double renewable;
     double consumptionTotal;
     double productionTotal;
-    double ImportTotal;
-    double ExportTotal;
-    double carbon_intensity;
-} data_total;
+    double importTotal;
+    double exportTotal;
+    double carbonIntensity;
+} DataStats;
 
 /**
  * @brief Struct to contain the user settings determining how the program handles output
@@ -45,7 +45,7 @@ typedef struct
     int forecast;
     int numberOfHours;
     int CO2Intensity;
-} settings;
+} Settings;
 
 /**
  * @brief Data to contain WIND and TIME data pairs from openweathermap
@@ -53,8 +53,8 @@ typedef struct
  */
 typedef struct
 {
-    time_t UnixTime;
-    double WindSpeed;
+    time_t unixTime;
+    double windSpeed;
 } WindData;
 
 /**
@@ -67,63 +67,63 @@ typedef struct
     long int min;
     long int hour;
     long int day;
-} TimeInfo;
+} TimeSplit;
 
 /**
  * prototypes from the energyApp.c file
  */
-void EnergiApp(void);
+void EnergyApp(void);
 /**
  * prototypes from the command.c file
  */
-char Command (settings settings);
+char Command (Settings settings);
 
 /**
  * prototypes from the api_download.c file
  */
-void fileMaker(char Location);
-void get_api (char* filemode, char* url, char* filename, char* auth);
+void GetApiFiles(char location);
+void ContactApi(char* filemode, char* url, char* filename, char* auth);
 
 /**
  * prototypes from the store_data.c file
  */
-void readFile(data_total *POWAH);
-double EnergyParser(char *Filename, char *KeyWord);
-void WeatherParser(char *Filename, WindData WindPower[]);
+void PrepareParsing(DataStats *POWAH);
+double EnergyParser(char *filename, char *keyWord);
+void WeatherParser(char *filename, WindData windPower[]);
 
 /**
  * prototypes from the analyze.c file
  */
-int green_power(data_total *value);
+int GreenPower(DataStats *value);
 
 /**
  * prototypes from the printprogram.c file
  */
-void welcomeprint();
-void printdata(data_total total, data_consumption consumption, settings settings);
-void Plot(WindData WindPower[], int MaxHours);
+void WelcomePrint();
+void PrintData(DataStats total, DataConsumption consumption, Settings settings);
+void PlotForecast(WindData windPower[], int maxHours);
 
 /**
  * Prototypes from HandleSettings.c 
  */
 int CheckSettings();
-settings CreateSettings();
-void UpdateSettingsFile(settings settings);
-void UpdateSettingsMenu(settings settings);
-void UpdateSetting(settings *settings, char command);
+Settings CreateSettings();
+void UpdateSettingsFile(Settings settings);
+void UpdateSettingsMenu(Settings settings);
+void UpdateSetting(Settings *settings, char command);
 
 /**
  * Prototypes from HandleInput.c
  */
 int ValidateCharInput(char candidate, char option1, char option2);
-char CharInput (void);
-int IntInput(void);
-void CleanStdin();
+char GetUserCharInput (void);
+int GetUserIntInput(void);
+void CleanStandardInput();
 
 /**
  * Prototypes from WeatherPrint.c
  */
-void TimeForWind(WindData WindPower[50], int hoursAhead, TimeInfo *InfoTime);
-void ConvertUnixDate(time_t unix_number);
-void SecondsConverter(long int sekunder, TimeInfo *TimeInfo);
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime);
+void ConvertUnixDate(time_t unixNumber);
+void SecondsConverter(long int sekunder, TimeSplit *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
