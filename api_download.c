@@ -41,7 +41,7 @@ void GetApiFiles(char location)
  * @brief Get the file from a url to the electricity map api
  * 
  */
-void ContactApi (char* filemode, char* url, char* filename, char* auth)
+void ContactApi(char* filemode, char* url, char* filename, char* auth)
 {
 
     CURL *curl;

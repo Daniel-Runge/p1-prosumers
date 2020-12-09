@@ -4,7 +4,8 @@
 #include "energyAppFunctions.h"
 
 double EnergyParser(char *filename, char *keyword);
-void readFile(DataStats *data);
+void PrepareParsing(DataStats *data);
+void WeatherParser(char *filename, WindData windPower[]);
 
 /**
  * @brief Function takes the created files by api_download.c and runs thorugh them looking
