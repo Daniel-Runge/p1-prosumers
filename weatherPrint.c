@@ -47,19 +47,19 @@ void ConvertUnixDate(time_t unixNumber)
  * @param InfoTime the struct that contains info calculated from the function  
  */
 
-void SecondsConverter(long int sekunder, TimeSplit *InfoTime)
+void SecondsConverter(long int seconds, TimeSplit *InfoTime)
 {
-    long int minutter, timer, dage;
+    long int minutes, hours, days;
 
-    dage = (sekunder / SEC_PER_DAY) % SEC_PER_MIN;
-    timer = (sekunder / SEC_PER_HOUR) % SEC_PER_MIN;
-    minutter = (sekunder / SEC_PER_MIN) % SEC_PER_MIN;
-    sekunder = sekunder % SEC_PER_MIN;
+    days = (seconds / SEC_PER_DAY) % SEC_PER_MIN;
+    hours = (seconds / SEC_PER_HOUR) % SEC_PER_MIN;
+    minutes = (seconds / SEC_PER_MIN) % SEC_PER_MIN;
+    seconds = seconds % SEC_PER_MIN;
 
-    InfoTime->sec = sekunder;
-    InfoTime->min = minutter;
-    InfoTime->hour = timer;
-    InfoTime->day = dage;
+    InfoTime->sec = seconds;
+    InfoTime->min = minutes;
+    InfoTime->hour = hours;
+    InfoTime->day = days;
 }
 
 /**

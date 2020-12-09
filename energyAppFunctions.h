@@ -125,5 +125,5 @@ void CleanStandardInput();
  */
 void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime);
 void ConvertUnixDate(time_t unixNumber);
-void SecondsConverter(long int sekunder, TimeSplit *TimeInfo);
+void SecondsConverter(long int seconds, TimeSplit *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
