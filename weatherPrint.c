@@ -94,3 +94,86 @@ int CompareWindSpeed(const void *a, const void *b)
 
     return (WindDataB->WindSpeed - WindDataA->WindSpeed);
 }
+
+/**
+ * @brief Plots a graph of windspeed up to 48 hours in the future.
+ * 
+ * @param WindPower is used to get windspeeds at each hour.
+ * @param MaxHours is used to change how far ahead into the future the graph should plot.
+ */
+void Plot(WindData WindPower[], int MaxHours)
+{
+    int UpperMS = 0, i, j;
+    /* +0.5 is used to round up any numbers that need to be rounded up */
+    for (i = 0; i < MaxHours; i++)
+    {
+        if ((WindPower[i].WindSpeed + 0.5) > UpperMS)
+        {
+            UpperMS = (WindPower[i].WindSpeed + 0.5);
+        }
+    }
+    /* Rounds up to the nearest 5 */
+    if (UpperMS >= 15)
+    {
+        UpperMS = 20;
+    }
+    else if (UpperMS >= 10)
+    {
+        UpperMS = 15;
+    }
+    else if (UpperMS >= 5)
+    {
+        UpperMS = 10;
+    }
+    else if (UpperMS >= 0)
+    {
+        UpperMS = 5;
+    }
+    /* This for-loop starts at the top of the graph and goes down - Controls Y-axis */
+    for (i = UpperMS; i >= 0; i--)
+    {
+        if (i == 20 || i == 15 || i == 10 || i == 5 || i == 0)
+        {
+            printf("%2d m/s|", i);
+        }
+        else
+        {
+            printf("      |");
+        }
+        for (j = 0; j < MaxHours; j++)
+        {
+            printf("  ");
+            if ((WindPower[j].WindSpeed + 0.5) >= i - 1 && (WindPower[j].WindSpeed + 0.5) < i)
+            {
+                printf("#");
+            }
+            else
+            {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    printf("      ");
+    for (i = 0; i <= MaxHours * 3; i++)
+    {
+        printf("-");
+    }
+    printf("\n");
+    printf("      ");
+    for (i = 0; i < MaxHours; i++)
+    {
+        if (i % 2 == 0)
+        {
+            printf("  %2d", i);
+        }
+        else
+        {
+            printf("  ");
+        }
+    }
+    printf("\n");
+    printf("      ");
+    printf("%*s", (MaxHours * 3 / 2) + 6, "Hours Ahead");
+    printf("\n");
+}
