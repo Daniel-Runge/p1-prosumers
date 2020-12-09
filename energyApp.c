@@ -17,9 +17,10 @@ int main(void)
 void EnergyApp(void)
 {
     Settings settings;
-    settings.forecast=1;
-    settings.location='w';
-    settings.numberOfHours=8;
+    settings.forecast = 1;
+    settings.location = 'w';
+    settings.numberOfHours = 8;
+
 
     WelcomePrint();
     if (!CheckSettings())
