@@ -4,7 +4,7 @@ LIBS = `curl-config --libs` -ljson-c
 DEPS = energyAppFunctions.h
 
 OBJ = api_download.o store_data.o analyze.o printprogram.o \
-HandleSettings.o HandleInput.o forecast.o weatherPrint.o energyApp.o 
+HandleSettings.o HandleInput.o weatherPrint.o energyApp.o 
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
