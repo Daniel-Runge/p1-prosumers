@@ -36,7 +36,7 @@ settings CreateSettings()
     printf("No settings detected, creating user settings:\n"
            "Are you in w(est) or e(ast)?\n");
     charBuffer = CharInput();
-    while (!ValidateCharInput(charBuffer, 2, 'w', 'e'))
+    while (!ValidateCharInput(charBuffer, 'w', 'e'))
     {
         printf(ERROR_SCAN_RETRY);
         charBuffer = CharInput();
@@ -45,7 +45,7 @@ settings CreateSettings()
 
     printf("Do you wish to see a forecast? (y/n)\n");
     charBuffer = CharInput();
-    while (!ValidateCharInput(charBuffer, 2, 'y', 'n'))
+    while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {
         printf(ERROR_SCAN_RETRY);
         charBuffer = CharInput();
@@ -67,7 +67,7 @@ settings CreateSettings()
 
     printf("Do you wish to see the specific CO2 intensity? (y/n)\n");
     charBuffer = CharInput();
-    while (!ValidateCharInput(charBuffer, 2, 'y', 'n'))
+    while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {
         printf(ERROR_SCAN_RETRY);
         charBuffer = CharInput();
