@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <curl/curl.h>
-#include <json-c/json.h>
 #include "energyAppFunctions.h"
 
 /**
@@ -133,4 +130,3 @@ void Plot(WindData WindPower[], int MaxHours)
     printf("%*s", (MaxHours * 3 / 2) + 6, "Hours Ahead");
     printf("\n");
 }
-
