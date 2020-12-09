@@ -5,7 +5,7 @@
 #include "energyAppFunctions.h"
 
 void RunProgram(Settings settings);
-
+void CreateSettingsStruct(Settings settings);
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
@@ -27,6 +27,8 @@ void EnergyApp(void)
     {
         CreateSettings(settings);
     }
+
+    
     RunProgram(settings);
     while (Command(settings) != 'e')
     {
@@ -40,7 +42,7 @@ void RunProgram(Settings settings)
     WindData windpower[50];
     TimeSplit InfoTime;
     PrepareParsing(&total);
-    PrintData(total, consumtion, settings);
+    PrintData(total, consumtion, settings, InfoTime);
 
     if (settings.forecast)
     {

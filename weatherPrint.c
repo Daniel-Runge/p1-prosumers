@@ -52,12 +52,12 @@ void SecondsConverter(long int seconds, TimeSplit *InfoTime)
  * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
  * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void TimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime)
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime)
 {
     long int timeDifference;
     time_t t = time(NULL);
 
-    qsort(windPower, hoursAhead, sizeof(WindData), ComparewindSpeed);
+    qsort(windPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
     timeDifference = windPower[0].unixTime - t;
 
@@ -70,7 +70,7 @@ void TimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime)
  * @param b second element in the structure
  * @return positive int if the function is true
  */
-int ComparewindSpeed(const void *a, const void *b)
+int CompareWindSpeed(const void *a, const void *b)
 {
     WindData *windDataA = (WindData *)a;
 
