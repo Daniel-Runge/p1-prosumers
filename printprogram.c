@@ -45,7 +45,7 @@ void WelcomePrint()
  * 
  *
  */
-void printdata(DataStats total, DataConsumption consumtion, /*here we need to change the prototype in the header file to match*/
+void PrintData(DataStats total, DataConsumption consumtion, /*here we need to change the prototype in the header file to match*/
                Settings settings)
 {
     char *empty[] = {"|"};
