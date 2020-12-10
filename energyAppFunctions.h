@@ -39,7 +39,7 @@ typedef struct
  */
 typedef struct
 {
-    long int sec;
+    int sec;
     int min;
     int hour;
     int day;
