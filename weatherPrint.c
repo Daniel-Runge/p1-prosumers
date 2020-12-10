@@ -33,8 +33,7 @@ void ConvertUnixDate(time_t unixNumber)
 
 void SecondsConverter(long int seconds, TimeSplit *infoTime)
 {
-    long int minutes, hours, days;
-
+    long int minutes = 0, hours = 0, days = 0;
     days = (seconds / SEC_PER_DAY) % SEC_PER_MIN;
     hours = (seconds / SEC_PER_HOUR) % SEC_PER_MIN;
     minutes = (seconds / SEC_PER_MIN) % SEC_PER_MIN;

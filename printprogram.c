@@ -2,7 +2,6 @@
 #include "energyAppFunctions.h"
 
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings);
 
 const char *carbonReponse[] = {
     /*this needs to change*/
@@ -49,20 +48,28 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings)
+void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
+    printf("\n %d\n\n\n", settings.forecast);
+    printf("Renewabele energy (%%) |");
+    if (settings.CO2Intensity)
+        printf(" Carbon intensity (CO2/kWh) |");
 
-    printf("%11.2f%9s %14.2f%12s %10s \n", total.renewable, formatLine[0], total.carbonIntensity, formatLine[0], carbonReponse[GreenPower(&total)]);
+    printf(" The conclusion\n");
+    printf("%11.0f%12s", total.renewable, formatLine[0]);
+    if (settings.CO2Intensity)
+        printf(" %14f%14.2s", total.carbonIntensity, formatLine[0]);
+    printf(" %10s \n", carbonReponse[GreenPower(&total)]);
 
     if (1)
     {
         printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
     }
 
-    if (1)
+    if (settings.forecast)
     {
-        printf("the best time is %ld sek %ld min %ld hours %ld day.\n", infotime.sec, infotime.min, infotime.hour, infotime.day);
+        printf("the best time is %d day %d hours %d mins %d secs.\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
     }
 }

@@ -7,12 +7,7 @@
  */
 typedef struct 
 {
-    double fossile;
     double renewable;
-    double consumptionTotal;
-    double productionTotal;
-    double importTotal;
-    double exportTotal;
     double carbonIntensity;
 } DataStats;
 
@@ -44,10 +39,10 @@ typedef struct
  */
 typedef struct
 {
-    long int sec;
-    long int min;
-    long int hour;
-    long int day;
+    int sec;
+    int min;
+    int hour;
+    int day;
 } TimeSplit;
 
 /**
@@ -77,16 +72,17 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings);
+void PrintData(DataStats total, Settings settings, TimeSplit Infotime);
 
 /**
  * Prototypes from HandleSettings.c 
  */
-int CheckSettings();
-Settings CreateSettings();
+int CheckSettings(void);
+Settings CreateSettings(void);
 void UpdateSettingsFile(Settings settings);
 void UpdateSettingsMenu(Settings settings);
 void UpdateSetting(Settings *settings, char command);
+void CreateSettingsStruct(Settings *settings);
 
 /**
  * Prototypes from HandleInput.c
