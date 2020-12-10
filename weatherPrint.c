@@ -53,7 +53,6 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
  */
 void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
 {
-    int i;
     long int timeDifference;
     time_t t = time(NULL);
 

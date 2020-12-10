@@ -127,14 +127,14 @@ void UpdateSettingsFile(Settings settings)
     fclose(settingsFile);
 }
 
-void UpdateSettingsMenu(Settings settings)
+void UpdateSettingsMenu(Settings *settings)
 {
     char choice;
     printf(SETTINGS_WELCOME_MESSAGE,
-           settings.location, settings.CO2Intensity, settings.forecast, settings.plot);
-    if (settings.forecast)
+           settings->location, settings->CO2Intensity, settings->forecast, settings->plot);
+    if (settings->forecast)
     {
-        printf(" Forecast hours - %d", settings.numberOfHours);
+        printf(" Forecast hours - %d", settings->numberOfHours);
     }
     puts("\n");
     SettingsInstructions();
@@ -143,7 +143,7 @@ void UpdateSettingsMenu(Settings settings)
     {
         puts("\n");
         choice = GetUserCharInput();
-        UpdateSetting(&settings, choice);
+        UpdateSetting(settings, choice);
     } while (choice != 'e');
 }
 
@@ -240,6 +240,7 @@ void UpdateSetting(Settings *settings, char command)
     }
 
     UpdateSettingsFile(*settings);
+    CreateSettingsStruct(settings);
     if (command != 'e')
     {
         SettingsInstructions();

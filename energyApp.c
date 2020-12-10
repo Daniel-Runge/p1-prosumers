@@ -25,7 +25,7 @@ void EnergyApp(void)
     }
     CreateSettingsStruct(&settings);
     RunProgram(settings);
-    while (Command(settings) != 'e')
+    while (Command(&settings) != 'e')
     {
     }
 }
@@ -52,7 +52,7 @@ void RunProgram(Settings settings)
  * @param settings 
  * @return char 
  */
-char Command(Settings settings)
+char Command(Settings *settings)
 {
     printf("Choose a command, write '-h' for help\n");
     char choice;
@@ -67,6 +67,7 @@ char Command(Settings settings)
     case 's':
         printf("Lets open settings then\n");
         UpdateSettingsMenu(settings);
+        printf("Loc: %c Hours: %d FC: %d Carbon: %d Plot: %d", settings->location, settings->numberOfHours, settings->forecast, settings->CO2Intensity, settings->plot);
         return 's';
         break;
     case 'g':
@@ -75,7 +76,7 @@ char Command(Settings settings)
         break;
     case 'r':
         printf("Here we go again\n");
-        RunProgram(settings);
+        RunProgram(*settings);
         return 'r';
         break;
     case 'e':
