@@ -53,12 +53,12 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
     
-    printf("               Renewabele energy (%%) |");
+    printf(" Renewabele energy (%%) |");
     if (settings.CO2Intensity)
         printf(" Carbon intensity (CO2/kWh) |");
 
     printf(" The conclusion\n");
-    printf("               %11.0f%12s", total.renewable, formatLine[0]);
+    printf(" %11.0f%12s", total.renewable, formatLine[0]);
     if (settings.CO2Intensity)
         printf(" %14.0f%14.2s", total.carbonIntensity, formatLine[0]);
     printf(" %10s \n", carbonReponse[GreenPower(&total)]);
