@@ -17,10 +17,10 @@ int CheckSettings()
     FILE *settingsFile = fopen(SETTINGS_FILE, "r");
     if (settingsFile == NULL)
     {
-        fclose(settingsFile);
         return 0;
     }
     fclose(settingsFile);
+    printf("Closed settingsFile\n");
     return 1;
 }
 

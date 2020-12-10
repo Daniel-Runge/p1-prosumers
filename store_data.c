@@ -42,7 +42,7 @@ double EnergyParser(char *filename, char *keyword)
     fp = fopen(filename, "r");
     if (fp == NULL)
     {
-        printf("Could not read file\n");
+        printf("Could not read energy JSON file\n");
     }
     fread(fileBuffer, 1800, 1, fp);
     fclose(fp);

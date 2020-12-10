@@ -25,8 +25,10 @@ void EnergyApp(void)
     WelcomePrint();
     if (!CheckSettings())
     {
+        printf("!CheckSettings\n");
         CreateSettings(settings);
     }
+    printf("Done with if\n");
     RunProgram(settings);
     while (Command(settings) != 'e')
     {
@@ -38,6 +40,7 @@ void RunProgram(Settings settings)
     DataStats total;
     WindData windpower[50];
     TimeSplit InfoTime;
+    GetApiFiles(settings.location);
     PrepareParsing(&total);
     PrintData(total, settings);
 
