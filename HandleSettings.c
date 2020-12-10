@@ -5,7 +5,7 @@
 #define ERROR_FILE "Could not open the file %s\n"
 #define ERROR_SCAN_RETRY "Invalid input! Try again\n"
 #define SETTINGS_WELCOME_MESSAGE "\nThis is the settings menu.\n" \
-                                 "The current settings: Location - %c, CO2 Intensity - %c, Forecast - %c"
+                                 "The current settings: Location - %c, CO2 Intensity - %c, Forecast - %c, Plot - %d"
 
 /**
  * @brief Function to determine existence of settings.txt file.
@@ -66,6 +66,18 @@ Settings CreateSettings()
     }
     settings.numberOfHours = intBuffer;
 
+    if (settings.forecast)
+    {
+        printf("Do you wish to see a graph of the forecast? (y/n)\n");
+        charBuffer = GetUserCharInput();
+        while (!ValidateCharInput(charBuffer, 'y', 'n'))
+        {
+            printf(ERROR_SCAN_RETRY);
+            charBuffer = GetUserCharInput();
+        }
+        settings.plot = charBuffer == 'y' ? 1 : 0;
+    }
+
     printf("Do you wish to see the specific CO2 intensity? (y/n)\n");
     charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'y', 'n'))
@@ -90,6 +102,7 @@ void CreateSettingsStruct(Settings *settings)
     fscanf(settingsFile, "%d", &settings->forecast);
     fscanf(settingsFile, "%d", &settings->numberOfHours);
     fscanf(settingsFile, "%d", &settings->CO2Intensity);
+    fscanf(settingsFile, "%d", &settings->plot);
     fclose(settingsFile);
 }
 /**
@@ -109,6 +122,7 @@ void UpdateSettingsFile(Settings settings)
     fprintf(settingsFile, "\n%d", settings.forecast);
     fprintf(settingsFile, "\n%d", settings.numberOfHours);
     fprintf(settingsFile, "\n%d", settings.CO2Intensity);
+    fprintf(settingsFile, "\n%d", settings.plot);
 
     fclose(settingsFile);
 }
@@ -117,7 +131,7 @@ void UpdateSettingsMenu(Settings settings)
 {
     char choice;
     printf(SETTINGS_WELCOME_MESSAGE,
-           settings.location, settings.CO2Intensity, settings.forecast);
+           settings.location, settings.CO2Intensity, settings.forecast, settings.plot);
     if (settings.forecast)
     {
         printf(" Forecast hours - %d", settings.numberOfHours);
@@ -196,8 +210,27 @@ void UpdateSetting(Settings *settings, char command)
         }
         else
         {
-            printf("Please change forecast setting with -f first.");
+            printf("Please change forecast setting with -f first\n");
         }
+        break;
+    case 'g':
+        if (settings->forecast)
+        {
+            settings->plot = settings->plot == 1 ? 0 : 1;
+            if (settings->plot == 1)
+            {
+                printf("The graph of the forecast has now been enabled\n");
+            }
+            else
+            {
+                printf("The graph of the forecast has now been disabled\n");
+            }
+        }
+        else
+        {
+            printf("Please change forecast setting with -f first\n");
+        }
+        
         break;
     case 'e':
         printf("Exiting settings menu.");
@@ -218,6 +251,7 @@ void SettingsInstructions()
     printf("Write -l to change to location,\n"
            "-c to change CO2 intensity,\n"
            "-f to change forecast,\n"
+           "-g to change plotting of graph\n"
            "-h to change the number of hours,\n"
            "-e to exit settings menu.\n\n");
 }
