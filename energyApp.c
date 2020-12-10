@@ -48,3 +48,46 @@ void RunProgram(Settings settings)
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }
 }
+
+/**
+ * @brief What does Command do?
+ * 
+ * @param settings 
+ * @return char 
+ */
+char Command(Settings settings)
+{
+    printf("chose a command, write '-h' for help\n");
+    char choice;
+    choice = GetUserCharInput();
+
+    switch (choice)
+    {
+    case 'h':
+        printf("-h to open help\n -s to change settings\n -g to do graphs\n -r to run the\b -e to exit the program\n");
+        return 'h';
+        break;
+    case 's':
+        printf("lets open settings then\n");
+        UpdateSettingsMenu(settings);
+        return 's';
+        break;
+    case 'g':
+        printf("not yet implemented");
+        return 'g';
+        break;
+    case 'r':
+        printf("here we go again\n");
+        RunProgram(settings);
+        return 'r';
+        break;
+    case 'e':
+        printf("thanks for using\n");
+        return 'e';
+        break;
+    default:
+        printf("not a valid input\n");
+        return 'z';
+        break;
+    }
+}
