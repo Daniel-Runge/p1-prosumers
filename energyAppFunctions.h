@@ -82,7 +82,7 @@ Settings CreateSettings(void);
 void UpdateSettingsFile(Settings settings);
 void UpdateSettingsMenu(Settings settings);
 void UpdateSetting(Settings *settings, char command);
-void CreateSettingsStruct(Settings settings);
+void CreateSettingsStruct(Settings *settings);
 
 /**
  * Prototypes from HandleInput.c

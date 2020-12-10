@@ -16,7 +16,6 @@ int main(void)
 void EnergyApp(void)
 {
     Settings settings;
-   
 
     WelcomePrint();
     if (!CheckSettings())
@@ -24,10 +23,7 @@ void EnergyApp(void)
 
         settings = CreateSettings();
     }
-    else{
-        CreateSettingsStruct(settings);
-    }
-
+    CreateSettingsStruct(&settings);
     RunProgram(settings);
     while (Command(settings) != 'e')
     {

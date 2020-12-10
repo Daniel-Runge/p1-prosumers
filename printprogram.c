@@ -52,6 +52,7 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
+    printf("\n %d\n\n\n", settings.forecast);
     printf("Renewabele energy (%%) |");
     if (settings.CO2Intensity)
         printf(" Carbon intensity (CO2/kWh) |");

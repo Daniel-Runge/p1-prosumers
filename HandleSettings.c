@@ -79,7 +79,7 @@ Settings CreateSettings()
     UpdateSettingsFile(settings);
     return settings;
 }
-void CreateSettingsStruct(Settings settings)
+void CreateSettingsStruct(Settings *settings)
 {
     FILE *settingsFile;
     settingsFile = fopen(SETTINGS_FILE, "r");
@@ -87,10 +87,10 @@ void CreateSettingsStruct(Settings settings)
     {
         printf(ERROR_FILE, SETTINGS_FILE);
     }
-    fscanf(settingsFile," %s",&settings.location);
-    fscanf(settingsFile," %d",&settings.forecast);
-    fscanf(settingsFile," %d",&settings.numberOfHours);
-    fscanf(settingsFile," %d",&settings.CO2Intensity);
+    fscanf(settingsFile," %c",&settings->location);
+    fscanf(settingsFile,"%d",&settings->forecast);
+    fscanf(settingsFile,"%d",&settings->numberOfHours);
+    fscanf(settingsFile,"%d",&settings->CO2Intensity);
     fclose(settingsFile);
 }
 /**
