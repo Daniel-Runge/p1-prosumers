@@ -35,60 +35,16 @@ void EnergyApp(void)
 
 void RunProgram(Settings settings)
 {
-    DataConsumption consumtion;
     DataStats total;
     WindData windpower[50];
     TimeSplit InfoTime;
     PrepareParsing(&total);
-    PrintData(total, consumtion, settings);
+    PrintData(total, settings);
 
     if (settings.forecast)
     {
         printf("hello\n");
         WeatherParser("OpenWeatherMap.json", windpower);
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
-    }
-}
-
-/**
- * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.
- * 
- * @param settings 
- * @return char 
- */
-char Command(Settings settings)
-{
-    printf("chose a command, write '-h' for help\n");
-    char choice;
-    choice = GetUserCharInput();
-
-    switch (choice)
-    {
-    case 'h':
-        printf("-h to open help\n -s to change settings\n -g to do graphs\n -r to run the\b -e to exit the program\n");
-        return 'h';
-        break;
-    case 's':
-        printf("lets open settings then\n");
-        UpdateSettingsMenu(settings);
-        return 's';
-        break;
-    case 'g':
-        printf("not yet implemented");
-        return 'g';
-        break;
-    case 'r':
-        printf("here we go again\n");
-        RunProgram(settings);
-        return 'r';
-        break;
-    case 'e':
-        printf("thanks for using\n");
-        return 'e';
-        break;
-    default:
-        printf("not a valid input\n");
-        return 'z';
-        break;
     }
 }
