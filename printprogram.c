@@ -48,11 +48,11 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
+void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[])
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
-    
+
     printf(" Renewabele energy (%%) |");
     if (settings.CO2Intensity)
         printf(" Carbon intensity (CO2/kWh) |");
@@ -71,5 +71,9 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
     if (settings.forecast)
     {
         printf("the best time is %d day %d hours %d mins %d secs.\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
+        if (settings.plot)
+        {
+            PlotForecast(windpower, settings.numberOfHours);
+        }
     }
 }

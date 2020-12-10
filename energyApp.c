@@ -43,7 +43,7 @@ void RunProgram(Settings settings)
         WeatherParser("OpenWeatherMap.json", windpower);
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }
-    PrintData(total, settings, InfoTime);
+    PrintData(total, settings, InfoTime, windpower);
 }
 
 /**

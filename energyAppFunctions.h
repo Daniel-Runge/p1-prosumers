@@ -21,6 +21,7 @@ typedef struct
     int forecast;
     int numberOfHours;
     int CO2Intensity;
+    int plot;
 } Settings;
 
 /**
@@ -72,7 +73,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings, TimeSplit Infotime);
+void PrintData(DataStats total, Settings settings, TimeSplit Infotime, WindData windpower[]);
 
 /**
  * Prototypes from HandleSettings.c 
