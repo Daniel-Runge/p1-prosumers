@@ -2,7 +2,6 @@
 #include "energyAppFunctions.h"
 
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings);
 
 const char *carbonReponse[] = {
     /*this needs to change*/
@@ -49,7 +48,7 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings)
+void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
@@ -63,6 +62,6 @@ void PrintData(DataStats total, Settings settings)
 
     if (1)
     {
-        printf("the best time is %ld sek %ld min %ld hours %ld day.\n", infotime.sec, infotime.min, infotime.hour, infotime.day);
+        printf("the best time is %ld sek %d min %d hours %d day.\n", InfoTime.sec, InfoTime.min, InfoTime.hour, InfoTime.day);
     }
 }

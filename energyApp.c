@@ -5,7 +5,6 @@
 #include "energyAppFunctions.h"
 
 void RunProgram(Settings settings);
-void CreateSettingsStruct(Settings settings);
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
@@ -17,18 +16,18 @@ int main(void)
 void EnergyApp(void)
 {
     Settings settings;
-    settings.forecast = 1;
-    settings.location = 'w';
-    settings.numberOfHours = 8;
-
+   
 
     WelcomePrint();
     if (!CheckSettings())
     {
-        printf("!CheckSettings\n");
-        CreateSettings(settings);
+
+        settings = CreateSettings();
     }
-    printf("Done with if\n");
+    else{
+        CreateSettingsStruct(settings);
+    }
+
     RunProgram(settings);
     while (Command(settings) != 'e')
     {
@@ -42,7 +41,6 @@ void RunProgram(Settings settings)
     TimeSplit InfoTime;
     GetApiFiles(settings.location);
     PrepareParsing(&total);
-    PrintData(total, settings);
 
     if (settings.forecast)
     {
@@ -50,6 +48,7 @@ void RunProgram(Settings settings)
         WeatherParser("OpenWeatherMap.json", windpower);
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }
+    PrintData(total, settings, InfoTime);
 }
 
 /**
