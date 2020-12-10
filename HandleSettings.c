@@ -20,7 +20,6 @@ int CheckSettings()
         return 0;
     }
     fclose(settingsFile);
-    printf("Closed settingsFile\n");
     return 1;
 }
 

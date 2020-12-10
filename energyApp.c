@@ -40,7 +40,6 @@ void RunProgram(Settings settings)
 
     if (settings.forecast)
     {
-        printf("hello\n");
         WeatherParser("OpenWeatherMap.json", windpower);
         GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
     }

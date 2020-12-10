@@ -24,7 +24,6 @@ void GetApiFiles(char location)
     
     char* filename[] = {"renewable.json", "carbonIntensity.json", "OpenWeatherMap.json"};
 
-    printf("\n%c\n",location);
     if(location == 'e'){
         ContactApi(filemode[0],url[1],filename[0], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
         ContactApi(filemode[0],url[3],filename[1], "auth-token: aRcMAViDADF2TuzMvUp3xFg6");
@@ -68,6 +67,5 @@ void ContactApi(char* filemode, char* url, char* filename, char* auth)
     /* closes everything and cleans up */
     fclose(fp);
     curl_easy_cleanup(curl);
-    printf("API contact done\n");
 }
 
