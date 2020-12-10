@@ -33,13 +33,13 @@ void WelcomePrint()
     printf("              \\___/\\___/    |______|  |______|  \\_____|   \\_____/ /___/      \\___\\ |______| \n");
 
     /*this needs to change*/
-    printf("              Hello and welcome to energy data program. This program is able show you\n"
-           "              if the electricity consumed in denmark is green or not. It can also show when\n"
-           "              it will probably be green in the next 48 hours based on wind preditions.\n\n"
-           "              There can be made changes on what you want to see in the program.\n"
-           "              This can be done with the settings. To use the settings always use '-'\n"
-           "              before a setting is changed.\n"
-           "              If you need help simply press '-h' to go to the help menu.\n\n\n");
+    printf("               Hello and welcome to energy data program. This program is able show you\n"
+           "               if the electricity consumed in denmark is green or not. It can also show when\n"
+           "               it will probably be green in the next 48 hours based on wind preditions.\n\n"
+           "               There can be made changes on what you want to see in the program.\n"
+           "               This can be done with the settings. To use the settings always use '-'\n"
+           "               before a setting is changed.\n"
+           "               If you need help simply press '-h' to go to the help menu.\n\n\n");
 }
 /**
  * @brief this is where the data will be printed, based on settings
@@ -52,16 +52,24 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime)
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
+    
+    printf(" Renewabele energy (%%) |");
+    if (settings.CO2Intensity)
+        printf(" Carbon intensity (CO2/kWh) |");
 
-    printf("%11.2f%9s %14.2f%12s %10s \n", total.renewable, formatLine[0], total.carbonIntensity, formatLine[0], carbonReponse[GreenPower(&total)]);
+    printf(" The conclusion\n");
+    printf(" %11.0f%12s", total.renewable, formatLine[0]);
+    if (settings.CO2Intensity)
+        printf(" %14.0f%14.2s", total.carbonIntensity, formatLine[0]);
+    printf(" %10s \n", carbonReponse[GreenPower(&total)]);
 
     if (1)
     {
         printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
     }
 
-    if (1)
+    if (settings.forecast)
     {
-        printf("the best time is %ld sek %d min %d hours %d day.\n", InfoTime.sec, InfoTime.min, InfoTime.hour, InfoTime.day);
+        printf("the best time is %d day %d hours %d mins %d secs.\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
     }
 }

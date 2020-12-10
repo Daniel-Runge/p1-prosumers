@@ -4,7 +4,7 @@
 #define SETTINGS_FILE "settings.txt"
 #define ERROR_FILE "Could not open the file %s\n"
 #define ERROR_SCAN_RETRY "Invalid input! Try again\n"
-#define SETTINGS_WELCOME_MESSAGE "This is the settings menu.\n" \
+#define SETTINGS_WELCOME_MESSAGE "\nThis is the settings menu.\n" \
                                  "The current settings: Location - %c, CO2 Intensity - %c, Forecast - %c"
 
 /**
@@ -20,7 +20,6 @@ int CheckSettings()
         return 0;
     }
     fclose(settingsFile);
-    printf("Closed settingsFile\n");
     return 1;
 }
 
@@ -79,7 +78,7 @@ Settings CreateSettings()
     UpdateSettingsFile(settings);
     return settings;
 }
-void CreateSettingsStruct(Settings settings)
+void CreateSettingsStruct(Settings *settings)
 {
     FILE *settingsFile;
     settingsFile = fopen(SETTINGS_FILE, "r");
@@ -87,10 +86,10 @@ void CreateSettingsStruct(Settings settings)
     {
         printf(ERROR_FILE, SETTINGS_FILE);
     }
-    fscanf(settingsFile," %s",&settings.location);
-    fscanf(settingsFile," %d",&settings.forecast);
-    fscanf(settingsFile," %d",&settings.numberOfHours);
-    fscanf(settingsFile," %d",&settings.CO2Intensity);
+    fscanf(settingsFile, " %c", &settings->location);
+    fscanf(settingsFile, "%d", &settings->forecast);
+    fscanf(settingsFile, "%d", &settings->numberOfHours);
+    fscanf(settingsFile, "%d", &settings->CO2Intensity);
     fclose(settingsFile);
 }
 /**
@@ -124,17 +123,14 @@ void UpdateSettingsMenu(Settings settings)
         printf(" Forecast hours - %d", settings.numberOfHours);
     }
     puts("\n");
+    SettingsInstructions();
 
-    printf("Write -l to change to location,\n"
-           "-c to change CO2 intensity,\n"
-           "-f to change forecast,\n"
-           "-h to change the number of hours,\n"
-           "-e to exit settings menu.\n");
-
-    do{
+    do
+    {
+        puts("\n");
         choice = GetUserCharInput();
         UpdateSetting(&settings, choice);
-    }while(choice != 'e');
+    } while (choice != 'e');
 }
 
 /**
@@ -149,19 +145,54 @@ void UpdateSetting(Settings *settings, char command)
     {
     case 'l':
         settings->location = settings->location == 'e' ? 'w' : 'e';
+        if (settings->location == 'e')
+        {
+            printf("Location is now east\n");
+        }
+        else
+        {
+            printf("Location is now west\n");
+        }
         break;
     case 'c':
         settings->CO2Intensity = settings->CO2Intensity == 1 ? 0 : 1;
+        if (settings->CO2Intensity == 1)
+        {
+            printf("Now shows carbon intensity\n");
+        }
+        else
+        {
+            printf("No longer shows carbon intensity\n");
+        }
         break;
     case 'f':
         settings->forecast = settings->forecast == 1 ? 0 : 1;
+        if (settings->forecast == 1)
+        {
+            printf("Now shows a forecast of upcoming green energy\n");
+        }
+        else
+        {
+            printf("No longer shows a forecast of upcoming green energy\n");
+        }
         break;
     case 'h':
         if (settings->forecast)
         {
-            settings->numberOfHours = GetUserIntInput();
-            while ((settings->numberOfHours < 1) || (settings->numberOfHours > 48))
-                ;
+            printf("How many hours into the future do you want a forecast for?\n");
+            do
+            {
+                settings->numberOfHours = GetUserIntInput();
+                if ((settings->numberOfHours < 1) || (settings->numberOfHours > 48))
+                {
+                    printf("Not within the interval of 1 and 48, try again\n");
+                }
+                else
+                {
+                    printf("The forecast now looks %d hours into the future\n", settings->numberOfHours);
+                }
+
+            } while ((settings->numberOfHours < 1) || (settings->numberOfHours > 48));
         }
         else
         {
@@ -171,9 +202,22 @@ void UpdateSetting(Settings *settings, char command)
     case 'e':
         printf("Exiting settings menu.");
         break;
-    default :
+    default:
         printf("Not a valid input.");
     }
-    
+
     UpdateSettingsFile(*settings);
+    if (command != 'e')
+    {
+        SettingsInstructions();
+    }
+}
+
+void SettingsInstructions()
+{
+    printf("Write -l to change to location,\n"
+           "-c to change CO2 intensity,\n"
+           "-f to change forecast,\n"
+           "-h to change the number of hours,\n"
+           "-e to exit settings menu.\n\n");
 }

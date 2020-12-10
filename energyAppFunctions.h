@@ -39,7 +39,7 @@ typedef struct
  */
 typedef struct
 {
-    long int sec;
+    int sec;
     int min;
     int hour;
     int day;
@@ -82,7 +82,8 @@ Settings CreateSettings(void);
 void UpdateSettingsFile(Settings settings);
 void UpdateSettingsMenu(Settings settings);
 void UpdateSetting(Settings *settings, char command);
-void CreateSettingsStruct(Settings settings);
+void CreateSettingsStruct(Settings *settings);
+void SettingsInstructions(void);
 
 /**
  * Prototypes from HandleInput.c

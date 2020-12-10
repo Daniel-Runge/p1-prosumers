@@ -33,7 +33,7 @@ void ConvertUnixDate(time_t unixNumber)
 
 void SecondsConverter(long int seconds, TimeSplit *infoTime)
 {
-    long int minutes = 0, hours = 0, days = 0;
+    int minutes, hours, days;
     days = (seconds / SEC_PER_DAY) % SEC_PER_MIN;
     hours = (seconds / SEC_PER_HOUR) % SEC_PER_MIN;
     minutes = (seconds / SEC_PER_MIN) % SEC_PER_MIN;
@@ -53,13 +53,13 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
  */
 void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
 {
+    int i;
     long int timeDifference;
     time_t t = time(NULL);
 
     qsort(windPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
     timeDifference = windPower[0].unixTime - t;
-
     SecondsConverter(timeDifference, infoTime);
 }
 
@@ -74,8 +74,12 @@ int CompareWindSpeed(const void *a, const void *b)
     WindData *windDataA = (WindData *)a;
 
     WindData *windDataB = (WindData *)b;
+    if (windDataA->windSpeed > windDataB->windSpeed)
+        return -1;
+    else 
+        return 1;
 
-    return (windDataB->windSpeed - windDataA->windSpeed);
+    return 0;
 }
 
 /**
