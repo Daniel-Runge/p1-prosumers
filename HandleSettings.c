@@ -77,13 +77,10 @@ Settings CreateSettings()
     settings.CO2Intensity = charBuffer == 'y' ? 1 : 0;
 
     UpdateSettingsFile(settings);
-
     return settings;
 }
 void CreateSettingsStruct(Settings settings)
 {
-
-
     FILE *settingsFile;
     settingsFile = fopen(SETTINGS_FILE, "r");
     if (settingsFile == NULL)
