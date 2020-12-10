@@ -80,7 +80,22 @@ Settings CreateSettings()
 
     return settings;
 }
+void CreateSettingsStruct(Settings settings)
+{
 
+
+    FILE *settingsFile;
+    settingsFile = fopen(SETTINGS_FILE, "r");
+    if (settingsFile == NULL)
+    {
+        printf(ERROR_FILE, SETTINGS_FILE);
+    }
+    fscanf(settingsFile," %s",&settings.location);
+    fscanf(settingsFile," %d",&settings.forecast);
+    fscanf(settingsFile," %d",&settings.numberOfHours);
+    fscanf(settingsFile," %d",&settings.CO2Intensity);
+    fclose(settingsFile);
+}
 /**
  * @brief Update the settings file based on the settings struct.
  * 

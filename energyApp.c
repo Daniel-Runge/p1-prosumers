@@ -5,7 +5,7 @@
 #include "energyAppFunctions.h"
 
 void RunProgram(Settings settings);
-
+void CreateSettingsStruct(Settings settings);
 /**
  * @brief WRITE THIS MAIN FUNCTION PROPERLY! 
  */
