@@ -183,6 +183,7 @@ void UpdateSetting(Settings *settings, char command)
     case 'h':
         if (settings->forecast)
         {
+            printf("How many hours into the future do you want a forecast for?\n");
             do
             {
                 settings->numberOfHours = GetUserIntInput();
