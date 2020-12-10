@@ -55,7 +55,7 @@ void RunProgram(Settings settings)
  */
 char Command(Settings settings)
 {
-    printf("chose a command, write '-h' for help\n");
+    printf("Choose a command, write '-h' for help\n");
     char choice;
     choice = GetUserCharInput();
 
@@ -66,25 +66,25 @@ char Command(Settings settings)
         return 'h';
         break;
     case 's':
-        printf("lets open settings then\n");
+        printf("Lets open settings then\n");
         UpdateSettingsMenu(settings);
         return 's';
         break;
     case 'g':
-        printf("not yet implemented");
+        printf("Not yet implemented\n");
         return 'g';
         break;
     case 'r':
-        printf("here we go again\n");
+        printf("Here we go again\n");
         RunProgram(settings);
         return 'r';
         break;
     case 'e':
-        printf("thanks for using\n");
+        printf("Thanks for using\n");
         return 'e';
         break;
     default:
-        printf("not a valid input\n");
+        printf("Not a valid input\n");
         return 'z';
         break;
     }
