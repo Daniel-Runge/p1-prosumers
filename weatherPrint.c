@@ -74,8 +74,12 @@ int CompareWindSpeed(const void *a, const void *b)
     WindData *windDataA = (WindData *)a;
 
     WindData *windDataB = (WindData *)b;
+    if (windDataA->windSpeed > windDataB->windSpeed)
+        return -1;
+    else 
+        return 1;
 
-    return (windDataB->windSpeed - windDataA->windSpeed);
+    return 0;
 }
 
 /**
