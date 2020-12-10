@@ -55,8 +55,8 @@ Here is a list of important Git commands in the Ubuntu terminal, as well as a sh
 | git push --set-upstream origin \<branch> | Creates your local branch in the online repo, and pushes to it. |
 | git branch | Displays the branch you are working in, as well as other available branches in the project. |
 
-### Git flow
-An explanation of an approriate flow for us to get the most out of GitHub.
+### GitHub flow
+[An explanation of an approriate flow for us to get the most out of GitHub.](https://guides.github.com/introduction/flow/)
 
 ***
 
