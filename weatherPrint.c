@@ -28,10 +28,10 @@ void ConvertUnixDate(time_t unixNumber)
  * @brief function which converts seconds into days, hours, minutes and seconds
  * 
  * @param sekunder calculated in TimeForWind
- * @param InfoTime the struct that contains info calculated from the function  
+ * @param infoTime the struct that contains info calculated from the function  
  */
 
-void SecondsConverter(long int seconds, TimeSplit *InfoTime)
+void SecondsConverter(long int seconds, TimeSplit *infoTime)
 {
     long int minutes, hours, days;
 
@@ -40,10 +40,10 @@ void SecondsConverter(long int seconds, TimeSplit *InfoTime)
     minutes = (seconds / SEC_PER_MIN) % SEC_PER_MIN;
     seconds = seconds % SEC_PER_MIN;
 
-    InfoTime->sec = seconds;
-    InfoTime->min = minutes;
-    InfoTime->hour = hours;
-    InfoTime->day = days;
+    infoTime->sec = seconds;
+    infoTime->min = minutes;
+    infoTime->hour = hours;
+    infoTime->day = days;
 }
 
 /**
@@ -52,7 +52,7 @@ void SecondsConverter(long int seconds, TimeSplit *InfoTime)
  * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
  * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime)
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
 {
     long int timeDifference;
     time_t t = time(NULL);
@@ -61,7 +61,7 @@ void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoT
 
     timeDifference = windPower[0].unixTime - t;
 
-    SecondsConverter(timeDifference, InfoTime);
+    SecondsConverter(timeDifference, infoTime);
 }
 
 /**

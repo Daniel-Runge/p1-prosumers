@@ -25,10 +25,10 @@ void EnergyApp(void)
     WelcomePrint();
     if (!CheckSettings())
     {
+        printf("!CheckSettings\n");
         CreateSettings(settings);
     }
-
-    
+    printf("Done with if\n");
     RunProgram(settings);
     while (Command(settings) != 'e')
     {
@@ -37,12 +37,12 @@ void EnergyApp(void)
 
 void RunProgram(Settings settings)
 {
-    DataConsumption consumtion;
     DataStats total;
     WindData windpower[50];
     TimeSplit InfoTime;
+    GetApiFiles(settings.location);
     PrepareParsing(&total);
-    PrintData(total, consumtion, settings, InfoTime);
+    PrintData(total, settings);
 
     if (settings.forecast)
     {
@@ -53,7 +53,7 @@ void RunProgram(Settings settings)
 }
 
 /**
- * @brief THIS FUNCTION HAS TO BE MOVED TO A DIFFERENT FILE.
+ * @brief What does Command do?
  * 
  * @param settings 
  * @return char 

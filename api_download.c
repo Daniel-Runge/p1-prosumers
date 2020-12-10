@@ -41,7 +41,7 @@ void GetApiFiles(char location)
  * @brief Get the file from a url to the electricity map api
  * 
  */
-void ContactApi (char* filemode, char* url, char* filename, char* auth)
+void ContactApi(char* filemode, char* url, char* filename, char* auth)
 {
 
     CURL *curl;
@@ -51,29 +51,24 @@ void ContactApi (char* filemode, char* url, char* filename, char* auth)
     
     /* creates a file and a pointer to that file  */
     fp=fopen(filename, filemode);
-    printf("1");
     /* this is setting up the request type "GET" and the adress curl should access  */
     curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
     curl_easy_setopt(curl, CURLOPT_URL, url);
-    printf("2");
 
     /* creates a header file and puts the authentification token into it for the curl request  */
     headers = curl_slist_append(headers, auth);
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-    printf("3");
 
     /*  tells curl that you want to write the data you get into your file */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
     /* curl_easy_perform runs the curl that you set using easy_setopt */
     result = curl_easy_perform(curl);
-    printf("4");
     printf("\n%d\n",result);
 
     /* closes everything and cleans up */
     fclose(fp);
-    printf("5");
     curl_easy_cleanup(curl);
-    printf("6");
+    printf("API contact done\n");
 }
 

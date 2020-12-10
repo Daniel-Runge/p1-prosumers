@@ -1,24 +1,5 @@
 #include <time.h>
 
-/**
- * @brief Struct to contain CONSUMPTION data from Electricity Map API
- * 
- */
-typedef struct 
-{
-    double battery_discharge;
-    double biomass;
-    double coal;
-    double gas;
-    double hydro;
-    double hydro_discharge;
-    double nuclear;
-    double oil;
-    double solar;
-    double wind;
-    double geothermal;
-    double unknown;
-} DataConsumption;
 
 /**
  * @brief Struct to contain CARBON INTENSITY data from Electricity Map API
@@ -73,10 +54,6 @@ typedef struct
  * prototypes from the energyApp.c file
  */
 void EnergyApp(void);
-/**
- * prototypes from the command.c file
- */
-char Command (Settings settings);
 
 /**
  * prototypes from the api_download.c file
@@ -87,7 +64,7 @@ void ContactApi(char* filemode, char* url, char* filename, char* auth);
 /**
  * prototypes from the store_data.c file
  */
-void PrepareParsing(DataStats *POWAH);
+void PrepareParsing(DataStats *data);
 double EnergyParser(char *filename, char *keyWord);
 void WeatherParser(char *filename, WindData windPower[]);
 
@@ -100,8 +77,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, DataConsumption consumption, Settings settings, TimeSplit infotime);
-void PlotForecast(WindData windPower[], int maxHours);
+void PrintData(DataStats total, Settings settings);
 
 /**
  * Prototypes from HandleSettings.c 
@@ -119,6 +95,7 @@ int ValidateCharInput(char candidate, char option1, char option2);
 char GetUserCharInput (void);
 int GetUserIntInput(void);
 void CleanStandardInput();
+char Command (Settings settings);
 
 /**
  * Prototypes from WeatherPrint.c
@@ -127,3 +104,4 @@ void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoT
 void ConvertUnixDate(time_t unixNumber);
 void SecondsConverter(long int seconds, TimeSplit *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
+void PlotForecast(WindData windPower[], int maxHours);

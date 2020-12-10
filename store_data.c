@@ -4,7 +4,7 @@
 #include "energyAppFunctions.h"
 
 double EnergyParser(char *filename, char *keyword);
-void readFile(DataStats *data);
+void PrepareParsing(DataStats *data);
 
 /**
  * @brief Function takes the created files by api_download.c and runs thorugh them looking
@@ -42,7 +42,7 @@ double EnergyParser(char *filename, char *keyword)
     fp = fopen(filename, "r");
     if (fp == NULL)
     {
-        printf("Could not read file\n");
+        printf("Could not read energy JSON file\n");
     }
     fread(fileBuffer, 1800, 1, fp);
     fclose(fp);

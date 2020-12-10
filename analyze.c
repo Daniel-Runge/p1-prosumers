@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "energyAppFunctions.h"
 
-int analyze_data(DataStats total, DataConsumption consumption);
+// int analyze_data(DataStats total, DataConsumption consumption);
 int green_power(DataStats *value);
-int wind_power(DataStats total, DataConsumption consumption);
+// int wind_power(DataStats total, DataConsumption consumption);
 
 /**
  * @brief Function to analyze data that comes from the API.
@@ -57,21 +57,21 @@ int wind_power(DataStats total, DataConsumption consumption);
  * @return int Analyzed data returned to print.
  */
 
-int analyze_data(DataStats total, DataConsumption consumption)
+/* int analyze_data(DataStats total, DataConsumption consumption)
 {
     double wind_procentage, hydro_procentage, biomass_procentage, solar_procentage, hydro_dischare_procentage;
     double renewable_sum;
 
     solar_procentage = (consumption.solar * 100.) / total.consumptionTotal;
-    wind_procentage = (consumption.wind * 100.) / total.consumptionTotal;       /*Precentage of total prower from wind*/
-    hydro_procentage = (consumption.hydro * 100.) / total.consumptionTotal;     /*Precentage of total prower from Hydro*/
-    biomass_procentage = (consumption.biomass * 100.) / total.consumptionTotal; /*Precentage of total prower from Biomass*/
+    wind_procentage = (consumption.wind * 100.) / total.consumptionTotal;       /*Precentage of total prower from wind
+    hydro_procentage = (consumption.hydro * 100.) / total.consumptionTotal;     /*Precentage of total prower from Hydro
+    biomass_procentage = (consumption.biomass * 100.) / total.consumptionTotal; /*Precentage of total prower from Biomass
 
     printf("Solar:            %6.2lf %%\n", solar_procentage);
     printf("Wind:             %6.2lf %%\n", wind_procentage);
     printf("Hydro:            %6.2lf %%\n", hydro_procentage);
     printf("Biomass:          %6.2lf %%\n", biomass_procentage);
-    printf("Sum af renewable: %6.2f %%\n", renewable_sum = wind_procentage + hydro_procentage + biomass_procentage + solar_procentage);
+    printf("Sum af renewable: %6.2f %%\n", renewable_sum = wind_procentage + hydro_procentage + biomass_procentage + solar_procentage); */
 
 
 
@@ -83,8 +83,8 @@ int analyze_data(DataStats total, DataConsumption consumption)
     /*Biomass 230 gCO2/kWh*/
     /*Coal 820 gCO2/kWh*/
 
-    return 1;
-}
+    /* return 1;
+} */
 
 /**
  * 
@@ -122,7 +122,7 @@ int GreenPower(DataStats *value)
  * @return int Return 1 if wind power is 10% or under 2 if its over 50% and 0 if its anything else.
  */
 
-int wind_power(DataStats total, DataConsumption consumption)
+/* int wind_power(DataStats total, DataConsumption consumption)
 {
     int wind_procentage;
     wind_procentage = (consumption.wind * 100.) / total.consumptionTotal;
@@ -139,7 +139,7 @@ int wind_power(DataStats total, DataConsumption consumption)
     {
         return 0;
     }
-}
+} */
 
 /**
  * @brief |WORK IN PROGRESS|
@@ -149,7 +149,7 @@ int wind_power(DataStats total, DataConsumption consumption)
  * @return int 
  */
 
-int coal_power(DataStats total, DataConsumption consumption) 
+/* int coal_power(DataStats total, DataConsumption consumption) 
 {
     int coal_procentage;
     coal_procentage = (consumption.coal * 100.) / total.consumptionTotal;
@@ -166,5 +166,5 @@ int coal_power(DataStats total, DataConsumption consumption)
     {
         return 0;
     }
-}
+} */
 

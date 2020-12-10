@@ -2,9 +2,9 @@
 #include "energyAppFunctions.h"
 
 void WelcomePrint();
-void PrintData(DataStats total, DataConsumption consumtion, Settings settings, TimeSplit infotime);
+void PrintData(DataStats total, Settings settings);
 
-const char *co2Response[] = {
+const char *carbonReponse[] = {
     /*this needs to change*/
     "Green.\n",
     "Partialy green.\n",
@@ -49,16 +49,16 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, DataConsumption consumtion, Settings settings, TimeSplit infotime){
-    char *empty[] = {"|"};
+void PrintData(DataStats total, Settings settings)
+{
+    char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
 
-    printf("\nThe energy is %s\n", co2Response[GreenPower(&total)]);
+    printf("%11.2f%9s %14.2f%12s %10s \n", total.renewable, formatLine[0], total.carbonIntensity, formatLine[0], carbonReponse[GreenPower(&total)]);
 
     if (1)
     {
-        printf("%% renewable energy | Carbon intensity (g/kWh) | Conclusion\n");
-        printf("%11.2f%9s %14.2f%12s %10s \n", total.renewable, empty[0], total.carbonIntensity, empty[0], co2Response[GreenPower(&total)]);
+        printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
     }
 
     if (1)
