@@ -13,15 +13,16 @@
  * The function is taken from https://www.epochconverter.com/programming/c
  * @param unixNumber which needs to be of type time_t 
  */
-void ConvertUnixDate(time_t unixNumber)
+char ConvertUnixDate(time_t unixNumber)
 {
     struct tm ts;
-    char buf[80];
+    char prettyTime[80];
+    char timeFormat[10] = "%c %Z";
 
     // Format time, "day yyyy-mm-dd hh:mm:ss tmz"
     ts = *localtime(&unixNumber);
-    strftime(buf, sizeof(buf), "%H", &ts);
-    printf("%s", buf);
+    strftime(prettyTime, sizeof(prettyTime), timeFormat, &ts);
+    return(prettyTime);
 }
 
 /**
@@ -61,12 +62,12 @@ void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoT
     }
     
     long int timeDifference;
-    time_t t = time(NULL);
 
     qsort(sortedWinds, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
-    timeDifference = sortedWinds[0].unixTime - t;
-    SecondsConverter(timeDifference, infoTime);
+
+    /*timeDifference = sortedWinds[0].unixTime - t;
+    SecondsConverter(timeDifference, infoTime);*/
 }
 
 /**

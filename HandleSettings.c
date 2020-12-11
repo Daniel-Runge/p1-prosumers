@@ -34,8 +34,7 @@ Settings CreateSettings()
     char charBuffer;
     int intBuffer;
 
-    printf("No settings detected, creating user settings:\n"
-           "Are you in Western Denmark or Eastern Denmark? (type w or e)\n");
+    printf("Are you in Western Denmark or Eastern Denmark? (type -w for west, -e for east)\n");
     charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'w', 'e'))
     {
@@ -44,7 +43,7 @@ Settings CreateSettings()
     }
     settings.location = charBuffer;
 
-    printf("Do you wish to see a forecast? (y/n)\n");
+    printf("Do you wish to see a forecast? (-y for yes, -n for no)\n");
     charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {
@@ -68,7 +67,7 @@ Settings CreateSettings()
 
     if (settings.forecast)
     {
-        printf("Do you wish to see a graph of the forecast? (y/n)\n");
+        printf("Do you wish to see a graph of the forecast? (-y for yes, -n for no)\n");
         charBuffer = GetUserCharInput();
         while (!ValidateCharInput(charBuffer, 'y', 'n'))
         {
@@ -78,7 +77,7 @@ Settings CreateSettings()
         settings.plot = charBuffer == 'y' ? 1 : 0;
     }
 
-    printf("Do you wish to see the specific CO2 intensity? (y/n)\n");
+    printf("Do you wish to see the specific CO2 intensity? (-y for yes, -n for no)\n");
     charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'y', 'n'))
     {

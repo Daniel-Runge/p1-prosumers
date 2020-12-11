@@ -33,9 +33,9 @@ void WelcomePrint()
     printf("              \\___/\\___/    |______|  |______|  \\_____|   \\_____/ /___/      \\___\\ |______| \n");
 
     /*this needs to change*/
-    printf("               Hello and welcome to energy data program. This program is able show you\n"
-           "               if the electricity consumed in denmark is green or not. It can also show when\n"
-           "               it will probably be green in the next 48 hours based on wind preditions.\n\n"
+    printf("               Hello and welcome to the energy data program. This program is able to show you\n"
+           "               if the electricity consumed in Denmark is green or not. It can also show when\n"
+           "               it will probably be green in the next 48 hours based on wind predictions.\n\n"
            "               There can be made changes on what you want to see in the program.\n"
            "               This can be done with the settings.\n"
            "               To use any commands always use '-' before any input.\n"
@@ -48,12 +48,11 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[])
+void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[], WindData sortedWinds[])
 {
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
-
-    printf("\n\n\n Renewable energy (%%) |");
+    printf("\n\n Renewable energy (%%) |");
     if (settings.CO2Intensity)
     {
         printf(" Carbon intensity (g CO2/kWh) |");
