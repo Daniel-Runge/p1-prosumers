@@ -21,6 +21,7 @@ typedef struct
     int forecast;
     int numberOfHours;
     int CO2Intensity;
+    int plot;
 } Settings;
 
 /**
@@ -72,7 +73,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings, TimeSplit Infotime);
+void PrintData(DataStats total, Settings settings, TimeSplit Infotime, WindData windpower[]);
 
 /**
  * Prototypes from HandleSettings.c 
@@ -80,7 +81,7 @@ void PrintData(DataStats total, Settings settings, TimeSplit Infotime);
 int CheckSettings(void);
 Settings CreateSettings(void);
 void UpdateSettingsFile(Settings settings);
-void UpdateSettingsMenu(Settings settings);
+void UpdateSettingsMenu(Settings *settings);
 void UpdateSetting(Settings *settings, char command);
 void CreateSettingsStruct(Settings *settings);
 void SettingsInstructions(void);
@@ -92,7 +93,7 @@ int ValidateCharInput(char candidate, char option1, char option2);
 char GetUserCharInput (void);
 int GetUserIntInput(void);
 void CleanStandardInput();
-char Command (Settings settings);
+char Command (Settings *settings);
 
 /**
  * Prototypes from WeatherPrint.c
