@@ -5,7 +5,7 @@
 #define ERROR_FILE "Could not open the file %s\n"
 #define ERROR_SCAN_RETRY "Invalid input! Try again\n"
 #define SETTINGS_WELCOME_MESSAGE "\nThis is the settings menu.\n" \
-                                 "The current settings: Location - %c, CO2 Intensity - %c, Forecast - %c, Plot - %d"
+                                 "The current settings: Location - %c, CO2 Intensity - %d, Forecast - %d, Plot - %d"
 
 /**
  * @brief Function to determine existence of settings.txt file.
@@ -190,7 +190,7 @@ void UpdateSetting(Settings *settings, char command)
             printf("No longer shows a forecast of upcoming green energy\n");
         }
         break;
-    case 'h':
+    case 'n':
         if (settings->forecast)
         {
             printf("How many hours into the future do you want a forecast for?\n");
@@ -233,10 +233,10 @@ void UpdateSetting(Settings *settings, char command)
         
         break;
     case 'e':
-        printf("Exiting settings menu.");
+        printf("Exiting settings menu\n");
         break;
     default:
-        printf("Not a valid input.");
+        printf("Not a valid input, please try again\n");
     }
 
     UpdateSettingsFile(*settings);
@@ -253,6 +253,6 @@ void SettingsInstructions()
            "-c to change CO2 intensity,\n"
            "-f to change forecast,\n"
            "-g to change plotting of graph\n"
-           "-h to change the number of hours,\n"
+           "-n to change the number of hours,\n"
            "-e to exit settings menu.\n\n");
 }

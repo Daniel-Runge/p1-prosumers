@@ -53,24 +53,25 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData 
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
 
-    printf(" Renewabele energy (%%) |");
+    printf("\n\n\n Renewable energy (%%) |");
     if (settings.CO2Intensity)
-        printf(" Carbon intensity (CO2/kWh) |");
-
-    printf(" The conclusion\n");
-    printf(" %11.0f%12s", total.renewable, formatLine[0]);
-    if (settings.CO2Intensity)
-        printf(" %14.0f%14.2s", total.carbonIntensity, formatLine[0]);
-    printf(" %10s \n", carbonReponse[GreenPower(&total)]);
-
-    if (1)
     {
-        printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
+        printf(" Carbon intensity (g CO2/kWh) |");
     }
+    printf("\n");
+    /*printf(" The conclusion\n");*/
+    printf(" %10.0f%12s", total.renewable, formatLine[0]);
+    if (settings.CO2Intensity)
+    {
+        printf(" %15.0f%15.2s", total.carbonIntensity, formatLine[0]);
+    }
+    /*printf(" %10s \n", carbonReponse[GreenPower(&total)]);*/
+
+    printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
 
     if (settings.forecast)
     {
-        printf("the best time is %d day %d hours %d mins %d secs.\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
+        printf("The best time is %d day %d hours %d mins %d secs from now\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
         if (settings.plot)
         {
             PlotForecast(windpower, settings.numberOfHours);

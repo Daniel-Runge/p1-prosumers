@@ -25,7 +25,7 @@ void EnergyApp(void)
     }
     CreateSettingsStruct(&settings);
     RunProgram(settings);
-    while (Command(&settings) != 'e')
+    while (Command(&settings) != 'q')
     {
     }
 }
@@ -61,30 +61,25 @@ char Command(Settings *settings)
     switch (choice)
     {
     case 'h':
-        printf("-h to open help\n -s to change settings\n -g to do graphs\n -r to run the\b -e to exit the program\n");
+        printf("-h to open the help menu\n-s to change program settings\n-r to run the program again\n-q to quit the program\n");
         return 'h';
         break;
     case 's':
-        printf("Lets open settings then\n");
+        printf("Opening settings\n");
         UpdateSettingsMenu(settings);
-        printf("Loc: %c Hours: %d FC: %d Carbon: %d Plot: %d", settings->location, settings->numberOfHours, settings->forecast, settings->CO2Intensity, settings->plot);
         return 's';
         break;
-    case 'g':
-        printf("Not yet implemented\n");
-        return 'g';
-        break;
     case 'r':
-        printf("Here we go again\n");
+        printf("Running the program again\n");
         RunProgram(*settings);
         return 'r';
         break;
-    case 'e':
+    case 'q':
         printf("Thanks for using\n");
-        return 'e';
+        return 'q';
         break;
     default:
-        printf("Not a valid input\n");
+        printf("Not a valid input, please try again\n");
         return 'z';
         break;
     }

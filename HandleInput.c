@@ -28,7 +28,7 @@ char GetUserCharInput(void)
     while ((scanf("-%c", &choice) != 1) || !isalpha(choice))
     {
         CleanStandardInput();
-        printf("wrong!\n");
+        printf("Not a valid input, please try again\n");
     }
     CleanStandardInput();
     return choice;
@@ -45,8 +45,7 @@ int GetUserIntInput(void)
     while (scanf("-%d", &choice) != 1)
     {
         CleanStandardInput();
-        printf("%d", choice);
-        printf("Wrong!\n");
+        printf("Not a valid input, please try again\n");
     }
     CleanStandardInput();
 
