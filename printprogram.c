@@ -5,10 +5,10 @@ void WelcomePrint();
 
 const char *carbonReponse[] = {
     /*this needs to change*/
-    "Green.\n",
-    "Partialy green.\n",
-    "Not green.\n",
-    "very not green.\n"};
+    "very green.\n",
+    "sonewhat green.\n",
+    "a little bit green.\n",
+    "not green at all.\n"};
 const char *windResponse[] = {
     /*this needs to change and also what do we use it for*/
     "There is medicore wind in Denmark right now",
@@ -37,8 +37,8 @@ void WelcomePrint()
            "               if the electricity consumed in denmark is green or not. It can also show when\n"
            "               it will probably be green in the next 48 hours based on wind preditions.\n\n"
            "               There can be made changes on what you want to see in the program.\n"
-           "               This can be done with the settings. To use the settings always use '-'\n"
-           "               before a setting is changed.\n"
+           "               This can be done with the settings.\n"
+           "               To use any commands always use '-' before any input.\n"
            "               If you need help simply press '-h' to go to the help menu.\n\n\n");
 }
 /**
@@ -67,7 +67,7 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData 
     }
     /*printf(" %10s \n", carbonReponse[GreenPower(&total)]);*/
 
-    printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
+    printf("\n\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
 
     if (settings.forecast)
     {

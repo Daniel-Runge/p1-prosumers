@@ -53,12 +53,19 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
  */
 void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
 {
+    int i;
+    WindData sortedWinds[50];
+    for (i = 0; i < hoursAhead; i++)
+    {
+        sortedWinds[i] = windPower[i];
+    }
+    
     long int timeDifference;
     time_t t = time(NULL);
 
-    qsort(windPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
+    qsort(sortedWinds, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
-    timeDifference = windPower[0].unixTime - t;
+    timeDifference = sortedWinds[0].unixTime - t;
     SecondsConverter(timeDifference, infoTime);
 }
 

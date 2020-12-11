@@ -35,7 +35,7 @@ Settings CreateSettings()
     int intBuffer;
 
     printf("No settings detected, creating user settings:\n"
-           "Are you in w(est) or e(ast)?\n");
+           "Are you in Western Denmark or Eastern Denmark? (type w or e)\n");
     charBuffer = GetUserCharInput();
     while (!ValidateCharInput(charBuffer, 'w', 'e'))
     {
