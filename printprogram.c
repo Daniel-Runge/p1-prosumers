@@ -50,17 +50,18 @@ void WelcomePrint()
  */
 void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[], WindData sortedWinds[])
 {
+    printf("\n\nEnergy data pulled on ");
     ConvertUnixDate(time(NULL));
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
-    printf("\n\n Renewable energy (%%) |");
+    printf("\n\n| Renewable energy (%%) |");
     if (settings.CO2Intensity)
     {
         printf(" Carbon intensity (g CO2/kWh) |");
     }
     printf("\n");
     /*printf(" The conclusion\n");*/
-    printf(" %10.0f%12s", total.renewable, formatLine[0]);
+    printf("| %10.0f%12s", total.renewable, formatLine[0]);
     if (settings.CO2Intensity)
     {
         printf(" %15.0f%15.2s", total.carbonIntensity, formatLine[0]);

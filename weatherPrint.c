@@ -169,4 +169,6 @@ void PlotForecast(WindData windPower[], int maxHours)
     printf("      ");
     printf("%*s", (maxHours * 3 / 2) + 6, "Hours Ahead");
     printf("\n");
+    printf("This graph shows the forecast windspeeds (measured in meters per second) \n"
+    "at specific times (measured in hours) within the chosen forecast hours\n\n");
 }
