@@ -34,6 +34,7 @@ void RunProgram(Settings settings)
 {
     DataStats total;
     WindData windpower[50];
+    WindData sortedWinds[50];
     TimeSplit InfoTime;
     GetApiFiles(settings.location);
     PrepareParsing(&total);
@@ -41,9 +42,9 @@ void RunProgram(Settings settings)
     if (settings.forecast)
     {
         WeatherParser("OpenWeatherMap.json", windpower);
-        GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime);
+        GetBestTimeForWind(windpower, settings.numberOfHours, &InfoTime, sortedWinds);
     }
-    PrintData(total, settings, InfoTime, windpower);
+    PrintData(total, settings, InfoTime, windpower, sortedWinds);
 }
 
 /**

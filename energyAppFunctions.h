@@ -98,8 +98,8 @@ char Command (Settings *settings);
 /**
  * Prototypes from WeatherPrint.c
  */
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime);
-char ConvertUnixDate(time_t unixNumber);
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime, WindData sortedWinds[]);
+void ConvertUnixDate(time_t unixNumber);
 void SecondsConverter(long int seconds, TimeSplit *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);
 void PlotForecast(WindData windPower[], int maxHours);

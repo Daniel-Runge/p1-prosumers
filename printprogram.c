@@ -50,6 +50,7 @@ void WelcomePrint()
  */
 void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[], WindData sortedWinds[])
 {
+    ConvertUnixDate(time(NULL));
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
     printf("\n\n Renewable energy (%%) |");
@@ -70,7 +71,10 @@ void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData 
 
     if (settings.forecast)
     {
-        printf("The best time is %d day %d hours %d mins %d secs from now\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
+        printf("The best time is most likely ");
+        ConvertUnixDate(sortedWinds[0].unixTime);
+        printf("\n");
+        /*printf("The best time is %d day %d hours %d mins %d secs from now\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);*/
         if (settings.plot)
         {
             PlotForecast(windpower, settings.numberOfHours);

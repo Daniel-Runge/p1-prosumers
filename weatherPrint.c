@@ -13,16 +13,16 @@
  * The function is taken from https://www.epochconverter.com/programming/c
  * @param unixNumber which needs to be of type time_t 
  */
-char ConvertUnixDate(time_t unixNumber)
+void ConvertUnixDate(time_t unixNumber)
 {
     struct tm ts;
-    char prettyTime[80];
+    char prettyTime[50];
     char timeFormat[10] = "%c %Z";
 
     // Format time, "day yyyy-mm-dd hh:mm:ss tmz"
     ts = *localtime(&unixNumber);
     strftime(prettyTime, sizeof(prettyTime), timeFormat, &ts);
-    return(prettyTime);
+    printf("%s", prettyTime);
 }
 
 /**
@@ -52,10 +52,9 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
  * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
  * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime, WindData sortedWinds[])
 {
     int i;
-    WindData sortedWinds[50];
     for (i = 0; i < hoursAhead; i++)
     {
         sortedWinds[i] = windPower[i];
