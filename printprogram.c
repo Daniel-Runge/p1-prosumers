@@ -6,7 +6,7 @@ void WelcomePrint();
 const char *carbonReponse[] = {
     /*this needs to change*/
     "very green.\n",
-    "sonewhat green.\n",
+    "somewhat green.\n",
     "a little bit green.\n",
     "not green at all.\n"};
 const char *windResponse[] = {
