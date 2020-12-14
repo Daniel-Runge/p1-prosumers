@@ -7,19 +7,9 @@ const char *carbonReponse[] = {
     /*this needs to change*/
     "very green.\n",
     "somewhat green.\n",
-    "a little bit green.\n",
+    "a partially green.\n",
     "not green at all.\n"};
-const char *windResponse[] = {
-    /*this needs to change and also what do we use it for*/
-    "There is medicore wind in Denmark right now",
-    "There is not much energy coming from the wind right now",
-    "it blows a half pelican"};
-/*int main()
-{
-    welcomeprint();
-    printdata();
-    return 0;
-}*/
+
 /**
  * @brief It is not finished
  * 
@@ -48,7 +38,7 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[], WindData sortedWinds[])
+void PrintData(DataStats total, Settings settings, WindData windpower[], WindData sortedWinds[])
 {
     printf("\n\nEnergy data pulled on ");
     ConvertUnixDate(time(NULL));

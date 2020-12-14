@@ -73,7 +73,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings, TimeSplit Infotime, WindData windpower[], WindData sortedWinds[]);
+void PrintData(DataStats total, Settings settings, WindData windpower[], WindData sortedWinds[]);
 
 /**
  * Prototypes from HandleSettings.c 
