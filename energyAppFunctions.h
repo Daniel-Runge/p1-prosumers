@@ -73,7 +73,7 @@ int GreenPower(DataStats *value);
  * prototypes from the printprogram.c file
  */
 void WelcomePrint();
-void PrintData(DataStats total, Settings settings, TimeSplit Infotime, WindData windpower[]);
+void PrintData(DataStats total, Settings settings, TimeSplit Infotime, WindData windpower[], WindData sortedWinds[]);
 
 /**
  * Prototypes from HandleSettings.c 
@@ -98,7 +98,7 @@ char Command (Settings *settings);
 /**
  * Prototypes from WeatherPrint.c
  */
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime);
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime, WindData sortedWinds[]);
 void ConvertUnixDate(time_t unixNumber);
 void SecondsConverter(long int seconds, TimeSplit *TimeInfo);
 int CompareWindSpeed(const void *a, const void *b);

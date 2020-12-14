@@ -16,12 +16,13 @@
 void ConvertUnixDate(time_t unixNumber)
 {
     struct tm ts;
-    char buf[80];
+    char prettyTime[50];
+    char timeFormat[10] = "%c %Z";
 
     // Format time, "day yyyy-mm-dd hh:mm:ss tmz"
     ts = *localtime(&unixNumber);
-    strftime(buf, sizeof(buf), "%H", &ts);
-    printf("%s", buf);
+    strftime(prettyTime, sizeof(prettyTime), timeFormat, &ts);
+    printf("%s", prettyTime);
 }
 
 /**
@@ -51,15 +52,21 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
  * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most
  * @param hoursAhead hours limit the amount of data that needs to be worked on
  */
-void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime)
+void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoTime, WindData sortedWinds[])
 {
+    int i;
+    for (i = 0; i < hoursAhead; i++)
+    {
+        sortedWinds[i] = windPower[i];
+    }
+    
     long int timeDifference;
-    time_t t = time(NULL);
 
-    qsort(windPower, hoursAhead, sizeof(WindData), CompareWindSpeed);
+    qsort(sortedWinds, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
-    timeDifference = windPower[0].unixTime - t;
-    SecondsConverter(timeDifference, infoTime);
+
+    /*timeDifference = sortedWinds[0].unixTime - t;
+    SecondsConverter(timeDifference, infoTime);*/
 }
 
 /**
@@ -162,4 +169,6 @@ void PlotForecast(WindData windPower[], int maxHours)
     printf("      ");
     printf("%*s", (maxHours * 3 / 2) + 6, "Hours Ahead");
     printf("\n");
+    printf("This graph shows the forecast windspeeds (measured in meters per second) \n"
+    "at specific times (measured in hours) within the chosen forecast hours\n\n");
 }

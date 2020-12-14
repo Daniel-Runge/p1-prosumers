@@ -5,10 +5,10 @@ void WelcomePrint();
 
 const char *carbonReponse[] = {
     /*this needs to change*/
-    "Green.\n",
-    "Partialy green.\n",
-    "Not green.\n",
-    "very not green.\n"};
+    "very green.\n",
+    "sonewhat green.\n",
+    "a little bit green.\n",
+    "not green at all.\n"};
 const char *windResponse[] = {
     /*this needs to change and also what do we use it for*/
     "There is medicore wind in Denmark right now",
@@ -33,12 +33,12 @@ void WelcomePrint()
     printf("              \\___/\\___/    |______|  |______|  \\_____|   \\_____/ /___/      \\___\\ |______| \n");
 
     /*this needs to change*/
-    printf("               Hello and welcome to energy data program. This program is able show you\n"
-           "               if the electricity consumed in denmark is green or not. It can also show when\n"
-           "               it will probably be green in the next 48 hours based on wind preditions.\n\n"
+    printf("               Hello and welcome to the energy data program. This program is able to show you\n"
+           "               if the electricity consumed in Denmark is green or not. It can also show when\n"
+           "               it will probably be green in the next 48 hours based on wind predictions.\n\n"
            "               There can be made changes on what you want to see in the program.\n"
-           "               This can be done with the settings. To use the settings always use '-'\n"
-           "               before a setting is changed.\n"
+           "               This can be done with the settings.\n"
+           "               To use any commands always use '-' before any input.\n"
            "               If you need help simply press '-h' to go to the help menu.\n\n\n");
 }
 /**
@@ -48,29 +48,34 @@ void WelcomePrint()
  * 
  *
  */
-void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[])
+void PrintData(DataStats total, Settings settings, TimeSplit InfoTime, WindData windpower[], WindData sortedWinds[])
 {
+    printf("\n\nEnergy data pulled on ");
+    ConvertUnixDate(time(NULL));
     char *formatLine[] = {"|"};
     /*these strings maybe needs to change*/
-
-    printf(" Renewabele energy (%%) |");
+    printf("\n\n| Renewable energy (%%) |");
     if (settings.CO2Intensity)
-        printf(" Carbon intensity (CO2/kWh) |");
-
-    printf(" The conclusion\n");
-    printf(" %11.0f%12s", total.renewable, formatLine[0]);
-    if (settings.CO2Intensity)
-        printf(" %14.0f%14.2s", total.carbonIntensity, formatLine[0]);
-    printf(" %10s \n", carbonReponse[GreenPower(&total)]);
-
-    if (1)
     {
-        printf("\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
+        printf(" Carbon intensity (g CO2/kWh) |");
     }
+    printf("\n");
+    /*printf(" The conclusion\n");*/
+    printf("| %10.0f%12s", total.renewable, formatLine[0]);
+    if (settings.CO2Intensity)
+    {
+        printf(" %15.0f%15.2s", total.carbonIntensity, formatLine[0]);
+    }
+    /*printf(" %10s \n", carbonReponse[GreenPower(&total)]);*/
+
+    printf("\n\nThe energy is %s\n", carbonReponse[GreenPower(&total)]);
 
     if (settings.forecast)
     {
-        printf("the best time is %d day %d hours %d mins %d secs.\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);
+        printf("The best time is most likely ");
+        ConvertUnixDate(sortedWinds[0].unixTime);
+        printf("\n");
+        /*printf("The best time is %d day %d hours %d mins %d secs from now\n", InfoTime.day, InfoTime.hour, InfoTime.min, InfoTime.sec);*/
         if (settings.plot)
         {
             PlotForecast(windpower, settings.numberOfHours);
