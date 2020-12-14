@@ -26,27 +26,6 @@ void ConvertUnixDate(time_t unixNumber)
 }
 
 /**
- * @brief function which converts seconds into days, hours, minutes and seconds
- * 
- * @param sekunder calculated in TimeForWind
- * @param infoTime the struct that contains info calculated from the function  
- */
-
-/*void SecondsConverter(long int seconds, TimeSplit *infoTime)
-{
-    int minutes, hours, days;
-    days = (seconds / SEC_PER_DAY) % SEC_PER_MIN;
-    hours = (seconds / SEC_PER_HOUR) % SEC_PER_MIN;
-    minutes = (seconds / SEC_PER_MIN) % SEC_PER_MIN;
-    seconds = seconds % SEC_PER_MIN;
-
-    infoTime->sec = seconds;
-    infoTime->min = minutes;
-    infoTime->hour = hours;
-    infoTime->day = days;
-}*/
-
-/**
  * @brief the function calculates the difference between the actual time and the prognosed time
  *       
  * @param windPower 48 hour forecast. We used this structure to find the best time where the wind blows the most

@@ -100,6 +100,5 @@ char Command (Settings *settings);
  */
 void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *InfoTime, WindData sortedWinds[]);
 void ConvertUnixDate(time_t unixNumber);
-/*void SecondsConverter(long int seconds, TimeSplit *TimeInfo);*/
 int CompareWindSpeed(const void *a, const void *b);
 void PlotForecast(WindData windPower[], int maxHours);
