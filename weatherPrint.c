@@ -32,7 +32,7 @@ void ConvertUnixDate(time_t unixNumber)
  * @param infoTime the struct that contains info calculated from the function  
  */
 
-void SecondsConverter(long int seconds, TimeSplit *infoTime)
+/*void SecondsConverter(long int seconds, TimeSplit *infoTime)
 {
     int minutes, hours, days;
     days = (seconds / SEC_PER_DAY) % SEC_PER_MIN;
@@ -44,7 +44,7 @@ void SecondsConverter(long int seconds, TimeSplit *infoTime)
     infoTime->min = minutes;
     infoTime->hour = hours;
     infoTime->day = days;
-}
+}*/
 
 /**
  * @brief the function calculates the difference between the actual time and the prognosed time
