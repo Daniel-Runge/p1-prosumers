@@ -60,7 +60,7 @@ void GetBestTimeForWind(WindData windPower[50], int hoursAhead, TimeSplit *infoT
         sortedWinds[i] = windPower[i];
     }
     
-    long int timeDifference;
+    
 
     qsort(sortedWinds, hoursAhead, sizeof(WindData), CompareWindSpeed);
 
